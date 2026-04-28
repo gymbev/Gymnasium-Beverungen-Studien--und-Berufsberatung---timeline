@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berufliche Bildung – Gymnasium Beverungen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+:root,[data-theme="light"]{
+  --color-bg:#f5f4f0;--color-surface:#fafaf8;--color-surface-2:#ffffff;
+  --color-surface-offset:#eeecea;--color-surface-dynamic:#e5e3de;
+  --color-divider:#dbd9d4;--color-border:#d0cdc7;
+  --color-text:#22201a;--color-text-muted:#6b6960;--color-text-faint:#b0aea8;
+  --color-text-inverse:#f9f8f4;
+  --color-primary:#1a56a0;--color-primary-hover:#123f7d;--color-primary-highlight:#dce7f5;
+  --color-schueler:#1a56a0;--color-schueler-bg:#dce7f5;
+  --color-lehrer:#2e7d32;--color-lehrer-bg:#dceedd;
+  --color-eltern:#c65d00;--color-eltern-bg:#fce8d4;
+  --color-pflicht:#b71c1c;--color-pflicht-bg:#fce4e4;
+  --color-freiwillig:#2e7d32;--color-freiwillig-bg:#e8f5e9;
+  --color-wahlpflicht:#e65100;--color-wahlpflicht-bg:#fff3e0;
+  --color-partner:#7b1fa2;--color-partner-bg:#f3e5f5;
+  --radius-sm:.25rem;--radius-md:.5rem;--radius-lg:.75rem;--radius-xl:1rem;--radius-full:9999px;
+  --shadow-sm:0 1px 3px oklch(0.2 0.01 80/0.07);--shadow-md:0 4px 12px oklch(0.2 0.01 80/0.09);
+  --shadow-lg:0 8px 24px oklch(0.2 0.01 80/0.12);
+  --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;
+  --space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;
+  --text-xs:clamp(.75rem,.7rem + .25vw,.875rem);--text-sm:clamp(.875rem,.8rem + .35vw,1rem);
+  --text-base:clamp(1rem,.95rem + .25vw,1.125rem);--text-lg:clamp(1.125rem,1rem + .75vw,1.5rem);
+  --text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+  --transition-fast:140ms cubic-bezier(.16,1,.3,1);--transition:200ms cubic-bezier(.16,1,.3,1);
+  --font-display:'DM Serif Display',Georgia,serif;--font-body:'Inter',system-ui,sans-serif;
+}
+[data-theme="dark"]{
+  --color-bg:#151412;--color-surface:#1c1b18;--color-surface-2:#211f1c;
+  --color-surface-offset:#1a1916;--color-surface-dynamic:#2a2825;
+  --color-divider:#242220;--color-border:#343230;
+  --color-text:#cccac6;--color-text-muted:#7a7872;--color-text-faint:#545250;
+  --color-text-inverse:#211f1c;
+  --color-primary:#5b9dd6;--color-primary-hover:#7ab5e0;--color-primary-highlight:#1e2f42;
+  --color-schueler:#5b9dd6;--color-schueler-bg:#1a2b3e;
+  --color-lehrer:#6abf70;--color-lehrer-bg:#1a2e1b;
+  --color-eltern:#f4a460;--color-eltern-bg:#2e1e0d;
+  --color-pflicht:#ef5350;--color-pflicht-bg:#2e1515;
+  --color-freiwillig:#66bb6a;--color-freiwillig-bg:#142014;
+  --color-wahlpflicht:#ffa726;--color-wahlpflicht-bg:#2e1a08;
+  --color-partner:#ce93d8;--color-partner-bg:#2a1a2e;
+  --shadow-sm:0 1px 3px oklch(0 0 0/.25);--shadow-md:0 4px 12px oklch(0 0 0/.35);--shadow-lg:0 8px 24px oklch(0 0 0/.45);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme]){
+  --color-bg:#151412;--color-surface:#1c1b18;--color-surface-2:#211f1c;
+  --color-surface-offset:#1a1916;--color-divider:#242220;--color-border:#343230;
+  --color-text:#cccac6;--color-text-muted:#7a7872;--color-text-faint:#545250;
+  --color-primary:#5b9dd6;--color-primary-highlight:#1e2f42;
+  --color-schueler:#5b9dd6;--color-schueler-bg:#1a2b3e;
+  --color-lehrer:#6abf70;--color-lehrer-bg:#1a2e1b;
+  --color-eltern:#f4a460;--color-eltern-bg:#2e1e0d;
+  --color-pflicht:#ef5350;--color-pflicht-bg:#2e1515;
+  --color-freiwillig:#66bb6a;--color-freiwillig-bg:#142014;
+  --color-wahlpflicht:#ffa726;--color-wahlpflicht-bg:#2e1a08;
+  --color-partner:#ce93d8;--color-partner-bg:#2a1a2e;
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{font-family:var(--font-body);font-size:var(--text-base);color:var(--color-text);background:var(--color-bg);min-height:100dvh;line-height:1.6}
+img{display:block;max-width:100%}
+button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+input,select,textarea{font:inherit;color:inherit}
+a,button,[role="button"]{transition:color var(--transition-fast),background var(--transition-fast),border-color var(--transition-fast),box-shadow var(--transition-fast)}
+:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px;border-radius:var(--radius-sm)}
+.app-shell{display:flex;flex-direction:column;min-height:100dvh}
+
+/* HEADER */
+.header{background:var(--color-surface);border-bottom:1px solid var(--color-divider);position:sticky;top:0;z-index:100;box-shadow:var(--shadow-sm)}
+.header-inner{max-width:1200px;margin-inline:auto;padding:var(--space-3) var(--space-6);display:flex;align-items:center;gap:var(--space-4)}
+.logo{display:flex;align-items:center;gap:var(--space-2);flex-shrink:0}
+.logo-svg{color:var(--color-primary)}
+.logo-text{font-family:var(--font-display);font-size:var(--text-lg);line-height:1.2;white-space:nowrap}
+.logo-sub{font-size:var(--text-xs);color:var(--color-text-muted);font-family:var(--font-body);font-weight:400;display:block}
+.header-actions{margin-left:auto;display:flex;align-items:center;gap:var(--space-2)}
+.btn-icon{width:36px;height:36px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:var(--color-text-muted);flex-shrink:0}
+.btn-icon:hover{background:var(--color-surface-offset);color:var(--color-text)}
+.btn-primary{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-2) var(--space-4);background:var(--color-primary);color:white;border-radius:var(--radius-md);font-size:var(--text-sm);font-weight:500}
+.btn-primary:hover{opacity:.9}
+
+/* AUTH DROPDOWN */
+.auth-wrap{position:relative}
+.auth-dropdown{position:absolute;top:calc(100% + 8px);right:0;width:260px;background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:var(--space-4);display:none;flex-direction:column;gap:var(--space-3);z-index:200}
+.auth-dropdown.open{display:flex}
+.auth-title{font-size:var(--text-sm);font-weight:600;color:var(--color-text);margin-bottom:var(--space-1)}
+.auth-subtitle{font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-2)}
+.auth-role-btns{display:flex;gap:var(--space-2)}
+.auth-role-btn{flex:1;padding:var(--space-2);border:1.5px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-xs);font-weight:500;text-align:center;transition:all var(--transition-fast)}
+.auth-role-btn:hover,.auth-role-btn.selected{border-color:var(--color-primary);background:var(--color-primary-highlight);color:var(--color-primary)}
+.auth-input{padding:var(--space-2) var(--space-3);background:var(--color-surface-offset);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-sm);width:100%}
+.auth-input:focus{outline:none;border-color:var(--color-primary)}
+.auth-error{font-size:var(--text-xs);color:var(--color-pflicht);display:none}
+.auth-status{padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);font-size:var(--text-xs);font-weight:500;display:flex;align-items:center;justify-content:space-between;gap:var(--space-2)}
+.auth-status-admin{background:color-mix(in oklch,var(--color-pflicht) 10%,var(--color-surface-offset));color:var(--color-pflicht);border:1px solid color-mix(in oklch,var(--color-pflicht) 20%,transparent)}
+.auth-status-partner{background:color-mix(in oklch,var(--color-partner) 10%,var(--color-surface-offset));color:var(--color-partner);border:1px solid color-mix(in oklch,var(--color-partner) 20%,transparent)}
+.auth-logout-btn{font-size:var(--text-xs);color:var(--color-text-muted);padding:2px 6px;border-radius:var(--radius-sm);border:1px solid var(--color-border)}
+.auth-logout-btn:hover{background:var(--color-surface-offset);color:var(--color-text)}
+.lock-icon-active{color:var(--color-primary)}
+
+/* PENDING PANEL (admin only, subtle) */
+.pending-panel{background:color-mix(in oklch,var(--color-partner) 8%,var(--color-surface));border:1px solid color-mix(in oklch,var(--color-partner) 25%,transparent);border-radius:var(--radius-lg);padding:var(--space-4) var(--space-5);margin-bottom:var(--space-4);display:none}
+.pending-panel h3{font-size:var(--text-sm);font-weight:600;color:var(--color-partner);margin-bottom:var(--space-3);display:flex;align-items:center;gap:var(--space-2)}
+.pending-item{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);padding:var(--space-2) 0;border-bottom:1px solid var(--color-divider);font-size:var(--text-sm)}
+.pending-item:last-child{border-bottom:none}
+.pending-btns{display:flex;gap:var(--space-2);flex-shrink:0}
+.btn-approve{padding:2px 10px;background:var(--color-freiwillig-bg);color:var(--color-freiwillig);border:1px solid var(--color-freiwillig);border-radius:var(--radius-sm);font-size:var(--text-xs);font-weight:500}
+.btn-approve:hover{opacity:.8}
+.btn-reject{padding:2px 10px;background:var(--color-pflicht-bg);color:var(--color-pflicht);border:1px solid var(--color-pflicht);border-radius:var(--radius-sm);font-size:var(--text-xs);font-weight:500}
+.btn-reject:hover{opacity:.8}
+
+/* EXPORT/IMPORT BAR (admin only) */
+.admin-bar{display:none;gap:var(--space-2);margin-bottom:var(--space-4);align-items:center;flex-wrap:wrap}
+.btn-outline-sm{display:inline-flex;align-items:center;gap:6px;padding:var(--space-1) var(--space-3);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-xs);font-weight:500;background:var(--color-surface);color:var(--color-text-muted)}
+.btn-outline-sm:hover{background:var(--color-surface-offset);color:var(--color-text)}
+.embed-code{font-size:var(--text-xs);color:var(--color-text-faint);padding:var(--space-2) var(--space-3);background:var(--color-surface-offset);border-radius:var(--radius-md);border:1px solid var(--color-border);font-family:monospace;word-break:break-all;margin-left:auto;max-width:400px;cursor:pointer}
+.embed-code:hover{border-color:var(--color-primary)}
+
+/* MAIN */
+.main{max-width:1200px;margin-inline:auto;padding:var(--space-6);flex:1;width:100%}
+
+/* CONTROLS */
+.controls{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-4) var(--space-5);margin-bottom:var(--space-6);display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center;box-shadow:var(--shadow-sm)}
+.controls-section{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap}
+.controls-divider{width:1px;height:24px;background:var(--color-divider);flex-shrink:0}
+.label-sm{font-size:var(--text-xs);color:var(--color-text-muted);font-weight:500;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+
+/* KLASSE FILTER */
+.klasse-filter-row{display:none;align-items:center;gap:var(--space-2);flex-wrap:wrap;padding-top:var(--space-2);border-top:1px solid var(--color-divider);width:100%}
+.klasse-chip{display:inline-flex;align-items:center;padding:3px var(--space-3);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:500;border:1.5px solid var(--color-border);cursor:pointer;background:var(--color-surface-offset);color:var(--color-text-muted);transition:all var(--transition-fast)}
+.klasse-chip.active{background:var(--color-schueler-bg);color:var(--color-schueler);border-color:var(--color-schueler)}
+.klasse-chip:disabled{opacity:.35;cursor:not-allowed}
+
+/* CHIPS */
+.chip{display:inline-flex;align-items:center;gap:var(--space-1);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:500;border:1.5px solid transparent;cursor:pointer;user-select:none;transition:all var(--transition-fast)}
+.chip-schueler{background:var(--color-schueler-bg);color:var(--color-schueler);border-color:var(--color-schueler-bg)}.chip-schueler.active{border-color:var(--color-schueler)}.chip-schueler:not(.active){opacity:.4}
+.chip-lehrer{background:var(--color-lehrer-bg);color:var(--color-lehrer);border-color:var(--color-lehrer-bg)}.chip-lehrer.active{border-color:var(--color-lehrer)}.chip-lehrer:not(.active){opacity:.4}
+.chip-eltern{background:var(--color-eltern-bg);color:var(--color-eltern);border-color:var(--color-eltern-bg)}.chip-eltern.active{border-color:var(--color-eltern)}.chip-eltern:not(.active){opacity:.4}
+.chip-type{display:inline-flex;align-items:center;gap:var(--space-1);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:500;border:1.5px solid transparent;cursor:pointer;user-select:none;transition:all var(--transition-fast)}
+.chip-pflicht{background:var(--color-pflicht-bg);color:var(--color-pflicht);border-color:var(--color-pflicht-bg)}.chip-pflicht.active{border-color:var(--color-pflicht)}.chip-pflicht:not(.active){opacity:.4}
+.chip-freiwillig{background:var(--color-freiwillig-bg);color:var(--color-freiwillig);border-color:var(--color-freiwillig-bg)}.chip-freiwillig.active{border-color:var(--color-freiwillig)}.chip-freiwillig:not(.active){opacity:.4}
+.chip-wahlpflicht{background:var(--color-wahlpflicht-bg);color:var(--color-wahlpflicht);border-color:var(--color-wahlpflicht-bg)}.chip-wahlpflicht.active{border-color:var(--color-wahlpflicht)}.chip-wahlpflicht:not(.active){opacity:.4}
+
+/* VIEW TOGGLE */
+.view-toggle{display:flex;background:var(--color-surface-offset);border-radius:var(--radius-md);padding:2px;gap:2px}
+.view-btn{display:flex;align-items:center;gap:var(--space-1);padding:var(--space-1) var(--space-3);border-radius:calc(var(--radius-md) - 2px);font-size:var(--text-xs);font-weight:500;color:var(--color-text-muted);transition:all var(--transition-fast)}
+.view-btn.active{background:var(--color-surface-2);color:var(--color-text);box-shadow:var(--shadow-sm)}
+.view-btn:hover:not(.active){color:var(--color-text)}
+
+/* SEARCH */
+.search-wrap{position:relative}
+.search-input{padding:var(--space-2) var(--space-3) var(--space-2) var(--space-8);background:var(--color-surface-offset);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-sm);width:200px;transition:all var(--transition-fast)}
+.search-input:focus{outline:none;border-color:var(--color-primary);background:var(--color-surface-2);width:260px}
+.search-icon{position:absolute;left:var(--space-2);top:50%;transform:translateY(-50%);color:var(--color-text-faint);pointer-events:none}
+
+/* UPCOMING BANNER */
+.upcoming-banner{background:var(--color-primary-highlight);border:1px solid color-mix(in oklch,var(--color-primary) 30%,transparent);border-radius:var(--radius-lg);padding:var(--space-3) var(--space-5);margin-bottom:var(--space-5);display:flex;align-items:center;gap:var(--space-3);font-size:var(--text-sm)}
+.upcoming-banner strong{font-weight:600;color:var(--color-primary)}
+
+/* MONTH GROUP */
+.month-group{margin-bottom:var(--space-6)}
+.month-header{display:flex;align-items:center;gap:var(--space-3);padding:var(--space-2) 0;margin-bottom:var(--space-3);position:sticky;top:57px;z-index:10;background:var(--color-bg)}
+.month-header::after{content:'';flex:1;height:1px;background:var(--color-divider)}
+.month-label{font-size:var(--text-sm);font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;background:var(--color-bg);padding-right:var(--space-2)}
+.month-badge{font-size:var(--text-xs);padding:2px var(--space-2);background:var(--color-surface-offset);color:var(--color-text-muted);border-radius:var(--radius-full);font-weight:500}
+
+/* EVENT CARD */
+.event-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-4) var(--space-5);margin-bottom:var(--space-2);display:grid;grid-template-columns:72px 1fr auto;gap:var(--space-4);align-items:start;box-shadow:var(--shadow-sm);transition:box-shadow var(--transition-fast),transform var(--transition-fast);cursor:pointer;position:relative;overflow:hidden;animation:fadeSlideIn 200ms ease both}
+.event-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+.event-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.event-card[data-type="pflicht"]::before{background:var(--color-pflicht)}
+.event-card[data-type="freiwillig"]::before{background:var(--color-freiwillig)}
+.event-card[data-type="wahlpflicht"]::before{background:var(--color-wahlpflicht)}
+.event-card.next-event{border-color:var(--color-primary);box-shadow:0 0 0 2px color-mix(in oklch,var(--color-primary) 20%,transparent),var(--shadow-md)}
+.event-card.pending-card{opacity:.75;border-style:dashed;border-color:var(--color-partner)}
+
+/* DATE */
+.event-date{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;flex-shrink:0}
+.event-day{font-size:var(--text-xl);font-weight:700;line-height:1;color:var(--color-text);font-family:var(--font-display)}
+.event-weekday{font-size:var(--text-xs);color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.06em}
+.event-date-range{font-size:var(--text-xs);color:var(--color-text-muted);font-weight:500;margin-top:2px}
+
+/* CONTENT */
+.event-title{font-size:var(--text-base);font-weight:600;margin-bottom:var(--space-1);line-height:1.3}
+.event-desc{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.5;margin-bottom:var(--space-2)}
+.event-meta{display:flex;flex-wrap:wrap;gap:var(--space-1);align-items:center}
+.event-badges{display:flex;flex-direction:column;align-items:flex-end;gap:var(--space-1);flex-shrink:0}
+.next-badge{position:absolute;top:var(--space-2);right:var(--space-3);font-size:10px;font-weight:700;letter-spacing:.08em;background:var(--color-primary);color:white;padding:1px 6px;border-radius:var(--radius-full);text-transform:uppercase}
+
+/* PILLS */
+.pill{display:inline-flex;align-items:center;gap:4px;padding:2px var(--space-2);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:500;line-height:1.4}
+.pill-schueler{background:var(--color-schueler-bg);color:var(--color-schueler)}
+.pill-lehrer{background:var(--color-lehrer-bg);color:var(--color-lehrer)}
+.pill-eltern{background:var(--color-eltern-bg);color:var(--color-eltern)}
+.pill-pflicht{background:var(--color-pflicht-bg);color:var(--color-pflicht)}
+.pill-freiwillig{background:var(--color-freiwillig-bg);color:var(--color-freiwillig)}
+.pill-wahlpflicht{background:var(--color-wahlpflicht-bg);color:var(--color-wahlpflicht)}
+.category-icon{display:flex;align-items:center;gap:var(--space-1);font-size:var(--text-xs);color:var(--color-text-muted)}
+
+/* CALENDAR */
+.calendar-view{display:none}
+.timeline-view{display:flex;flex-direction:column}
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-4)}
+.cal-nav{display:flex;align-items:center;gap:var(--space-3)}
+.cal-month-label{font-size:var(--text-lg);font-weight:700;font-family:var(--font-display);min-width:200px;text-align:center}
+.cal-nav-btn{width:36px;height:36px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-text)}
+.cal-nav-btn:hover{background:var(--color-surface-offset)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--color-divider);border:1px solid var(--color-divider);border-radius:var(--radius-lg);overflow:hidden}
+.cal-day-label{background:var(--color-surface-offset);padding:var(--space-2);text-align:center;font-size:var(--text-xs);font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.06em}
+.cal-cell{background:var(--color-surface);min-height:100px;padding:var(--space-2);display:flex;flex-direction:column;gap:2px;transition:background var(--transition-fast)}
+.cal-cell:hover{background:var(--color-surface-2);cursor:pointer}
+.cal-cell.other-month{background:var(--color-surface-offset)}.cal-cell.other-month .cal-date-num{color:var(--color-text-faint)}
+.cal-cell.today{background:color-mix(in oklch,var(--color-primary) 6%,var(--color-surface))}
+.cal-date-num{font-size:var(--text-xs);font-weight:600;color:var(--color-text-muted);width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-full)}
+.cal-cell.today .cal-date-num{background:var(--color-primary);color:white}
+.cal-event-dot{font-size:11px;padding:1px 4px;border-radius:var(--radius-sm);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;font-weight:500;cursor:pointer}
+.cal-event-dot[data-type="pflicht"]{background:var(--color-pflicht-bg);color:var(--color-pflicht)}
+.cal-event-dot[data-type="freiwillig"]{background:var(--color-freiwillig-bg);color:var(--color-freiwillig)}
+.cal-event-dot[data-type="wahlpflicht"]{background:var(--color-wahlpflicht-bg);color:var(--color-wahlpflicht)}
+.cal-more{font-size:11px;color:var(--color-text-muted);font-weight:500;padding:1px 4px}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:oklch(.1 0 0/.5);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:var(--space-4);opacity:0;pointer-events:none;transition:opacity var(--transition)}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--color-surface-2);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);width:100%;max-width:580px;max-height:90dvh;overflow-y:auto;transform:translateY(8px) scale(.98);transition:transform var(--transition)}
+.modal-overlay.open .modal{transform:none}
+.modal-header{padding:var(--space-5) var(--space-6) var(--space-4);border-bottom:1px solid var(--color-divider);display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4)}
+.modal-title{font-family:var(--font-display);font-size:var(--text-xl);line-height:1.2}
+.modal-body{padding:var(--space-5) var(--space-6);display:flex;flex-direction:column;gap:var(--space-4)}
+.modal-row{display:flex;align-items:flex-start;gap:var(--space-3)}
+.modal-icon{color:var(--color-text-muted);flex-shrink:0;margin-top:2px}
+.modal-label{font-size:var(--text-xs);color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:2px}
+.modal-value{font-size:var(--text-sm)}
+
+/* FORM */
+.form-group{display:flex;flex-direction:column;gap:var(--space-1)}
+.form-label{font-size:var(--text-sm);font-weight:500}
+.form-input,.form-select,.form-textarea{padding:var(--space-2) var(--space-3);background:var(--color-surface-offset);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-sm);transition:border-color var(--transition-fast),background var(--transition-fast)}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--color-primary);background:var(--color-surface-2)}
+.form-textarea{resize:vertical;min-height:80px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}
+.checkbox-group{display:flex;flex-wrap:wrap;gap:var(--space-2)}
+.checkbox-label{display:flex;align-items:center;gap:var(--space-1);font-size:var(--text-sm);cursor:pointer;padding:var(--space-1) var(--space-2);border-radius:var(--radius-md);border:1px solid var(--color-border);transition:all var(--transition-fast)}
+.checkbox-label:hover{background:var(--color-surface-offset)}
+.checkbox-label input[type="checkbox"]{accent-color:var(--color-primary)}
+.modal-footer{padding:var(--space-4) var(--space-6);border-top:1px solid var(--color-divider);display:flex;justify-content:flex-end;gap:var(--space-3)}
+.btn-secondary{padding:var(--space-2) var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-md);font-size:var(--text-sm);font-weight:500;background:var(--color-surface)}
+.btn-secondary:hover{background:var(--color-surface-offset)}
+
+/* KLASSE CHIPS im Formular */
+.klasse-btn-group{display:flex;flex-wrap:wrap;gap:var(--space-1)}
+.klasse-form-btn{padding:3px 10px;border:1.5px solid var(--color-border);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:500;background:var(--color-surface-offset);color:var(--color-text-muted);cursor:pointer;transition:all var(--transition-fast)}
+.klasse-form-btn.sel{background:var(--color-schueler-bg);color:var(--color-schueler);border-color:var(--color-schueler)}
+.klasse-form-btn.all-btn.sel{background:var(--color-lehrer-bg);color:var(--color-lehrer);border-color:var(--color-lehrer)}
+
+/* WIEDERHOLUNG */
+.repeat-section{display:flex;flex-direction:column;gap:var(--space-2);padding:var(--space-3);background:var(--color-surface-offset);border-radius:var(--radius-lg);border:1px solid var(--color-border)}
+.repeat-section-title{font-size:var(--text-xs);font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.05em}
+.repeat-tabs{display:flex;gap:var(--space-1);flex-wrap:wrap}
+.repeat-tab{padding:3px 10px;border:1.5px solid var(--color-border);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:500;background:var(--color-surface);color:var(--color-text-muted);cursor:pointer;transition:all var(--transition-fast)}
+.repeat-tab.active{background:var(--color-primary-highlight);color:var(--color-primary);border-color:var(--color-primary)}
+.repeat-options{display:none;flex-direction:column;gap:var(--space-2);margin-top:var(--space-1)}
+.repeat-options.visible{display:flex}
+.custom-dates-list{display:flex;flex-direction:column;gap:var(--space-1)}
+.custom-date-row{display:flex;align-items:center;gap:var(--space-2)}
+.custom-date-row .form-input{flex:1}
+.btn-remove-date{width:28px;height:28px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:var(--color-pflicht);background:var(--color-pflicht-bg);flex-shrink:0;font-size:14px}
+.btn-remove-date:hover{opacity:.7}
+.btn-add-date{padding:4px 12px;border:1.5px dashed var(--color-border);border-radius:var(--radius-md);font-size:var(--text-xs);color:var(--color-text-muted);background:transparent;width:100%;margin-top:2px}
+.btn-add-date:hover{border-color:var(--color-primary);color:var(--color-primary)}
+
+/* EMPTY */
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--space-12) var(--space-8);color:var(--color-text-muted)}
+.empty-state-icon{width:56px;height:56px;margin-bottom:var(--space-4);color:var(--color-text-faint)}
+.empty-state h3{font-size:var(--text-lg);color:var(--color-text);margin-bottom:var(--space-2)}
+.empty-state p{font-size:var(--text-sm);max-width:36ch}
+
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-4)}
+.legend-item{display:flex;align-items:center;gap:var(--space-1);font-size:var(--text-xs);color:var(--color-text-muted)}
+.legend-dot{width:10px;height:10px;border-radius:var(--radius-full);flex-shrink:0}
+
+/* FAB */
+.fab{position:fixed;bottom:var(--space-8);right:var(--space-8);width:52px;height:52px;border-radius:var(--radius-full);background:var(--color-primary);color:white;display:none;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);z-index:50;font-size:24px;font-weight:300}
+.fab:hover{opacity:.9;transform:scale(1.05)}
+
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+@media (max-width:640px){
+  .header-inner{padding:var(--space-3) var(--space-4)}
+  .main{padding:var(--space-4)}
+  .event-card{grid-template-columns:56px 1fr;gap:var(--space-3)}
+  .event-badges{display:none}
+  .controls{flex-direction:column;align-items:flex-start}
+  .controls-divider{display:none}
+  .search-input,.search-input:focus{width:100%}
+  .form-grid{grid-template-columns:1fr}
+  .cal-cell{min-height:70px}
+  .logo-text{font-size:1rem}
+  .embed-code{display:none}
+  .fab{display:flex}
+}
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <svg class="logo-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-label="Logo">
+        <rect x="2" y="17" width="28" height="13" rx="2" fill="currentColor" opacity="0.15"/>
+        <path d="M16 2L2 13h28L16 2z" fill="currentColor"/>
+        <rect x="12" y="19" width="8" height="11" rx="1" fill="currentColor" opacity="0.8"/>
+        <rect x="5" y="19" width="5" height="7" rx="1" fill="currentColor" opacity="0.5"/>
+        <rect x="22" y="19" width="5" height="7" rx="1" fill="currentColor" opacity="0.5"/>
+        <circle cx="16" cy="10" r="2" fill="white" opacity="0.9"/>
+      </svg>
+      <div>
+        <span class="logo-text">Berufliche Bildung</span>
+        <span class="logo-sub">Gymnasium Beverungen</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-icon" data-theme-toggle aria-label="Farbschema wechseln">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+
+      <!-- AUTH DROPDOWN -->
+      <div class="auth-wrap">
+        <button class="btn-icon" id="authToggleBtn" aria-label="Anmelden" title="Anmelden">
+          <svg id="lockIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </button>
+        <div class="auth-dropdown" id="authDropdown">
+          <!-- LOGGED OUT STATE -->
+          <div id="authLoginView">
+            <div class="auth-title">Geschützter Bereich</div>
+            <div class="auth-subtitle">Rolle wählen und Passwort eingeben</div>
+            <div class="auth-role-btns">
+              <button class="auth-role-btn selected" id="roleAdminBtn" onclick="selectRole('admin')">Administrator</button>
+              <button class="auth-role-btn" id="rolePartnerBtn" onclick="selectRole('partner')">Partner</button>
+            </div>
+            <input class="auth-input" type="password" id="authPassword" placeholder="Passwort …" autocomplete="current-password">
+            <div class="auth-error" id="authError">Falsches Passwort.</div>
+            <button class="btn-primary" style="width:100%;justify-content:center;" onclick="doLogin()">Anmelden</button>
+          </div>
+          <!-- LOGGED IN STATE -->
+          <div id="authLoggedView" style="display:none;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);">
+              <div id="authStatusBox" style="font-size:var(--text-xs);color:var(--color-text-muted);display:flex;align-items:center;gap:4px;"></div>
+              <button style="font-size:var(--text-xs);color:var(--color-text-faint);padding:3px 8px;border:1px solid var(--color-border);border-radius:var(--radius-sm);background:none;white-space:nowrap;" onmouseover="this.style.color='var(--color-text)'" onmouseout="this.style.color='var(--color-text-faint)'" onclick="doLogout()">Abmelden</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="addEventBtn" style="display:none;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>Termin</span>&nbsp;hinzufügen
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- PENDING PANEL (admin only) -->
+  <div class="pending-panel" id="pendingPanel">
+    <h3>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Termine zur Freigabe
+    </h3>
+    <div id="pendingList"></div>
+  </div>
+
+  <!-- ADMIN TOOLBAR -->
+  <div class="admin-bar" id="adminBar">
+    <button class="btn-outline-sm" onclick="exportData()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Termine exportieren
+    </button>
+    <label class="btn-outline-sm" style="cursor:pointer;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Termine importieren
+      <input type="file" accept=".json" style="display:none;" onchange="importData(event)">
+    </label>
+    <div class="embed-code" title="HTML-Code für Homepage-Button – klicken zum Kopieren" id="embedCodeBox" onclick="copyEmbed()">📋 Homepage-Button-Code kopieren</div>
+  </div>
+
+  <div class="controls">
+    <div class="controls-section">
+      <span class="label-sm">Für</span>
+      <button class="chip chip-schueler active" data-filter="audience" data-value="schueler">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/><path d="M12 14c5.33 0 8 2.67 8 4v2H4v-2c0-1.33 2.67-4 8-4z"/></svg>
+        Schüler:innen
+      </button>
+      <button class="chip chip-lehrer active" data-filter="audience" data-value="lehrer">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        Lehrkräfte
+      </button>
+      <button class="chip chip-eltern active" data-filter="audience" data-value="eltern">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Eltern
+      </button>
+    </div>
+    <div class="controls-divider"></div>
+    <div class="controls-section">
+      <span class="label-sm">Art</span>
+      <button class="chip chip-type chip-pflicht active" data-filter="type" data-value="pflicht">● Verpflichtend</button>
+      <button class="chip chip-type chip-wahlpflicht active" data-filter="type" data-value="wahlpflicht">● Wahlpflicht</button>
+      <button class="chip chip-type chip-freiwillig active" data-filter="type" data-value="freiwillig">● Freiwillig</button>
+    </div>
+    <div class="controls-divider"></div>
+    <div class="controls-section" style="margin-left:auto;">
+      <div class="view-toggle">
+        <button class="view-btn active" data-view="timeline">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          Timeline
+        </button>
+        <button class="view-btn" data-view="calendar">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Kalender
+        </button>
+      </div>
+      <div class="search-wrap">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="search-input" type="search" placeholder="Suchen…" id="searchInput" aria-label="Termine suchen">
+      </div>
+    </div>
+    <!-- KLASSENSTUFEN FILTER (nur wenn Schüler aktiv) -->
+    <div class="klasse-filter-row" id="klasseFilterRow">
+      <span class="label-sm">Meine Klasse</span>
+      <button class="klasse-chip active" data-klasse="alle">Alle</button>
+      <button class="klasse-chip" data-klasse="5">Kl. 5</button>
+      <button class="klasse-chip" data-klasse="6">Kl. 6</button>
+      <button class="klasse-chip" data-klasse="7">Kl. 7</button>
+      <button class="klasse-chip" data-klasse="8">Kl. 8</button>
+      <button class="klasse-chip" data-klasse="9">Kl. 9</button>
+      <button class="klasse-chip" data-klasse="10">Kl. 10</button>
+      <button class="klasse-chip" data-klasse="EF">EF</button>
+      <button class="klasse-chip" data-klasse="Q1">Q1</button>
+      <button class="klasse-chip" data-klasse="Q2">Q2</button>
+      <span style="font-size:var(--text-xs);color:var(--color-text-faint);margin-left:auto;">Zeigt nur deine Termine</span>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span class="legend-item"><span class="legend-dot" style="background:var(--color-pflicht)"></span>Verpflichtend</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--color-wahlpflicht)"></span>Wahlpflicht</span>
+    <span class="legend-item"><span class="legend-dot" style="background:var(--color-freiwillig)"></span>Freiwillig</span>
+    <span class="legend-item" style="margin-left:auto;font-size:var(--text-xs);color:var(--color-text-faint)">Vergangene Termine werden automatisch ausgeblendet</span>
+  </div>
+
+  <div class="upcoming-banner" id="upcomingBanner" style="display:none;">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;color:var(--color-primary)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <span id="upcomingText"></span>
+  </div>
+
+  <div class="timeline-view" id="timelineView">
+    <div id="timelineContent"></div>
+  </div>
+
+  <div class="calendar-view" id="calendarView">
+    <div class="cal-header">
+      <div class="cal-nav">
+        <button class="cal-nav-btn" id="calPrev" aria-label="Vorheriger Monat">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <span class="cal-month-label" id="calMonthLabel"></span>
+        <button class="cal-nav-btn" id="calNext" aria-label="Nächster Monat">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <button class="btn-secondary" id="calToday">Heute</button>
+    </div>
+    <div id="calendarGrid"></div>
+  </div>
+
+</main>
+
+<!-- FAB (mobile) -->
+<button class="fab" id="fabBtn" aria-label="Termin hinzufügen" style="display:none;">+</button>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="detailModal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="detailTitle"></div>
+        <div style="display:flex;gap:var(--space-1);flex-wrap:wrap;margin-top:var(--space-2);" id="detailBadges"></div>
+      </div>
+      <button class="btn-icon" id="closeDetailModal" aria-label="Schließen">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="detailBody"></div>
+    <div class="modal-footer" style="justify-content:space-between;" id="detailFooter">
+      <button class="btn-secondary" style="color:var(--color-pflicht);display:none;" id="deleteEventBtn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;vertical-align:middle;margin-right:4px"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+        Löschen
+      </button>
+      <button class="btn-secondary" id="closeDetailModal2">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD MODAL -->
+<div class="modal-overlay" id="addModal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="addModalTitle">Termin hinzufügen</h2>
+      <button class="btn-icon" id="closeAddModal" aria-label="Schließen">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label" for="f_title">Titel *</label>
+        <input class="form-input" id="f_title" type="text" placeholder="z.B. Berufsberatung Klasse 9" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f_desc">Beschreibung</label>
+        <textarea class="form-textarea" id="f_desc" placeholder="Weitere Informationen zum Termin…"></textarea>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="f_date_start">Datum (von) *</label>
+          <input class="form-input" id="f_date_start" type="date" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f_date_end">Datum (bis, optional)</label>
+          <input class="form-input" id="f_date_end" type="date">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="f_time">Uhrzeit (optional)</label>
+          <input class="form-input" id="f_time" type="time">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f_location">Ort</label>
+          <input class="form-input" id="f_location" type="text" placeholder="z.B. Aula, Raum 12…">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="f_category">Kategorie</label>
+          <select class="form-select" id="f_category">
+            <option value="berufsberatung">🎓 Berufsberatung</option>
+            <option value="workshop">🛠️ Workshop</option>
+            <option value="praktikum">💼 Praktikum</option>
+            <option value="messe">🏢 Ausbildungsmesse</option>
+            <option value="boygirl">⭐ Boys &amp; Girls Day</option>
+            <option value="uni">🏛️ Uni-Angebot</option>
+            <option value="vortrag">📢 Vortrag / Info</option>
+            <option value="sonstige">📅 Sonstiges</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f_type">Art</label>
+          <select class="form-select" id="f_type">
+            <option value="pflicht">🔴 Verpflichtend</option>
+            <option value="wahlpflicht">🟡 Wahlpflicht</option>
+            <option value="freiwillig">🟢 Freiwillig</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Zielgruppe *</label>
+        <div class="checkbox-group">
+          <label class="checkbox-label"><input type="checkbox" id="f_aud_schueler" value="schueler" checked> Schüler:innen</label>
+          <label class="checkbox-label"><input type="checkbox" id="f_aud_lehrer" value="lehrer"> Lehrkräfte</label>
+          <label class="checkbox-label"><input type="checkbox" id="f_aud_eltern" value="eltern"> Eltern</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Klassen / Jahrgänge</label>
+        <div class="klasse-btn-group" id="klasseFormBtns">
+          <button type="button" class="klasse-form-btn all-btn sel" data-k="alle">Alle Klassen</button>
+          <button type="button" class="klasse-form-btn" data-k="5">Kl. 5</button>
+          <button type="button" class="klasse-form-btn" data-k="6">Kl. 6</button>
+          <button type="button" class="klasse-form-btn" data-k="7">Kl. 7</button>
+          <button type="button" class="klasse-form-btn" data-k="8">Kl. 8</button>
+          <button type="button" class="klasse-form-btn" data-k="9">Kl. 9</button>
+          <button type="button" class="klasse-form-btn" data-k="10">Kl. 10</button>
+          <button type="button" class="klasse-form-btn" data-k="EF">EF</button>
+          <button type="button" class="klasse-form-btn" data-k="Q1">Q1</button>
+          <button type="button" class="klasse-form-btn" data-k="Q2">Q2</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f_link">Link (optional)</label>
+        <input class="form-input" id="f_link" type="url" placeholder="https://…">
+      </div>
+
+      <!-- WIEDERHOLUNG -->
+      <div class="repeat-section">
+        <div class="repeat-section-title">Wiederholung</div>
+        <div class="repeat-tabs">
+          <button type="button" class="repeat-tab active" data-rt="none">Kein</button>
+          <button type="button" class="repeat-tab" data-rt="weekly">Wöchentlich</button>
+          <button type="button" class="repeat-tab" data-rt="biweekly">14-tägig</button>
+          <button type="button" class="repeat-tab" data-rt="monthly">Monatlich</button>
+          <button type="button" class="repeat-tab" data-rt="custom">Freie Daten</button>
+        </div>
+        <!-- rhythmic end date -->
+        <div class="repeat-options" id="repeatRhythmOpts">
+          <div class="form-group">
+            <label class="form-label" for="f_repeat_until">Wiederholen bis</label>
+            <input class="form-input" id="f_repeat_until" type="date">
+          </div>
+        </div>
+        <!-- custom dates -->
+        <div class="repeat-options" id="repeatCustomOpts">
+          <div class="form-group">
+            <label class="form-label">Einzelne Wiederholungsdaten</label>
+            <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-2);">Für unregelmäßige Termine – trage einfach alle Einzeldaten ein. Das Startdatum oben zählt als erster Termin.</div>
+            <div class="custom-dates-list" id="customDatesList"></div>
+            <button type="button" class="btn-add-date" onclick="addCustomDateRow()">+ Weiteres Datum</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="cancelAddBtn">Abbrechen</button>
+      <button class="btn-primary" id="saveEventBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Speichern
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── CONSTANTS ───────────────────────────────────────────────────────────────
+const MONTHS_DE=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const WEEKDAYS_SHORT=['So','Mo','Di','Mi','Do','Fr','Sa'];
+const CATEGORY_LABELS={berufsberatung:'🎓 Berufsberatung',workshop:'🛠️ Workshop',praktikum:'💼 Praktikum',messe:'🏢 Ausbildungsmesse',boygirl:'⭐ Boys & Girls Day',uni:'🏛️ Uni-Angebot',vortrag:'📢 Vortrag / Info',sonstige:'📅 Sonstiges'};
+const TYPE_LABELS={pflicht:'Verpflichtend',wahlpflicht:'Wahlpflicht',freiwillig:'Freiwillig'};
+const AUD_LABELS={schueler:'Schüler:innen',lehrer:'Lehrkräfte',eltern:'Eltern'};
+const PW_ADMIN='gymbevstubo';
+const PW_PARTNER='gymbevpartner';
+const ALL_KLASSEN=['5','6','7','8','9','10','EF','Q1','Q2'];
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let events=[
+  {id:1,title:'Berufsberatung (Agentur für Arbeit)',desc:'Individuelle Beratungsgespräche für Schüler:innen der Klassen 9–12 mit der Beraterin der Agentur für Arbeit.',date:'2026-04-29',dateEnd:'',time:'08:00',location:'Beratungsraum 1.12',category:'berufsberatung',type:'freiwillig',audience:['schueler'],classes:'9,10,EF,Q1,Q2',link:'',pending:false},
+  {id:2,title:"Girls' & Boys' Day 2026",desc:'Schülerinnen und Schüler schnuppern einen Tag in untypische Berufsfelder. Anmeldung über die Klassenleitung.',date:'2026-04-30',dateEnd:'',time:'08:00',location:'Verschiedene Betriebe',category:'boygirl',type:'wahlpflicht',audience:['schueler'],classes:'8,9,10',link:'https://www.girls-day.de',pending:false},
+  {id:3,title:'Informationsabend Berufliche Bildung',desc:'Überblick über alle Angebote der Beruflichen Bildung am Gymnasium für Eltern und Schüler:innen ab Klasse 8.',date:'2026-05-07',dateEnd:'',time:'19:00',location:'Aula',category:'vortrag',type:'freiwillig',audience:['schueler','eltern'],classes:'8,9,10',link:'',pending:false},
+  {id:4,title:'Bewerbungsworkshop',desc:'Workshop zur Erstellung professioneller Bewerbungsunterlagen.',date:'2026-05-14',dateEnd:'',time:'10:00',location:'EDV-Raum 2.05',category:'workshop',type:'wahlpflicht',audience:['schueler'],classes:'9,10',link:'',pending:false},
+  {id:5,title:'Ausbildungsmesse Kreis Höxter',desc:'Regionale Ausbildungsmesse mit über 60 Betrieben aus der Region.',date:'2026-05-20',dateEnd:'',time:'09:00',location:'Stadthalle Höxter',category:'messe',type:'freiwillig',audience:['schueler','eltern'],classes:'alle',link:'',pending:false},
+  {id:6,title:'Uni Paderborn – Schnuppertag',desc:'Schüler:innen der Oberstufe erleben einen Tag Unileben.',date:'2026-05-28',dateEnd:'',time:'09:00',location:'Universität Paderborn',category:'uni',type:'freiwillig',audience:['schueler'],classes:'EF,Q1,Q2',link:'https://www.uni-paderborn.de',pending:false},
+  {id:7,title:'Schülerpraktikum Klasse 9',desc:'Zweiwöchiges Betriebspraktikum für alle Schüler:innen der Klasse 9.',date:'2026-06-01',dateEnd:'2026-06-12',time:'',location:'Praktikumsbetriebe',category:'praktikum',type:'pflicht',audience:['schueler','eltern','lehrer'],classes:'9',link:'',pending:false},
+  {id:8,title:'Vorstellung Ausbildungsberufe (IHK)',desc:'IHK-Vertreter:innen stellen verschiedene duale Ausbildungsberufe im Unterricht vor.',date:'2026-06-18',dateEnd:'',time:'09:00',location:'Aula',category:'vortrag',type:'pflicht',audience:['schueler','lehrer'],classes:'9,10',link:'',pending:false},
+  {id:9,title:'Elternabend Berufsberatung Klasse 9',desc:'Informationsabend für Eltern der Klasse 9 zu Ausbildung, Studium und Bewerbungsfristen.',date:'2026-09-22',dateEnd:'',time:'19:30',location:'Klassenraum 1.08',category:'vortrag',type:'pflicht',audience:['eltern','lehrer'],classes:'9',link:'',pending:false},
+  {id:10,title:'Berufsorientierungswoche',desc:'Projektwoche mit Betriebsbesichtigungen, Workshops und Rollenspielen.',date:'2026-10-19',dateEnd:'2026-10-23',time:'',location:'Schule & Betriebe',category:'workshop',type:'pflicht',audience:['schueler','lehrer'],classes:'9,10',link:'',pending:false},
+  {id:11,title:'Hochschultag NRW',desc:'Zentraler Infotag aller NRW-Hochschulen für Studieninteressierte.',date:'2026-10-07',dateEnd:'',time:'',location:'NRW-weit',category:'uni',type:'freiwillig',audience:['schueler'],classes:'EF,Q1,Q2',link:'',pending:false},
+  {id:12,title:'Schülerpraktikum EF (Klasse 11)',desc:'Einwöchiges Orientierungspraktikum für alle Schüler:innen der Einführungsphase.',date:'2026-09-14',dateEnd:'2026-09-18',time:'',location:'Praktikumsbetriebe',category:'praktikum',type:'pflicht',audience:['schueler','eltern','lehrer'],classes:'EF',link:'',pending:false},
+  {id:13,title:'Uni Bielefeld – MINT-Schnuppertag',desc:'MINT-Schnupperstudium für Interessierte der Oberstufe.',date:'2026-11-12',dateEnd:'',time:'10:00',location:'Universität Bielefeld',category:'uni',type:'freiwillig',audience:['schueler'],classes:'EF,Q1,Q2',link:'',pending:false},
+  {id:14,title:'Bewerbungstraining Oberstufe',desc:'Vorstellungsgespräch üben, Stärken-Schwächen-Analyse, Selbstpräsentation.',date:'2026-11-24',dateEnd:'',time:'09:00',location:'Mehrzweckraum',category:'workshop',type:'wahlpflicht',audience:['schueler'],classes:'Q1,Q2',link:'',pending:false},
+];
+let nextId=200;
+let authRole=null; // null | 'admin' | 'partner'
+let selectedRole='admin';
+let state={
+  activeAudience:{schueler:true,lehrer:true,eltern:true},
+  activeTypes:{pflicht:true,wahlpflicht:true,freiwillig:true},
+  view:'timeline',search:'',
+  calYear:new Date().getFullYear(),calMonth:new Date().getMonth(),
+  selectedEventId:null,
+  activeKlasse:'alle',
+  repeatType:'none',
+};
+
+// ─── AUTH ─────────────────────────────────────────────────────────────────────
+function selectRole(r){
+  selectedRole=r;
+  document.getElementById('roleAdminBtn').classList.toggle('selected',r==='admin');
+  document.getElementById('rolePartnerBtn').classList.toggle('selected',r==='partner');
+}
+function doLogin(){
+  const pw=document.getElementById('authPassword').value;
+  const err=document.getElementById('authError');
+  err.style.display='none';
+  if(selectedRole==='admin'&&pw===PW_ADMIN){authRole='admin';applyAuth();}
+  else if(selectedRole==='partner'&&pw===PW_PARTNER){authRole='partner';applyAuth();}
+  else{err.style.display='block';document.getElementById('authPassword').value='';}
+}
+function doLogout(){
+  authRole=null;
+  applyAuth();
+  closeAuthDropdown();
+}
+function applyAuth(){
+  const isAdmin=authRole==='admin';
+  const isPartner=authRole==='partner';
+  const loggedIn=isAdmin||isPartner;
+  // header lock icon
+  const lockIcon=document.getElementById('lockIcon');
+  lockIcon.style.color=loggedIn?'var(--color-primary)':'';
+  // show/hide add btn
+  document.getElementById('addEventBtn').style.display=loggedIn?'inline-flex':'none';
+  document.getElementById('fabBtn').style.display=isAdmin?'flex':'none';
+  // admin bar
+  document.getElementById('adminBar').style.display=isAdmin?'flex':'none';
+  // pending panel
+  renderPending();
+  // login/logout views in dropdown
+  document.getElementById('authLoginView').style.display=loggedIn?'none':'flex';
+  document.getElementById('authLoginView').style.flexDirection='column';
+  document.getElementById('authLoggedView').style.display=loggedIn?'block':'none';
+  if(loggedIn){
+    const box=document.getElementById('authStatusBox');
+    if(isAdmin){
+      box.className='auth-status auth-status-admin';
+      box.innerHTML='<svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="var(--color-pflicht)"/></svg> Admin';
+    } else {
+      box.className='auth-status auth-status-partner';
+      box.innerHTML='<svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="var(--color-partner)"/></svg> Partner';
+    }
+  }
+  // delete btn in detail modal
+  document.getElementById('deleteEventBtn').style.display=isAdmin?'inline-flex':'none';
+  // add modal title
+  document.getElementById('addModalTitle').textContent=isPartner?'Termin einreichen (zur Freigabe)':'Termin hinzufügen';
+  render();
+}
+document.getElementById('authToggleBtn').addEventListener('click',e=>{
+  e.stopPropagation();
+  document.getElementById('authDropdown').classList.toggle('open');
+  if(document.getElementById('authDropdown').classList.contains('open'))
+    setTimeout(()=>document.getElementById('authPassword').focus&&document.getElementById('authPassword').focus(),50);
+});
+function closeAuthDropdown(){document.getElementById('authDropdown').classList.remove('open');}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.auth-wrap'))closeAuthDropdown();
+});
+document.getElementById('authPassword').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+
+// ─── PENDING ──────────────────────────────────────────────────────────────────
+function renderPending(){
+  const panel=document.getElementById('pendingPanel');
+  const list=document.getElementById('pendingList');
+  if(authRole!=='admin'){panel.style.display='none';return;}
+  const pending=events.filter(e=>e.pending);
+  if(!pending.length){panel.style.display='none';return;}
+  panel.style.display='block';
+  list.innerHTML=pending.map(ev=>`
+    <div class="pending-item">
+      <div><strong>${ev.title}</strong><span style="color:var(--color-text-muted);font-size:var(--text-xs);margin-left:8px;">${formatDate(ev.date)}</span></div>
+      <div class="pending-btns">
+        <button class="btn-approve" onclick="approveEvent(${ev.id})">✓ Freigeben</button>
+        <button class="btn-reject" onclick="rejectEvent(${ev.id})">✕ Ablehnen</button>
+      </div>
+    </div>`).join('');
+}
+function approveEvent(id){
+  const ev=events.find(e=>e.id===id);if(!ev)return;
+  ev.pending=false;renderPending();render();
+}
+function rejectEvent(id){
+  events=events.filter(e=>e.id!==id);renderPending();render();
+}
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function isEventPast(ev){
+  const today=new Date();today.setHours(0,0,0,0);
+  const end=ev.dateEnd&&ev.dateEnd!==ev.date?new Date(ev.dateEnd+'T12:00:00'):new Date(ev.date+'T12:00:00');
+  end.setHours(0,0,0,0);
+  return end<today;
+}
+function classesMatch(ev,aktKlasse){
+  if(aktKlasse==='alle')return true;
+  if(!ev.classes||ev.classes==='alle')return true;
+  const list=ev.classes.split(',').map(s=>s.trim());
+  return list.includes(aktKlasse)||list.includes('alle');
+}
+function filterEvents(){
+  return events.filter(ev=>{
+    if(ev.pending&&authRole!=='admin')return false;
+    if(isEventPast(ev))return false;
+    if(!ev.audience.some(a=>state.activeAudience[a]))return false;
+    if(!state.activeTypes[ev.type])return false;
+    if(state.activeAudience.schueler&&!state.activeAudience.lehrer&&!state.activeAudience.eltern){
+      if(!classesMatch(ev,state.activeKlasse))return false;
+    }
+    if(state.search){
+      const q=state.search.toLowerCase();
+      if(!ev.title.toLowerCase().includes(q)&&!(ev.desc||'').toLowerCase().includes(q)&&!(ev.classes||'').toLowerCase().includes(q))return false;
+    }
+    return true;
+  }).sort((a,b)=>a.date.localeCompare(b.date));
+}
+function formatDate(str){
+  if(!str)return'';
+  const d=new Date(str+'T12:00:00');
+  return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'});
+}
+function formatDateShort(str){
+  if(!str)return'';
+  const d=new Date(str+'T12:00:00');
+  return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'});
+}
+function addDays(dateStr,n){
+  const d=new Date(dateStr+'T12:00:00');
+  d.setDate(d.getDate()+n);
+  return d.toISOString().split('T')[0];
+}
+function addMonths(dateStr,n){
+  const d=new Date(dateStr+'T12:00:00');
+  d.setMonth(d.getMonth()+n);
+  return d.toISOString().split('T')[0];
+}
+
+// ─── RENDER TIMELINE ─────────────────────────────────────────────────────────
+function renderTimeline(){
+  const container=document.getElementById('timelineContent');
+  const filtered=filterEvents();
+  if(!filtered.length){
+    container.innerHTML=`<div class="empty-state"><div class="empty-state-icon"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><h3>Keine Termine gefunden</h3><p>Filter anpassen oder neuen Termin hinzufügen.</p></div>`;
+    document.getElementById('upcomingBanner').style.display='none';
+    return;
+  }
+  const today=new Date();today.setHours(0,0,0,0);
+  const nextEv=filtered.find(e=>!e.pending);
+  if(nextEv){
+    const d=new Date(nextEv.date+'T12:00:00');
+    const diff=Math.round((d-today)/86400000);
+    const diffStr=diff<=0?'heute':diff===1?'morgen':`in ${diff} Tagen`;
+    document.getElementById('upcomingBanner').style.display='flex';
+    document.getElementById('upcomingText').innerHTML=`Nächster Termin: <strong>${nextEv.title}</strong> – ${diffStr} (${formatDate(nextEv.date)})`;
+  } else {
+    document.getElementById('upcomingBanner').style.display='none';
+  }
+  const groups={};
+  filtered.forEach(ev=>{
+    const d=new Date(ev.date+'T12:00:00');
+    const key=`${d.getFullYear()}-${String(d.getMonth()).padStart(2,'0')}`;
+    if(!groups[key])groups[key]={label:MONTHS_DE[d.getMonth()]+' '+d.getFullYear(),events:[]};
+    groups[key].events.push(ev);
+  });
+  let html='';let first=true;
+  for(const key of Object.keys(groups).sort()){
+    const g=groups[key];
+    html+=`<div class="month-group"><div class="month-header"><span class="month-label">${g.label}</span><span class="month-badge">${g.events.length} Termin${g.events.length!==1?'e':''}</span></div>`;
+    g.events.forEach(ev=>{const isNext=first&&!ev.pending;if(!ev.pending)first=false;html+=renderCard(ev,isNext);});
+    html+='</div>';
+  }
+  container.innerHTML=html;
+  container.querySelectorAll('.event-card').forEach(card=>{
+    card.addEventListener('click',()=>openDetail(parseInt(card.dataset.id)));
+  });
+}
+
+function renderCard(ev,isNext){
+  const d=new Date(ev.date+'T12:00:00');
+  const audPills=ev.audience.map(a=>`<span class="pill pill-${a}">${AUD_LABELS[a]}</span>`).join('');
+  const typePill=`<span class="pill pill-${ev.type}">${TYPE_LABELS[ev.type]}</span>`;
+  const hasRange=ev.dateEnd&&ev.dateEnd!==ev.date;
+  const timeStr=ev.time?`<span class="category-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${ev.time} Uhr</span>`:'';
+  const locStr=ev.location?`<span class="category-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${ev.location}</span>`:'';
+  const clsLabel=ev.classes&&ev.classes!=='alle'?ev.classes.split(',').slice(0,4).join(', ')+(ev.classes.split(',').length>4?'…':''):'Alle Klassen';
+  const clsStr=`<span class="category-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>${clsLabel}</span>`;
+  const pendingBadge=ev.pending?`<span style="font-size:10px;background:var(--color-partner-bg);color:var(--color-partner);padding:1px 6px;border-radius:999px;font-weight:600;">Zur Freigabe</span>`:'';
+  return `<article class="event-card${isNext?' next-event':''}${ev.pending?' pending-card':''}" data-id="${ev.id}" data-type="${ev.type}" tabindex="0" role="button" aria-label="${ev.title}">
+    ${isNext?'<span class="next-badge">Als Nächstes</span>':''}
+    <div class="event-date">
+      <span class="event-day">${String(d.getDate()).padStart(2,'0')}</span>
+      <span class="event-weekday">${WEEKDAYS_SHORT[d.getDay()]}</span>
+      ${hasRange?`<span class="event-date-range">${formatDateShort(ev.date)}–${formatDateShort(ev.dateEnd)}</span>`:''}
+    </div>
+    <div>
+      <div class="event-title">${ev.title}${pendingBadge?'&nbsp;'+pendingBadge:''}</div>
+      ${ev.desc?`<div class="event-desc">${ev.desc.substring(0,110)}${ev.desc.length>110?'…':''}</div>`:''}
+      <div class="event-meta">${audPills}${typePill}${clsStr}${locStr}${timeStr}</div>
+    </div>
+    <div class="event-badges">
+      <span style="font-size:var(--text-xs);color:var(--color-text-muted);white-space:nowrap">${CATEGORY_LABELS[ev.category]||ev.category}</span>
+    </div>
+  </article>`;
+}
+
+// ─── RENDER CALENDAR ─────────────────────────────────────────────────────────
+function renderCalendar(){
+  const{calYear,calMonth}=state;
+  document.getElementById('calMonthLabel').textContent=MONTHS_DE[calMonth]+' '+calYear;
+  const today=new Date();today.setHours(0,0,0,0);
+  const allFuture=events.filter(ev=>!ev.pending&&!isEventPast(ev)&&state.activeTypes[ev.type]&&ev.audience.some(a=>state.activeAudience[a]));
+  let html='<div class="cal-grid">';
+  ['Mo','Di','Mi','Do','Fr','Sa','So'].forEach(d=>{html+=`<div class="cal-day-label">${d}</div>`;});
+  const firstDay=new Date(calYear,calMonth,1);
+  let startDow=(firstDay.getDay()+6)%7;
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  const daysInPrevMonth=new Date(calYear,calMonth,0).getDate();
+  const totalCells=Math.ceil((startDow+daysInMonth)/7)*7;
+  for(let i=0;i<totalCells;i++){
+    let day,month,year,isOther=false;
+    if(i<startDow){day=daysInPrevMonth-startDow+i+1;month=calMonth-1;year=calYear;if(month<0){month=11;year--;}isOther=true;}
+    else if(i>=startDow+daysInMonth){day=i-startDow-daysInMonth+1;month=calMonth+1;year=calYear;if(month>11){month=0;year++;}isOther=true;}
+    else{day=i-startDow+1;month=calMonth;year=calYear;}
+    const dateStr=`${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const isToday=!isOther&&new Date(year,month,day).getTime()===today.getTime();
+    const dayEvs=allFuture.filter(ev=>{
+      if(ev.dateEnd&&ev.dateEnd!==ev.date)return dateStr>=ev.date&&dateStr<=ev.dateEnd;
+      return ev.date===dateStr;
+    });
+    html+=`<div class="cal-cell${isOther?' other-month':''}${isToday?' today':''}">`;
+    html+=`<span class="cal-date-num">${day}</span>`;
+    dayEvs.slice(0,3).forEach(ev=>{html+=`<div class="cal-event-dot" data-type="${ev.type}" data-id="${ev.id}" title="${ev.title}">${ev.title}</div>`;});
+    if(dayEvs.length>3)html+=`<div class="cal-more">+${dayEvs.length-3} weitere</div>`;
+    html+='</div>';
+  }
+  html+='</div>';
+  document.getElementById('calendarGrid').innerHTML=html;
+  document.getElementById('calendarGrid').querySelectorAll('.cal-event-dot').forEach(dot=>{
+    dot.addEventListener('click',e=>{e.stopPropagation();openDetail(parseInt(dot.dataset.id));});
+  });
+}
+
+// ─── DETAIL MODAL ────────────────────────────────────────────────────────────
+function openDetail(id){
+  const ev=events.find(e=>e.id===id);if(!ev)return;
+  state.selectedEventId=id;
+  document.getElementById('detailTitle').textContent=ev.title;
+  document.getElementById('detailBadges').innerHTML=
+    ev.audience.map(a=>`<span class="pill pill-${a}">${AUD_LABELS[a]}</span>`).join('')+
+    `<span class="pill pill-${ev.type}">${TYPE_LABELS[ev.type]}</span>`+
+    `<span style="font-size:var(--text-xs);background:var(--color-surface-offset);padding:2px 8px;border-radius:999px;">${CATEGORY_LABELS[ev.category]||ev.category}</span>`;
+  let dateStr=formatDate(ev.date);
+  if(ev.dateEnd&&ev.dateEnd!==ev.date)dateStr+=` – ${formatDate(ev.dateEnd)}`;
+  if(ev.time)dateStr+=` | ${ev.time} Uhr`;
+  const clsDisplay=ev.classes==='alle'||!ev.classes?'Alle Klassen':ev.classes.split(',').join(', ');
+  let body=`<div class="modal-row"><svg class="modal-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><div><div class="modal-label">Datum</div><div class="modal-value">${dateStr}</div></div></div>`;
+  if(ev.location)body+=`<div class="modal-row"><svg class="modal-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div><div class="modal-label">Ort</div><div class="modal-value">${ev.location}</div></div></div>`;
+  body+=`<div class="modal-row"><svg class="modal-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><div><div class="modal-label">Klassen</div><div class="modal-value">${clsDisplay}</div></div></div>`;
+  if(ev.desc)body+=`<div class="modal-row"><svg class="modal-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg><div><div class="modal-label">Beschreibung</div><div class="modal-value">${ev.desc}</div></div></div>`;
+  if(ev.link)body+=`<div class="modal-row"><svg class="modal-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><div><div class="modal-label">Link</div><div class="modal-value"><a href="${ev.link}" target="_blank" rel="noopener noreferrer" style="color:var(--color-primary)">${ev.link}</a></div></div></div>`;
+  document.getElementById('detailBody').innerHTML=body;
+  document.getElementById('deleteEventBtn').style.display=authRole==='admin'?'inline-flex':'none';
+  document.getElementById('detailModal').classList.add('open');
+}
+function closeDetail(){document.getElementById('detailModal').classList.remove('open');state.selectedEventId=null;}
+
+// ─── ADD MODAL ───────────────────────────────────────────────────────────────
+let selectedKlassen=new Set(['alle']);
+function openAdd(){
+  const today=new Date().toISOString().split('T')[0];
+  document.getElementById('f_date_start').value=today;
+  ['f_title','f_desc','f_date_end','f_time','f_location','f_link'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f_category').value='sonstige';
+  document.getElementById('f_type').value='freiwillig';
+  document.getElementById('f_aud_schueler').checked=true;
+  document.getElementById('f_aud_lehrer').checked=false;
+  document.getElementById('f_aud_eltern').checked=false;
+  selectedKlassen=new Set(['alle']);
+  renderKlasseFormBtns();
+  // reset repeat
+  state.repeatType='none';
+  document.querySelectorAll('.repeat-tab').forEach(t=>t.classList.toggle('active',t.dataset.rt==='none'));
+  document.getElementById('repeatRhythmOpts').classList.remove('visible');
+  document.getElementById('repeatCustomOpts').classList.remove('visible');
+  document.getElementById('f_repeat_until').value='';
+  document.getElementById('customDatesList').innerHTML='';
+  document.getElementById('addModal').classList.add('open');
+  setTimeout(()=>document.getElementById('f_title').focus(),100);
+}
+function renderKlasseFormBtns(){
+  document.querySelectorAll('#klasseFormBtns .klasse-form-btn').forEach(btn=>{
+    const k=btn.dataset.k;
+    if(k==='alle')btn.classList.toggle('sel',selectedKlassen.has('alle'));
+    else btn.classList.toggle('sel',!selectedKlassen.has('alle')&&selectedKlassen.has(k));
+  });
+}
+document.getElementById('klasseFormBtns').addEventListener('click',e=>{
+  const btn=e.target.closest('.klasse-form-btn');if(!btn)return;
+  const k=btn.dataset.k;
+  if(k==='alle'){selectedKlassen=new Set(['alle']);}
+  else{
+    selectedKlassen.delete('alle');
+    if(selectedKlassen.has(k))selectedKlassen.delete(k);
+    else selectedKlassen.add(k);
+    if(!selectedKlassen.size)selectedKlassen.add('alle');
+  }
+  renderKlasseFormBtns();
+});
+
+// REPEAT TABS
+document.querySelectorAll('.repeat-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    state.repeatType=tab.dataset.rt;
+    document.querySelectorAll('.repeat-tab').forEach(t=>t.classList.toggle('active',t===tab));
+    const isRhythm=['weekly','biweekly','monthly'].includes(state.repeatType);
+    const isCustom=state.repeatType==='custom';
+    document.getElementById('repeatRhythmOpts').classList.toggle('visible',isRhythm);
+    document.getElementById('repeatCustomOpts').classList.toggle('visible',isCustom);
+  });
+});
+
+function addCustomDateRow(val=''){
+  const row=document.createElement('div');
+  row.className='custom-date-row';
+  row.innerHTML=`<input type="date" class="form-input custom-date-input" value="${val}"><button type="button" class="btn-remove-date" onclick="this.parentElement.remove()">✕</button>`;
+  document.getElementById('customDatesList').appendChild(row);
+}
+
+function generateRepeatDates(baseDate,repeatType,untilDate){
+  const dates=[];
+  let current=baseDate;
+  const until=untilDate||addMonths(baseDate,12);
+  while(current<=until){
+    if(current!==baseDate)dates.push(current);
+    if(repeatType==='weekly')current=addDays(current,7);
+    else if(repeatType==='biweekly')current=addDays(current,14);
+    else if(repeatType==='monthly')current=addMonths(current,1);
+    else break;
+    if(dates.length>52)break;
+  }
+  return dates;
+}
+
+function saveEvent(){
+  const title=document.getElementById('f_title').value.trim();
+  const dateStart=document.getElementById('f_date_start').value;
+  if(!title||!dateStart){alert('Bitte Titel und Datum eingeben.');return;}
+  const audience=[];
+  if(document.getElementById('f_aud_schueler').checked)audience.push('schueler');
+  if(document.getElementById('f_aud_lehrer').checked)audience.push('lehrer');
+  if(document.getElementById('f_aud_eltern').checked)audience.push('eltern');
+  if(!audience.length){alert('Bitte mindestens eine Zielgruppe auswählen.');return;}
+  const classesVal=selectedKlassen.has('alle')?'alle':[...selectedKlassen].join(',');
+  const baseEv={
+    title,desc:document.getElementById('f_desc').value.trim(),
+    date:dateStart,dateEnd:document.getElementById('f_date_end').value||'',
+    time:document.getElementById('f_time').value,
+    location:document.getElementById('f_location').value.trim(),
+    category:document.getElementById('f_category').value,
+    type:document.getElementById('f_type').value,
+    audience,classes:classesVal,
+    link:document.getElementById('f_link').value.trim(),
+    pending:authRole==='partner',
+  };
+  // Main event
+  events.push({...baseEv,id:nextId++});
+  // Repeating events
+  if(state.repeatType==='custom'){
+    document.querySelectorAll('.custom-date-input').forEach(inp=>{
+      if(inp.value)events.push({...baseEv,id:nextId++,date:inp.value,dateEnd:''});
+    });
+  } else if(['weekly','biweekly','monthly'].includes(state.repeatType)){
+    const until=document.getElementById('f_repeat_until').value;
+    const addlDates=generateRepeatDates(dateStart,state.repeatType,until);
+    addlDates.forEach(d=>events.push({...baseEv,id:nextId++,date:d,dateEnd:''}));
+  }
+  document.getElementById('addModal').classList.remove('open');
+  renderPending();render();
+  if(authRole==='partner')alert('Dein Termin wurde eingereicht und wird nach Freigabe durch den Administrator sichtbar.');
+}
+
+function deleteEvent(){
+  if(!state.selectedEventId)return;
+  const ev=events.find(e=>e.id===state.selectedEventId);if(!ev)return;
+  if(!confirm(`Termin „${ev.title}" wirklich löschen?`))return;
+  events=events.filter(e=>e.id!==state.selectedEventId);
+  closeDetail();renderPending();render();
+}
+
+// ─── EXPORT / IMPORT ─────────────────────────────────────────────────────────
+function exportData(){
+  const json=JSON.stringify({events,nextId},null,2);
+  const blob=new Blob([json],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='termine-gymbev.json';a.click();
+  URL.revokeObjectURL(url);
+}
+function importData(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const data=JSON.parse(ev.target.result);
+      if(data.events&&Array.isArray(data.events)){
+        events=data.events;
+        if(data.nextId)nextId=data.nextId;
+        renderPending();render();
+        alert(`${events.length} Termine erfolgreich geladen.`);
+      }
+    }catch{alert('Fehler beim Lesen der Datei.');}
+  };
+  reader.readAsText(file);
+  e.target.value='';
+}
+function copyEmbed(){
+  const url=window.location.href;
+  const code=`<a href="${url}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#1a56a0;color:white;border-radius:8px;text-decoration:none;font-weight:600;">📅 Berufliche Bildung – Terminübersicht</a>`;
+  if(navigator.clipboard){navigator.clipboard.writeText(code).then(()=>alert('HTML-Code wurde kopiert!\n\nFüge ihn auf deiner Homepage ein.'));}
+  else{const ta=document.createElement('textarea');ta.value=code;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('Kopiert!');}
+}
+
+// ─── FILTERS ─────────────────────────────────────────────────────────────────
+document.querySelectorAll('[data-filter="audience"]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const v=btn.dataset.value;
+    state.activeAudience[v]=!state.activeAudience[v];
+    btn.classList.toggle('active',state.activeAudience[v]);
+    // show klasse filter only when schueler is the only active group
+    const onlySchueler=state.activeAudience.schueler;
+    document.getElementById('klasseFilterRow').style.display=onlySchueler?'flex':'none';
+    render();
+  });
+});
+document.querySelectorAll('[data-filter="type"]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const v=btn.dataset.value;
+    state.activeTypes[v]=!state.activeTypes[v];
+    btn.classList.toggle('active',state.activeTypes[v]);
+    render();
+  });
+});
+document.querySelectorAll('.klasse-chip').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.klasse-chip').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    state.activeKlasse=btn.dataset.klasse;
+    render();
+  });
+});
+
+// ─── VIEW TOGGLE ─────────────────────────────────────────────────────────────
+document.querySelectorAll('[data-view]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    state.view=btn.dataset.value;
+    document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.value===state.view));
+    const tv=document.getElementById('timelineView');const cv=document.getElementById('calendarView');
+    if(state.view==='timeline'){tv.style.display='';cv.style.display='none';}
+    else{cv.style.display='block';tv.style.display='none';state.calYear=new Date().getFullYear();state.calMonth=new Date().getMonth();}
+    render();
+  });
+});
+
+// ─── SEARCH ──────────────────────────────────────────────────────────────────
+document.getElementById('searchInput').addEventListener('input',e=>{state.search=e.target.value;render();});
+
+// ─── MODAL WIRING ────────────────────────────────────────────────────────────
+document.getElementById('addEventBtn').addEventListener('click',openAdd);
+document.getElementById('fabBtn').addEventListener('click',openAdd);
+document.getElementById('saveEventBtn').addEventListener('click',saveEvent);
+document.getElementById('cancelAddBtn').addEventListener('click',()=>document.getElementById('addModal').classList.remove('open'));
+document.getElementById('closeAddModal').addEventListener('click',()=>document.getElementById('addModal').classList.remove('open'));
+document.getElementById('closeDetailModal').addEventListener('click',closeDetail);
+document.getElementById('closeDetailModal2').addEventListener('click',closeDetail);
+document.getElementById('deleteEventBtn').addEventListener('click',deleteEvent);
+
+// CALENDAR NAV
+document.getElementById('calPrev').addEventListener('click',()=>{state.calMonth--;if(state.calMonth<0){state.calMonth=11;state.calYear--;}renderCalendar();});
+document.getElementById('calNext').addEventListener('click',()=>{state.calMonth++;if(state.calMonth>11){state.calMonth=0;state.calYear++;}renderCalendar();});
+document.getElementById('calToday').addEventListener('click',()=>{state.calYear=new Date().getFullYear();state.calMonth=new Date().getMonth();renderCalendar();});
+
+// OVERLAY CLOSE
+['detailModal','addModal'].forEach(id=>{document.getElementById(id).addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('open');});});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));closeAuthDropdown();}});
+
+// ─── DARK MODE ───────────────────────────────────────────────────────────────
+(function(){
+  const t=document.querySelector('[data-theme-toggle]'),r=document.documentElement;
+  let d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  r.setAttribute('data-theme',d);
+  t&&t.addEventListener('click',()=>{
+    d=d==='dark'?'light':'dark';r.setAttribute('data-theme',d);
+    t.innerHTML=d==='dark'?
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  });
+})();
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+document.getElementById('calendarView').style.display='none';
+render();
+
+function render(){
+  if(state.view==='timeline')renderTimeline();
+  else renderCalendar();
+}
+</script>
+</body>
+</html>
