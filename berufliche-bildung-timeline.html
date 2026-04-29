@@ -1940,10 +1940,15 @@ function saveHTML(){
     + '\n]; // __EVENTS_END__'
     + source.slice(ei + endMarker.length);
   // Also update nextId
-  const updatedFinal = updated.replace(
-    /let nextId\s*=\s*\d+;/,
-    'let nextId = ' + nextId + ';'
-  );
+let updatedFinal = updated.replace(
+  /let nextId\s*=\s*\d+;/,
+  'let nextId = ' + nextId + ';'
+);
+
+updatedFinal = updatedFinal.replace(
+  /let currentRole\s*=\s*[^;]+;/,
+  "let currentRole = null; // null | 'admin' | 'partner'"
+);
   const blob = new Blob([updatedFinal], {type: 'text/html;charset=utf-8'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
