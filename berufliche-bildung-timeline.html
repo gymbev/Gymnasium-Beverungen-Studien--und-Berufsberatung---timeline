@@ -861,40 +861,40 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
 
 <!-- REPEAT -->
 <div class="form-group">
-  <label class="form-label" for="evRepeat">Wiederholung</label>
-  <select id="evRepeat" class="form-select" onchange="toggleRepeatOptions()">
-    <option value="none">Kein Wiederholungstermin</option>
-    <option value="weekly">Wöchentlich</option>
-    <option value="biweekly">Alle 2 Wochen</option>
-    <option value="monthly">Monatlich</option>
-    <option value="custom">Eigene Daten</option>
-  </select>
+<label class="form-label" for="evRepeat">Wiederholung</label>
+<select id="evRepeat" class="form-select" onchange="toggleRepeatOptions()">
+  <option value="none">Kein Wiederholungstermin</option>
+  <option value="weekly">Wöchentlich</option>
+  <option value="biweekly">Alle 2 Wochen</option>
+  <option value="monthly">Monatlich</option>
+  <option value="custom">Eigene Daten</option>
+</select>
 
-  <div class="repeat-options hidden" id="repeatRhythmOpts">
-    <div class="repeat-grid">
-      <div class="form-group" style="margin-bottom:0">
-        <label class="form-label" for="evRepeatEnd">Enddatum der Serie *</label>
-        <input type="date" id="evRepeatEnd" class="form-input">
-      </div>
-      <div class="form-group" style="margin-bottom:0">
-        <label class="form-label">Vorschau</label>
-        <div id="repeatPreview" style="font-size:var(--text-xs);color:var(--color-text-muted);padding:var(--space-2) 0"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="repeat-options hidden" id="repeatCustomOpts">
+<div class="repeat-options hidden" id="repeatRhythmOpts">
+  <div class="repeat-grid">
     <div class="form-group" style="margin-bottom:0">
-      <label class="form-label">Eigene Wiederholungstermine</label>
-      <div id="customDatesList" style="display:flex;flex-direction:column;gap:8px"></div>
-      <button type="button" class="btn-sm btn-secondary" onclick="addCustomDate()" style="margin-top:8px">
-        Weiteres Datum hinzufügen
-      </button>
-      <div class="form-hint" style="margin-top:8px">
-        Der erste Termin ist das normale Startdatum oben. Hier ergänzt du nur die zusätzlichen Termine der Serie.
-      </div>
+      <label class="form-label" for="evRepeatEnd">Enddatum der Serie *</label>
+      <input type="date" id="evRepeatEnd" class="form-input">
+    </div>
+    <div class="form-group" style="margin-bottom:0">
+      <label class="form-label">Vorschau</label>
+      <div id="repeatPreview" style="font-size:var(--text-xs);color:var(--color-text-muted);padding:var(--space-2) 0"></div>
     </div>
   </div>
+</div>
+
+<div class="repeat-options hidden" id="repeatCustomOpts">
+  <div class="form-group" style="margin-bottom:0">
+    <label class="form-label">Eigene Wiederholungstermine</label>
+    <div id="customDatesList" style="display:flex;flex-direction:column;gap:8px"></div>
+    <button type="button" class="btn-sm btn-secondary" onclick="addCustomDateRow()" style="margin-top:8px">
+      Weiteres Datum hinzufügen
+    </button>
+    <div class="form-hint" style="margin-top:8px">
+      Der erste Termin ist das normale Datum oben. Hier trägst du nur zusätzliche Wiederholungstermine ein.
+    </div>
+  </div>
+</div>
 </div>
     </div>
     <div class="modal-footer">
@@ -1697,6 +1697,7 @@ function resetEventForm(){
   $('workshopCapacityGroup').classList.add('hidden');
   $('evWorkshopCap').value='';
   _repeatType = 'none';
+  const evRepeat = document.getElementById('evRepeat'); if(evRepeat) evRepeat.value='none';
   document.querySelectorAll('.repeat-tab').forEach(t=>t.classList.toggle('active',t.dataset.rt==='none'));
   const rRO = document.getElementById('repeatRhythmOpts');
   const rCO = document.getElementById('repeatCustomOpts');
@@ -1764,7 +1765,37 @@ document.querySelectorAll('.repeat-tab').forEach(tab=>{
     document.getElementById('repeatCustomOpts').classList.toggle('visible', isCustom);
   });
 });
+function toggleRepeatOptions(){
+  const sel = document.getElementById('evRepeat');
+  if(!sel) return;
 
+  _repeatType = sel.value;
+
+  const rhythm = document.getElementById('repeatRhythmOpts');
+  const custom = document.getElementById('repeatCustomOpts');
+  const old = document.getElementById('repeatOptions');
+
+  if(old) old.classList.add('hidden');
+
+  if(rhythm){
+    const showRhythm = ['weekly','biweekly','monthly'].includes(_repeatType);
+    rhythm.classList.toggle('hidden', !showRhythm);
+    rhythm.classList.toggle('visible', showRhythm);
+  }
+
+  if(custom){
+    const showCustom = _repeatType === 'custom';
+    custom.classList.toggle('hidden', !showCustom);
+    custom.classList.toggle('visible', showCustom);
+
+    if(showCustom){
+      const list = document.getElementById('customDatesList');
+      if(list && list.children.length === 0){
+        addCustomDateRow();
+      }
+    }
+  }
+}
 function addCustomDateRow(val=''){
   const row = document.createElement('div');
   row.className = 'custom-date-row';
