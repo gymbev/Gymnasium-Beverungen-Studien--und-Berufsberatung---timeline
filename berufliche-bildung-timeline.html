@@ -517,8 +517,24 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
       <div class="month-header">
         <h2 class="month-title">Juni 2026</h2>
         <div class="month-divider"></div>
-        <span class="month-count">2</span>
-      </div><div class="event-card" onclick="openDetail(23)">
+        <span class="month-count">3</span>
+      </div><div class="event-card" onclick="openDetail(25)">
+    <div class="event-type-bar pflicht"></div>
+    <div class="event-card-inner">
+      <div class="event-header">
+        <div class="event-date-block">
+          <div class="event-day">10</div>
+          <div class="event-month">Jun</div>
+        </div>
+        <div class="event-title-block">
+          <div class="event-title">Beverunger Ausbildungsmesse</div>
+          <div class="event-meta"><span class="meta-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="tag" aria-hidden="true" style="width:12px;height:12px" class="lucide lucide-tag"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"></path><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"></circle></svg>Ausbildungsmesse</span></div>
+        </div>
+        
+      </div>
+      <div class="badge-row"><span class="badge pflicht">Verpflichtend</span><span class="badge audience-s">Schüler:innen</span><span class="badge klasse">Kl. 8</span><span class="badge klasse">Kl. 9</span><span class="badge klasse">Kl. 10</span><span class="badge klasse">Kl. EF</span></div>
+    </div>
+  </div><div class="event-card" onclick="openDetail(23)">
     <div class="event-type-bar wahlpflicht"></div>
     <div class="event-card-inner">
       <div class="event-header">
@@ -737,7 +753,7 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
   <div class="modal modal-wide">
     <div class="modal-header">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar-plus" aria-hidden="true" style="width:20px;height:20px;color:var(--color-primary)" class="lucide lucide-calendar-plus"><path d="M16 19h6"></path><path d="M16 2v4"></path><path d="M19 16v6"></path><path d="M21 12.598V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8.5"></path><path d="M3 10h18"></path><path d="M8 2v4"></path></svg>
-      <h2 id="eventModalTitle">Termin hinzufügen</h2>
+      <h2 id="eventModalTitle">Termin bearbeiten</h2>
       <button class="icon-btn" onclick="closeModal('eventModal')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
     </div>
     <div class="modal-body">
@@ -773,8 +789,8 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
         <div class="chip-selector" id="catSelector">
           <span class="sel-chip cat-chip" data-cat="Berufsberatung" onclick="toggleCat(this)">Berufsberatung</span>
           <span class="sel-chip cat-chip" data-cat="Praktikum" onclick="toggleCat(this)">Praktikum</span>
-          <span class="sel-chip cat-chip" data-cat="Ausbildungsmesse" onclick="toggleCat(this)">Ausbildungsmesse</span>
-          <span class="sel-chip cat-chip selected" data-cat="Workshop" onclick="toggleCat(this)">Workshop</span>
+          <span class="sel-chip cat-chip selected" data-cat="Ausbildungsmesse" onclick="toggleCat(this)">Ausbildungsmesse</span>
+          <span class="sel-chip cat-chip" data-cat="Workshop" onclick="toggleCat(this)">Workshop</span>
           <span class="sel-chip cat-chip" data-cat="Universität" onclick="toggleCat(this)">Uni-Angebot</span>
           <span class="sel-chip cat-chip" data-cat="Boys &amp; Girls Day" onclick="toggleCat(this)">Boys &amp; Girls Day</span>
           <span class="sel-chip cat-chip" data-cat="Elternabend" onclick="toggleCat(this)">Elternabend</span>
@@ -784,8 +800,8 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
       <div class="form-group">
         <label class="form-label">Art des Termins *</label>
         <div class="chip-selector" id="typeSelector">
-          <span class="sel-chip type-pflicht" data-type="pflicht" onclick="selectType(this)">Verpflichtend</span>
-          <span class="sel-chip type-wahlpflicht selected" data-type="wahlpflicht" onclick="selectType(this)">Wahlpflicht</span>
+          <span class="sel-chip type-pflicht selected" data-type="pflicht" onclick="selectType(this)">Verpflichtend</span>
+          <span class="sel-chip type-wahlpflicht" data-type="wahlpflicht" onclick="selectType(this)">Wahlpflicht</span>
           <span class="sel-chip type-freiwillig" data-type="freiwillig" onclick="selectType(this)">Freiwillig</span>
         </div>
       </div>
@@ -802,12 +818,12 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
         <label class="form-label">Klassen / Stufen <span>(Mehrfachauswahl)</span></label>
         <div class="chip-selector" id="classSelector">
           <span class="sel-chip class-chip-sel" data-cls="alle" onclick="toggleCls(this,'alle')">Alle Klassen</span>
-          <span class="sel-chip class-chip-sel" data-cls="8" onclick="toggleCls(this,'8')">Kl. 8</span>
-          <span class="sel-chip class-chip-sel" data-cls="9" onclick="toggleCls(this,'9')">Kl. 9</span>
-          <span class="sel-chip class-chip-sel" data-cls="10" onclick="toggleCls(this,'10')">Kl. 10</span>
+          <span class="sel-chip class-chip-sel selected" data-cls="8" onclick="toggleCls(this,'8')">Kl. 8</span>
+          <span class="sel-chip class-chip-sel selected" data-cls="9" onclick="toggleCls(this,'9')">Kl. 9</span>
+          <span class="sel-chip class-chip-sel selected" data-cls="10" onclick="toggleCls(this,'10')">Kl. 10</span>
           <span class="sel-chip class-chip-sel selected" data-cls="EF" onclick="toggleCls(this,'EF')">EF</span>
-          <span class="sel-chip class-chip-sel selected" data-cls="Q1" onclick="toggleCls(this,'Q1')">Q1</span>
-          <span class="sel-chip class-chip-sel selected" data-cls="Q2" onclick="toggleCls(this,'Q2')">Q2</span>
+          <span class="sel-chip class-chip-sel" data-cls="Q1" onclick="toggleCls(this,'Q1')">Q1</span>
+          <span class="sel-chip class-chip-sel" data-cls="Q2" onclick="toggleCls(this,'Q2')">Q2</span>
         </div>
       </div>
       <div class="form-group">
@@ -877,25 +893,25 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
 <div class="modal-backdrop hidden" id="detailModal" role="dialog" aria-modal="true">
   <div class="modal modal-wide">
     <div class="modal-header">
-      <div id="detailTypeIndicator" style="width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; background: var(--color-success);"></div>
-      <h2 id="detailTitle">Berufsberatung - Einzelgespräche</h2>
+      <div id="detailTypeIndicator" style="width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; background: var(--color-error);"></div>
+      <h2 id="detailTitle">Beverunger Ausbildungsmesse</h2>
       <button class="icon-btn" onclick="closeModal('detailModal')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
     </div>
     <div class="modal-body" id="detailBody"><div class="detail-section">
     <div class="detail-grid">
-      <div class="detail-item"><span class="detail-item-label">Datum</span><span class="detail-item-value">Donnerstag, 18. Juni 2026</span></div>
+      <div class="detail-item"><span class="detail-item-label">Datum</span><span class="detail-item-value">Mittwoch, 10. Juni 2026</span></div>
       
       
       <div class="detail-item"><span class="detail-item-label">Kategorie</span><span class="detail-item-value">Berufsberatung</span></div>
-      <div class="detail-item"><span class="detail-item-label">Art</span><span class="detail-item-value">Freiwillig</span></div>
-      <div class="detail-item"><span class="detail-item-label">Zielgruppe</span><span class="detail-item-value">Schüler:innen, Eltern</span></div>
+      <div class="detail-item"><span class="detail-item-label">Art</span><span class="detail-item-value">Verpflichtend</span></div>
+      <div class="detail-item"><span class="detail-item-label">Zielgruppe</span><span class="detail-item-value">Schüler:innen</span></div>
       
       
     </div>
-    <p style="margin-top:var(--space-4);font-size:var(--text-sm);color:var(--color-text-muted)">Bei Frau Reckert-Paixao (Agentur für Arbeit)</p>
+    
     
   </div></div>
-    <div class="modal-footer" id="detailFooter"><button class="btn-sm btn-secondary" onclick="openEditModal(21)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pencil" aria-hidden="true" style="width:12px;height:12px" class="lucide lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></svg> Bearbeiten</button><button class="btn-sm btn-danger" onclick="deleteEvent(21)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" style="width:12px;height:12px" class="lucide lucide-trash-2"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg> Löschen</button><button class="btn-sm btn-primary" onclick="closeModal('detailModal')">Schließen</button></div>
+    <div class="modal-footer" id="detailFooter"><button class="btn-sm btn-secondary" onclick="openEditModal(25)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pencil" aria-hidden="true" style="width:12px;height:12px" class="lucide lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></svg> Bearbeiten</button><button class="btn-sm btn-danger" onclick="deleteEvent(25)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" style="width:12px;height:12px" class="lucide lucide-trash-2"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg> Löschen</button><button class="btn-sm btn-primary" onclick="closeModal('detailModal')">Schließen</button></div>
   </div>
 </div>
 
@@ -907,7 +923,7 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
       <h2>Freigaben verwalten</h2>
       <button class="icon-btn" onclick="closeModal('pendingModal')"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
     </div>
-    <div class="modal-body" id="pendingBody"></div>
+    <div class="modal-body" id="pendingBody"><p style="color:var(--color-text-muted);font-size:var(--text-sm)">Keine ausstehenden Termine.</p></div>
   </div>
 </div>
 
@@ -1137,10 +1153,37 @@ let events = [ // __EVENTS_START__
     "approved": true,
     "recurring": false,
     "id": 23
+  },
+  {
+    "title": "Beverunger Ausbildungsmesse",
+    "date": "2026-06-10",
+    "dateEnd": null,
+    "time": null,
+    "location": null,
+    "category": "Ausbildungsmesse",
+    "type": "pflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "8",
+      "9",
+      "10",
+      "EF"
+    ],
+    "desc": null,
+    "link": "https://beverungen-marketing.de/ausbildungsmesse-2026-anmeldephase-gestartet/",
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "id": 25
   }
 
 ]; // __EVENTS_END__
-let nextId = 24;
+let nextId = 26;
 
 // ===== HELPERS =====
 const $ = id => document.getElementById(id);
