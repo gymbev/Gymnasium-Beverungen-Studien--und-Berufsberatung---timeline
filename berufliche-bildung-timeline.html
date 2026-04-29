@@ -859,29 +859,43 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
         </div>
       </div>
 
-      <!-- REPEAT -->
-      <div class="form-group">
-        <label class="form-label" for="evRepeat">Wiederholung</label>
-        <select id="evRepeat" class="form-select" onchange="toggleRepeatOptions()">
-          <option value="none">Kein Wiederholungstermin</option>
-          <option value="weekly">Wöchentlich</option>
-          <option value="biweekly">Alle 2 Wochen</option>
-          <option value="monthly">Monatlich</option>
-          <option value="custom">Eigene Daten</option>
-        </select>
-        <div class="repeat-options hidden" id="repeatOptions">
-          <div class="repeat-grid">
-            <div class="form-group" style="margin-bottom:0">
-              <label class="form-label" for="evRepeatEnd">Enddatum der Serie *</label>
-              <input type="date" id="evRepeatEnd" class="form-input">
-            </div>
-            <div class="form-group" style="margin-bottom:0">
-              <label class="form-label">Vorschau</label>
-              <div id="repeatPreview" style="font-size:var(--text-xs);color:var(--color-text-muted);padding:var(--space-2) 0"></div>
-            </div>
-          </div>
-        </div>
+<!-- REPEAT -->
+<div class="form-group">
+  <label class="form-label" for="evRepeat">Wiederholung</label>
+  <select id="evRepeat" class="form-select" onchange="toggleRepeatOptions()">
+    <option value="none">Kein Wiederholungstermin</option>
+    <option value="weekly">Wöchentlich</option>
+    <option value="biweekly">Alle 2 Wochen</option>
+    <option value="monthly">Monatlich</option>
+    <option value="custom">Eigene Daten</option>
+  </select>
+
+  <div class="repeat-options hidden" id="repeatRhythmOpts">
+    <div class="repeat-grid">
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label" for="evRepeatEnd">Enddatum der Serie *</label>
+        <input type="date" id="evRepeatEnd" class="form-input">
       </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">Vorschau</label>
+        <div id="repeatPreview" style="font-size:var(--text-xs);color:var(--color-text-muted);padding:var(--space-2) 0"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="repeat-options hidden" id="repeatCustomOpts">
+    <div class="form-group" style="margin-bottom:0">
+      <label class="form-label">Eigene Wiederholungstermine</label>
+      <div id="customDatesList" style="display:flex;flex-direction:column;gap:8px"></div>
+      <button type="button" class="btn-sm btn-secondary" onclick="addCustomDate()" style="margin-top:8px">
+        Weiteres Datum hinzufügen
+      </button>
+      <div class="form-hint" style="margin-top:8px">
+        Der erste Termin ist das normale Startdatum oben. Hier ergänzt du nur die zusätzlichen Termine der Serie.
+      </div>
+    </div>
+  </div>
+</div>
     </div>
     <div class="modal-footer">
       <button class="btn-sm btn-secondary" onclick="closeModal('eventModal')">Abbrechen</button>
