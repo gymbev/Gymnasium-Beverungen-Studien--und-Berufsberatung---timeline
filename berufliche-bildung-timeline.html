@@ -2098,14 +2098,15 @@ function exportICS(){
   lines.push('END:VCALENDAR');
 
   const ics = lines.join('\\r\\n');
-  const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
+  const url = URL.createObjectURL(blob);
+  a.href = url;
   a.download = 'berufliche-bildung-calendar.ics';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 // ===== EMBED CODE =====
