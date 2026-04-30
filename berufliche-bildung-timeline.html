@@ -2038,7 +2038,13 @@ function eventCategoryLabel(ev){
   return `Kategorie: ${ev.category || '-'} | Art: ${ev.type || '-'} | Zielgruppen: ${aud || '-'} | Klassen: ${cls || '-'}`;
 }
 function exportICS(){
-  const list = visibleEventsForExport();
+  const list = events.filter(ev => ev.approved !== false);
+
+  if(!list.length){
+    alert('Es sind keine Termine für den iCal-Export vorhanden.');
+    return;
+  }
+
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
@@ -2054,14 +2060,18 @@ function exportICS(){
     const stamp = formatStamp();
     const title = escapeICS(ev.title || 'Termin');
     const descParts = [];
+
     if(ev.desc) descParts.push(ev.desc);
     descParts.push(eventCategoryLabel(ev));
     if(ev.link) descParts.push(`Link: ${ev.link}`);
-    const desc = escapeICS(descParts.join('\n\n'));
+
+    const desc = escapeICS(descParts.join('\\n\\n'));
     const loc = escapeICS(ev.location || '');
+
     lines.push('BEGIN:VEVENT');
     lines.push(`UID:${uid}`);
     lines.push(`DTSTAMP:${stamp}`);
+
     if(ev.time){
       lines.push(`DTSTART:${toICSDate(ev.date, ev.time)}`);
       if(ev.dateEnd){
@@ -2077,6 +2087,7 @@ function exportICS(){
       lines.push(`DTSTART;VALUE=DATE:${toICSDate(ev.date)}`);
       lines.push(`DTEND;VALUE=DATE:${toICSDate(addOneDay(ev.dateEnd || ev.date))}`);
     }
+
     lines.push(`SUMMARY:${title}`);
     if(loc) lines.push(`LOCATION:${loc}`);
     if(desc) lines.push(`DESCRIPTION:${desc}`);
@@ -2085,13 +2096,16 @@ function exportICS(){
   });
 
   lines.push('END:VCALENDAR');
-  const ics = lines.join('\r\n');
+
+  const ics = lines.join('\\r\\n');
   const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'berufliche-bildung-calendar.ics';
+  document.body.appendChild(a);
   a.click();
-  URL.revokeObjectURL(a.href);
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 
 // ===== EMBED CODE =====
