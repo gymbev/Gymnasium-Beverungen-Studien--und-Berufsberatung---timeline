@@ -2052,9 +2052,25 @@ function exportICS(){
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     'X-WR-CALNAME:Berufliche Bildung – Gymnasium Beverungen',
-    'X-WR-TIMEZONE:Europe/Berlin'
+    'X-WR-TIMEZONE:Europe/Berlin',
+    'BEGIN:VTIMEZONE',
+    'TZID:Europe/Berlin',
+    'BEGIN:DAYLIGHT',
+    'TZOFFSETFROM:+0100',
+    'TZOFFSETTO:+0200',
+    'TZNAME:CEST',
+    'DTSTART:19700329T020000',
+    'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU',
+    'END:DAYLIGHT',
+    'BEGIN:STANDARD',
+    'TZOFFSETFROM:+0200',
+    'TZOFFSETTO:+0100',
+    'TZNAME:CET',
+    'DTSTART:19701025T030000',
+    'RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU',
+    'END:STANDARD',
+    'END:VTIMEZONE'
   ];
-
   list.forEach(ev => {
     const uid = `bb-${ev.id}@gymbevstubo.local`;
     const stamp = formatStamp();
@@ -2065,28 +2081,30 @@ function exportICS(){
     descParts.push(eventCategoryLabel(ev));
     if(ev.link) descParts.push(`Link: ${ev.link}`);
 
-    const desc = escapeICS(descParts.join('\\n\\n'));
+    const desc = escapeICS(descParts.join('\n\\n'));
     const loc = escapeICS(ev.location || '');
 
     lines.push('BEGIN:VEVENT');
     lines.push(`UID:${uid}`);
     lines.push(`DTSTAMP:${stamp}`);
 
-    if(ev.time){
-      lines.push(`DTSTART:${toICSDate(ev.date, ev.time)}`);
-      if(ev.dateEnd){
-        lines.push(`DTEND:${toICSDate(addOneDay(ev.dateEnd), ev.time)}`);
-      } else {
-        const [hh,mm] = ev.time.split(':');
-        const start = new Date(`${ev.date}T${hh}:${mm}:00`);
-        start.setHours(start.getHours()+1);
-        const end = `${start.getFullYear()}${pad2(start.getMonth()+1)}${pad2(start.getDate())}T${pad2(start.getHours())}${pad2(start.getMinutes())}00`;
-        lines.push(`DTEND:${end}`);
-      }
-    } else {
-      lines.push(`DTSTART;VALUE=DATE:${toICSDate(ev.date)}`);
-      lines.push(`DTEND;VALUE=DATE:${toICSDate(addOneDay(ev.dateEnd || ev.date))}`);
-    }
+   if(ev.time){
+  // lokale Zeit mit TZID
+  lines.push(`DTSTART;TZID=Europe/Berlin:${toICSDate(ev.date, ev.time)}`);
+  if(ev.dateEnd){
+    lines.push(`DTEND;TZID=Europe/Berlin:${toICSDate(addOneDay(ev.dateEnd), ev.time)}`);
+  } else {
+    const [hh,mm] = ev.time.split(':');
+    const start = new Date(`${ev.date}T${hh}:${mm}:00`);
+    start.setHours(start.getHours()+1);
+    const end = `${start.getFullYear()}${pad2(start.getMonth()+1)}${pad2(start.getDate())}T${pad2(start.getHours())}${pad2(start.getMinutes())}00`;
+    lines.push(`DTEND;TZID=Europe/Berlin:${end}`);
+  }
+} else {
+  // ganztägig bleibt wie bisher
+  lines.push(`DTSTART;VALUE=DATE:${toICSDate(ev.date)}`);
+  lines.push(`DTEND;VALUE=DATE:${toICSDate(addOneDay(ev.dateEnd || ev.date))}`);
+}
 
     lines.push(`SUMMARY:${title}`);
     if(loc) lines.push(`LOCATION:${loc}`);
