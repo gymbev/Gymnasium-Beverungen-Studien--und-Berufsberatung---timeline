@@ -2081,7 +2081,7 @@ function exportICS(){
     descParts.push(eventCategoryLabel(ev));
     if(ev.link) descParts.push(`Link: ${ev.link}`);
 
-    const desc = escapeICS(descParts.join('\n\\n'));
+    const desc = escapeICS(descParts.join('\n\n'));
     const loc = escapeICS(ev.location || '');
 
     lines.push('BEGIN:VEVENT');
