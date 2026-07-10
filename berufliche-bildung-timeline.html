@@ -1030,28 +1030,36 @@ let ghFileSHA = null; // SHA der aktuellen events.json für Updates
 
 function loadGHConfig(){
   try {
-    const raw = sessionStorage.getItem('ghConfig');
-    if(raw){ const c = JSON.parse(raw); Object.assign(ghConfig, c); }
-  } catch(e){}
+    const raw = localStorage.getItem('bb_timeline_gh_config');
+    if(raw){
+      const cfg = JSON.parse(raw);
+      ghConfig.owner = cfg.owner || '';
+      ghConfig.repo = cfg.repo || '';
+      ghConfig.branch = cfg.branch || 'main';
+      ghConfig.file = cfg.file || 'events.json';
+      ghConfig.token = cfg.token || '';
+    }
+  } catch(e){
+    console.error('loadGHConfig localStorage error', e);
+  }
 }
-function saveGHConfigToSession(){
-  try { sessionStorage.setItem('ghConfig', JSON.stringify(ghConfig)); } catch(e){}
+
+function saveGHConfig(){
+  try {
+    const cfg = {
+      owner: ghConfig.owner || '',
+      repo: ghConfig.repo || '',
+      branch: ghConfig.branch || 'main',
+      file: ghConfig.file || 'events.json',
+      token: ghConfig.token || ''
+    };
+    localStorage.setItem('bb_timeline_gh_config', JSON.stringify(cfg));
+  } catch(e){
+    console.error('saveGHConfig localStorage error', e);
+  }
 }
 
-let currentRole = null; // null | 'admin' | 'partner' // null | 'admin' | 'partner'
-let currentView = 'timeline';
-let calendarDate = new Date();
-let editingId = null;
-let authTargetRole = null;
-
-const filters = {
-  audience: { schueler: true, lehrer: true, eltern: true },
-  types: { pflicht: true, wahlpflicht: true, freiwillig: true },
-  classes: [], // empty = all classes
-  search: ''
-};
-
-// ===== SAMPLE DATA =====
+// =====// ===== SAMPLE DATA =====
 const today = new Date();
 const y = today.getFullYear();
 const ny = y; // current school year
