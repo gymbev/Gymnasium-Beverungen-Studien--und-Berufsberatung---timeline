@@ -1,0 +1,212 @@
+{
+  "events": [
+    {
+      "id": 2,
+      "title": "Boys & Girls Day",
+      "date": "2026-04-23",
+      "time": "08:00",
+      "location": "Schulgebäude",
+      "category": "Boys & Girls Day",
+      "type": "freiwillig",
+      "audience": [
+        "schueler"
+      ],
+      "classes": [
+        "8",
+        "9"
+      ],
+      "desc": "Einblick in Berufe, die als untypisch für das eigene Geschlecht gelten.",
+      "approved": true,
+      "workshopSignup": true,
+      "workshopCapacity": 30,
+      "workshopRegistrants": [],
+      "timeslots": []
+    },
+    {
+      "id": 6,
+      "title": "Elternabend Berufliche Orientierung (Kl. 9)",
+      "date": "2026-03-17",
+      "time": "19:00",
+      "location": "Aula",
+      "category": "Elternabend",
+      "type": "pflicht",
+      "audience": [
+        "eltern",
+        "lehrer"
+      ],
+      "classes": [
+        "9"
+      ],
+      "desc": "Informationen zum Betriebspraktikum und zur Bewerbungsvorbereitung.",
+      "approved": true,
+      "workshopSignup": false,
+      "timeslots": []
+    },
+    {
+      "id": 8,
+      "title": "Workshop Bewerbungsunterlagen",
+      "date": "2026-04-28",
+      "time": "10:00",
+      "location": "Computerraum 2",
+      "category": "Workshop",
+      "type": "wahlpflicht",
+      "audience": [
+        "schueler"
+      ],
+      "classes": [
+        "10",
+        "EF"
+      ],
+      "desc": "Lebenslauf und Anschreiben professionell erstellen. Laptop mitbringen.",
+      "approved": true,
+      "workshopSignup": true,
+      "workshopCapacity": 18,
+      "workshopRegistrants": [],
+      "timeslots": []
+    },
+    {
+      "id": 14,
+      "title": "Berufsinformationszentrum Besuch",
+      "date": "2026-04-07",
+      "time": "09:00",
+      "location": "BiZ Paderborn",
+      "category": "Berufsberatung",
+      "type": "wahlpflicht",
+      "audience": [
+        "schueler"
+      ],
+      "classes": [
+        "10",
+        "EF"
+      ],
+      "desc": "Besuch im Berufsinformationszentrum der Bundesagentur für Arbeit.",
+      "approved": true,
+      "workshopSignup": false,
+      "timeslots": []
+    },
+    {
+      "title": "Berufsberatung -Einzelgespräche",
+      "date": "2026-05-28",
+      "dateEnd": null,
+      "time": null,
+      "location": "Stubo-Raum (gegenüber R201)",
+      "category": "Berufsberatung",
+      "type": "freiwillig",
+      "audience": [
+        "schueler",
+        "eltern"
+      ],
+      "classes": [],
+      "desc": "Bei Frau Reckert-Paixao (Agentur für Arbeit)",
+      "link": null,
+      "timeslots": [],
+      "workshopSignup": false,
+      "workshopCapacity": 0,
+      "workshopRegistrants": [],
+      "approved": true,
+      "recurring": false,
+      "id": 20
+    },
+    {
+      "title": "Berufsberatung - Einzelgespräche",
+      "date": "2026-06-18",
+      "dateEnd": null,
+      "time": null,
+      "location": "Stubo Raum (gegenüber von R201)",
+      "category": "Berufsberatung",
+      "type": "freiwillig",
+      "audience": [
+        "schueler",
+        "eltern"
+      ],
+      "classes": [],
+      "desc": "Bei Frau Reckert-Paixao (Agentur für Arbeit)",
+      "link": null,
+      "timeslots": [],
+      "workshopSignup": false,
+      "workshopCapacity": 0,
+      "workshopRegistrants": [],
+      "approved": true,
+      "recurring": false,
+      "id": 21
+    },
+    {
+      "title": "Berufsberatung am Elternsprechtag",
+      "date": "2026-05-18",
+      "dateEnd": null,
+      "time": "15:00",
+      "location": "Stubo Raum (gegenüber von R201)",
+      "category": "Berufsberatung",
+      "type": "freiwillig",
+      "audience": [
+        "schueler",
+        "eltern"
+      ],
+      "classes": [],
+      "desc": null,
+      "link": null,
+      "timeslots": [],
+      "workshopSignup": false,
+      "workshopCapacity": 0,
+      "workshopRegistrants": [],
+      "approved": true,
+      "recurring": false,
+      "id": 22
+    },
+    {
+      "title": "Workshop \"Was kostet das Leben?\"",
+      "date": "2026-06-11",
+      "dateEnd": null,
+      "time": "13:30",
+      "location": "ÜK",
+      "category": "Workshop",
+      "type": "wahlpflicht",
+      "audience": [
+        "schueler"
+      ],
+      "classes": [
+        "EF",
+        "Q1",
+        "Q2"
+      ],
+      "desc": "angeboten von Frau Reckert-Paixao (Agentur für Arbeit)",
+      "link": null,
+      "timeslots": [],
+      "workshopSignup": false,
+      "workshopCapacity": 0,
+      "workshopRegistrants": [],
+      "approved": true,
+      "recurring": false,
+      "id": 23
+    },
+    {
+      "title": "Beverunger Ausbildungsmesse",
+      "date": "2026-06-10",
+      "dateEnd": null,
+      "time": null,
+      "location": null,
+      "category": "Ausbildungsmesse",
+      "type": "pflicht",
+      "audience": [
+        "schueler"
+      ],
+      "classes": [
+        "8",
+        "9",
+        "10",
+        "Q1"
+      ],
+      "desc": null,
+      "link": "https://beverungen-marketing.de/ausbildungsmesse-2026-anmeldephase-gestartet/",
+      "timeslots": [],
+      "workshopSignup": false,
+      "workshopCapacity": 0,
+      "workshopRegistrants": [],
+      "approved": true,
+      "recurring": false,
+      "id": 25
+    }
+  ],
+  "nextId": 26,
+  "savedAt": "2026-07-10T19:02:53.314Z"
+}
