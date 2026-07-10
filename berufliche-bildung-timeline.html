@@ -373,6 +373,10 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
           <button class="btn-sm btn-secondary" onclick="exportData()" title="Termine exportieren">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="download" aria-hidden="true" style="width:14px;height:14px" class="lucide lucide-download"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg> Export
           </button>
+          <button class="btn-sm btn-primary" onclick="saveEventsToGitHub()" title="Termine auf GitHub speichern (alle Nutzer sehen die Änderung)" style="gap:var(--space-1)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 16l-4-4-4 4"/><path d="M12 12v9"/><path d="M20.39 18.39A4 4 0 0 0 18 11h-1.26A8 8 0 1 0 4 16.3"/></svg>
+            Auf GitHub speichern
+          </button>
           <label class="btn-sm btn-secondary" style="cursor:pointer" title="Termine importieren">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="upload" aria-hidden="true" style="width:14px;height:14px" class="lucide lucide-upload"><path d="M12 3v12"></path><path d="m17 8-5-5-5 5"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path></svg> Import
             <input type="file" accept=".json" onchange="importData(event)" style="display:none">
@@ -386,13 +390,7 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
           <button class="btn-sm btn-secondary" onclick="exportICS()" title="Als iCal-Datei exportieren">
             <i data-lucide="calendar-down" style="width:14px;height:14px"></i> iCal
           </button>
-        
-          <button class="btn-sm btn-primary" onclick="saveEventsToGitHub()" title="Termine in events.json auf GitHub speichern">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="cloud-upload" aria-hidden="true" style="width:14px;height:14px" class="lucide lucide-cloud-upload">
-              <path d="M16 16l-4-4-4 4"></path><path d="M12 12v9"></path><path d="M20.39 18.39A4 4 0 0 0 18 11h-1.26A8 8 0 1 0 4 16.3"></path>
-            </svg>
-            GitHub speichern
-          </button></div>
+        </div>
         <button class="icon-btn" id="authBtn" onclick="showAuthModal()" aria-label="Anmelden" title="Admin / Partner">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="lock" aria-hidden="true" class="lucide lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
         </button>
@@ -974,31 +972,33 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
 <script>
 // ===== STATE =====
 const PASSWORDS = { admin: 'gymbevstubo', partner: 'gymbevpartner' };
-let currentRole = null; // null | 'admin' | 'partner'
+let currentRole = null; // null | 'admin' | 'partner' // null | 'admin' | 'partner'
 let currentView = 'timeline';
 let calendarDate = new Date();
 let editingId = null;
 let authTargetRole = null;
 
-// GitHub-Konfiguration
-const GITHUB_CONFIG = {
-  owner: 'gymbev',
-  repo: 'Gymnasium-Beverungen-Studien--und-Berufsberatung---timeline',
-  branch: 'main',
-  path: 'events.json'
-};
-
-let events = [];
-let nextId = 1;
-
 const filters = {
   audience: { schueler: true, lehrer: true, eltern: true },
   types: { pflicht: true, wahlpflicht: true, freiwillig: true },
-  classes: [],
+  classes: [], // empty = all classes
   search: ''
 };
 
-// ===== DATUMS-HILFSFUNKTIONEN =====
+// ===== SAMPLE DATA =====
+const today = new Date();
+const y = today.getFullYear();
+const ny = y; // current school year
+
+function d(mo, day) {
+  return new Date(ny, mo - 1, day).toISOString().split('T')[0];
+}
+
+let events = [];
+let _eventsLoaded = false;
+let nextId = 1;
+
+// ===== HELPERS =====
 const $ = id => document.getElementById(id);
 const todayStr = () => new Date().toISOString().split('T')[0];
 
@@ -1025,90 +1025,11 @@ function countdownText(str){
   if(n<0) return null;
   return `in ${n} Tagen`;
 }
-function isPastEvent(ev){
-  const end = ev.dateEnd || ev.date;
-  return end < todayStr();
-}
 
 const TYPE_COLORS = { pflicht:'var(--color-error)', wahlpflicht:'var(--color-warning)', freiwillig:'var(--color-success)' };
 const TYPE_LABELS = { pflicht:'Verpflichtend', wahlpflicht:'Wahlpflicht', freiwillig:'Freiwillig' };
 const AUD_LABELS = { schueler:'Schüler:innen', lehrer:'Lehrkräfte', eltern:'Eltern' };
 const AUD_CLASS = { schueler:'audience-s', lehrer:'audience-l', eltern:'audience-e' };
-
-// ===== EVENTS AUS GITHUB LADEN =====
-async function loadEventsFromGitHub(){
-  const { owner, repo, branch, path } = GITHUB_CONFIG;
-  const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
-  try {
-    const resp = await fetch(url);
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const data = await resp.json();
-    events = Array.isArray(data) ? data : (data.events || []);
-    if (!Array.isArray(events)) events = [];
-    nextId = (events.reduce((max,e)=>Math.max(max, e.id || 0), 0) || 0) + 1;
-  } catch (e) {
-    console.error('Fehler beim Laden der events.json', e);
-    alert('events.json konnte nicht geladen werden. Es werden vorerst keine Termine angezeigt.');
-    events = [];
-    nextId = 1;
-  }
-}
-
-// ===== EVENTS AUF GITHUB SPEICHERN =====
-async function saveEventsToGitHub(){
-  const { owner, repo, branch, path } = GITHUB_CONFIG;
-  const token = prompt('Bitte GitHub Personal Access Token (PAT) eingeben.
-Dieser Token wird NICHT gespeichert, sondern nur einmal für diesen Vorgang verwendet.');
-  if (!token) return;
-
-  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-
-  const contentObj = { events, exportedAt: new Date().toISOString() };
-  const json = JSON.stringify(contentObj, null, 2);
-  const base64Content = btoa(unescape(encodeURIComponent(json)));
-
-  let sha = undefined;
-  try {
-    const getResp = await fetch(apiUrl + `?ref=${branch}`, {
-      headers: {
-        'Accept': 'application/vnd.github+json',
-        'Authorization': `Bearer ${token}`
-      }
-    });
-    if (getResp.ok) {
-      const meta = await getResp.json();
-      sha = meta.sha;
-    }
-  } catch (e) {
-    console.warn('Konnte vorhandene Datei-Info nicht laden, gehe von Neu-Anlage aus.', e);
-  }
-
-  try {
-    const putResp = await fetch(apiUrl, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/vnd.github+json',
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        message: 'Update events.json aus Timeline',
-        content: base64Content,
-        sha,
-        branch
-      })
-    });
-    if (!putResp.ok) {
-      const txt = await putResp.text();
-      alert('Speichern auf GitHub fehlgeschlagen: ' + putResp.status + '
-' + txt);
-      return;
-    }
-    alert('events.json wurde erfolgreich auf GitHub aktualisiert.');
-  } catch (e) {
-    alert('Fehler beim Speichern auf GitHub: ' + e.message);
-  }
-}
 
 // ===== AUTH =====
 function showAuthModal(){
@@ -1172,6 +1093,7 @@ function toggleType(key){
 }
 function setSearch(v){ filters.search = v.toLowerCase().trim(); render(); }
 
+// Class filter
 function updateClassFilterVisibility(){
   const row = $('classFilterRow');
   if(filters.audience.schueler){ row.style.display='flex'; }
@@ -1214,28 +1136,35 @@ function updateClassChipUI(){
   });
 }
 
+// ===== EVENT FILTERING =====
 function getVisibleEvents(){
   const ts = todayStr();
   return events.filter(e=>{
     if(!e.approved && currentRole!=='admin') return false;
+    // Past events hidden
     const effectiveDate = e.dateEnd || e.date;
     if(effectiveDate < ts) return false;
-    const audMatch = e.audience?.some(a => filters.audience[a]);
+    // Audience
+    const audMatch = e.audience.some(a => filters.audience[a]);
     if(!audMatch) return false;
+    // Type
     if(!filters.types[e.type]) return false;
+    // Class filter (only when schueler is active and classes selected)
     if(filters.audience.schueler && filters.classes.length>0){
       if(e.audience.includes('schueler')){
         if(e.classes.length>0 && !e.classes.some(c=>filters.classes.includes(c))) return false;
       }
     }
+    // Search
     if(filters.search){
-      const hay = (e.title+' '+(e.desc||'')+' '+(e.category||'')+' '+(e.classes||[]).join(' ')).toLowerCase();
+      const hay = (e.title+' '+(e.desc||'')+' '+(e.category||'')+' '+e.classes.join(' ')).toLowerCase();
       if(!hay.includes(filters.search)) return false;
     }
     return true;
   }).sort((a,b)=>a.date.localeCompare(b.date));
 }
 
+// ===== RENDER TIMELINE =====
 function render(){
   if(currentView==='timeline') renderTimeline();
   else renderCalendar();
@@ -1250,6 +1179,7 @@ function renderTimeline(){
     container.innerHTML=`<div class="empty-state"><i data-lucide="calendar-x2"></i><h3>Keine Termine</h3><p>Für die aktuelle Auswahl gibt es keine kommenden Termine.</p></div>`;
     lucide.createIcons();return;
   }
+  // Group by month
   const groups = {};
   visible.forEach(e=>{
     const d=parseDate(e.date);
@@ -1281,8 +1211,8 @@ function renderEventCard(e, isNext=false){
   const d=parseDate(e.date);
   const day=d.getDate();
   const mo=d.toLocaleDateString('de-DE',{month:'short'});
-  const badgeAud=(e.audience||[]).map(a=>`<span class="badge ${AUD_CLASS[a]}">${AUD_LABELS[a]}</span>`).join('');
-  const badgeCls=(e.classes||[]).length?e.classes.map(c=>`<span class="badge klasse">Kl. ${c}</span>`).join(''):'';
+  const badgeAud=e.audience.map(a=>`<span class="badge ${AUD_CLASS[a]}">${AUD_LABELS[a]}</span>`).join('');
+  const badgeCls=e.classes.length?e.classes.map(c=>`<span class="badge klasse">Kl. ${c}</span>`).join(''):'';
   const badgeType=`<span class="badge ${e.type}">${TYPE_LABELS[e.type]}</span>`;
   const badgeNext=isNext?`<span class="badge next-up">Als Nächstes</span>`:'';
   const badgePend=!e.approved?`<span class="badge pending">Ausstehend</span>`:'';
@@ -1314,6 +1244,7 @@ function renderEventCard(e, isNext=false){
   </div>`;
 }
 
+// ===== NEXT BANNER =====
 function renderNextBanner(){
   const visible=getVisibleEvents().filter(e=>e.date>=todayStr());
   if(!visible.length){ $('nextBanner').classList.add('hidden'); return; }
@@ -1324,6 +1255,7 @@ function renderNextBanner(){
   $('nextCountdown').textContent=countdownText(next.date)||'';
 }
 
+// ===== CALENDAR =====
 function switchView(v){
   currentView=v;
   $('timelineView').classList.toggle('hidden',v!=='timeline');
@@ -1332,13 +1264,12 @@ function switchView(v){
   $('tabCalendar').classList.toggle('active',v==='calendar');
   render();
 }
-
 function renderCalendar(){
   const container=$('calendarView');
   const yr=calendarDate.getFullYear(), mo=calendarDate.getMonth();
   const monthName=new Date(yr,mo,1).toLocaleDateString('de-DE',{month:'long',year:'numeric'});
-  const first=new Date(yr,mo,1).getDay();
-  const startDow=(first===0?6:first-1);
+  const first=new Date(yr,mo,1).getDay(); // 0=Sun
+  const startDow=(first===0?6:first-1); // Mon=0
   const daysInMo=new Date(yr,mo+1,0).getDate();
   const visible=getVisibleEvents();
   const todayISO=todayStr();
@@ -1351,6 +1282,7 @@ function renderCalendar(){
   </div>
   <div class="cal-grid">
     ${['Mo','Di','Mi','Do','Fr','Sa','So'].map(d=>`<div class="cal-day-name">${d}</div>`).join('')}`;
+  // leading blanks
   for(let i=0;i<startDow;i++) html+=`<div class="cal-day other-month"></div>`;
   for(let day=1;day<=daysInMo;day++){
     const iso=`${yr}-${String(mo+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
@@ -1368,20 +1300,692 @@ function renderCalendar(){
   container.innerHTML=html;
   lucide.createIcons();
 }
-
 function calNav(dir){
   calendarDate=new Date(calendarDate.getFullYear(),calendarDate.getMonth()+dir,1);
   renderCalendar();
 }
 
-// ===== REST: DETAILMODAL, BUCHUNGEN, SPEICHERN, EXPORT, MODALS, THEME =====
+// ===== DETAIL MODAL =====
+function openDetail(id){
+  const e=events.find(ev=>ev.id===id);
+  if(!e) return;
+  editingId=id;
+  const tc=TYPE_COLORS[e.type];
+  $('detailTypeIndicator').style.background=tc;
+  $('detailTitle').textContent=e.title;
+  const isAdmin=currentRole==='admin';
+  let body=`<div class="detail-section">
+    <div class="detail-grid">
+      <div class="detail-item"><span class="detail-item-label">Datum</span><span class="detail-item-value">${formatDateLong(e.date)}${e.dateEnd?' bis '+formatDateLong(e.dateEnd):''}</span></div>
+      ${e.time?`<div class="detail-item"><span class="detail-item-label">Uhrzeit</span><span class="detail-item-value">${e.time} Uhr</span></div>`:''}
+      ${e.location?`<div class="detail-item"><span class="detail-item-label">Ort</span><span class="detail-item-value">${e.location}</span></div>`:''}
+      <div class="detail-item"><span class="detail-item-label">Kategorie</span><span class="detail-item-value">${e.category||'—'}</span></div>
+      <div class="detail-item"><span class="detail-item-label">Art</span><span class="detail-item-value">${TYPE_LABELS[e.type]}</span></div>
+      <div class="detail-item"><span class="detail-item-label">Zielgruppe</span><span class="detail-item-value">${e.audience.map(a=>AUD_LABELS[a]).join(', ')}</span></div>
+      ${e.classes.length?`<div class="detail-item"><span class="detail-item-label">Klassen</span><span class="detail-item-value">${e.classes.join(', ')}</span></div>`:''}
+      ${e.recurring?`<div class="detail-item"><span class="detail-item-label">Wiederholung</span><span class="detail-item-value">Terminserie</span></div>`:''}
+    </div>
+    ${e.desc?`<p style="margin-top:var(--space-4);font-size:var(--text-sm);color:var(--color-text-muted)">${e.desc}</p>`:''}
+    ${e.link?`<a href="${e.link}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;margin-top:var(--space-3);font-size:var(--text-sm);color:var(--color-primary);text-decoration:underline">Mehr Infos <i data-lucide="external-link" style="width:12px;height:12px"></i></a>`:''}
+  </div>`;
 
-// Den restlichen Code deiner bisherigen Datei (openDetail, bookSlot, workshopSignupSubmit, saveEvent,
-// exportData, exportICS, showEmbedCode, Modalsteuerung, Theme-Toggle, Init) fügst du
-// UNVERÄNDERT hier unterhalb dieses Blocks ein.
+  // Timeslots
+  if(e.timeslots&&e.timeslots.length>0){
+    body+=`<div class="detail-section"><h3>Zeitslots & Buchungen</h3>`;
+    e.timeslots.forEach(sl=>{
+      const used=sl.registrants.length, cap=sl.capacity, pct=Math.round((used/cap)*100);
+      const fillClass=pct>=100?'full':pct>=70?'warn':'';
+      body+=`<div class="slot-card">
+        <div class="slot-card-header">
+          <h4>${sl.name}</h4>
+          <span style="font-size:var(--text-xs);color:${pct>=100?'var(--color-error)':'var(--color-text-muted)'}">${used}/${cap}</span>
+        </div>
+        <div class="slot-capacity-bar"><div class="slot-capacity-fill ${fillClass}" style="width:${Math.min(pct,100)}%"></div></div>`;
+      if(isAdmin&&sl.registrants.length>0){
+        body+=`<div class="registrant-list">`;
+        sl.registrants.forEach((r,i)=>{
+          body+=`<div class="registrant-item">${r.name}${r.klasse?' ('+r.klasse+')':''}<button class="btn-sm btn-danger" onclick="removeRegistrant(${id},'slot','${sl.id}',${i});event.stopPropagation()">×</button></div>`;
+        });
+        body+=`</div>`;
+      }
+      if(pct<100){
+        body+=`<div style="margin-top:var(--space-2)">
+          <input type="text" class="form-input" placeholder="Dein Name" id="slotName_${sl.id}" style="margin-bottom:var(--space-2)">
+          <input type="text" class="form-input" placeholder="Klasse (optional)" id="slotKlasse_${sl.id}" style="margin-bottom:var(--space-2)">
+          <button class="btn-sm btn-primary" onclick="bookSlot(${id},'${sl.id}')">Buchen</button>
+        </div>`;
+      } else {
+        body+=`<p style="font-size:var(--text-xs);color:var(--color-error);margin-top:var(--space-2)">Dieser Slot ist ausgebucht.</p>`;
+      }
+      body+=`</div>`;
+    });
+    body+=`</div>`;
+  }
+
+  // Workshop signup
+  if(e.workshopSignup){
+    const regs=e.workshopRegistrants||[];
+    const cap=e.workshopCapacity||999;
+    const full=regs.length>=cap;
+    body+=`<div class="workshop-signup">
+      <h3><i data-lucide="clipboard-list" style="width:14px;height:14px;display:inline;vertical-align:middle"></i> Anmeldung – ${regs.length}${cap<999?' / '+cap:''} Angemeldet</h3>`;
+    if(isAdmin&&regs.length>0){
+      body+=`<div class="registrant-list" style="margin-bottom:var(--space-3)">`;
+      regs.forEach((r,i)=>{
+        body+=`<div class="registrant-item" style="padding:var(--space-2) 0">${r.name}${r.klasse?' ('+r.klasse+')':''}<button class="btn-sm btn-danger" onclick="removeRegistrant(${id},'workshop',null,${i});event.stopPropagation()">×</button></div>`;
+      });
+      body+=`</div>`;
+    }
+    if(!full){
+      body+=`<div class="signup-form-row">
+        <input type="text" class="form-input" placeholder="Vor- und Nachname *" id="wsName_${id}">
+        <input type="text" class="form-input" placeholder="Klasse" id="wsKlasse_${id}">
+        <button class="btn-sm btn-primary" onclick="workshopSignupSubmit(${id})">Anmelden</button>
+      </div>`;
+    } else {
+      body+=`<p style="font-size:var(--text-sm);color:var(--color-error);font-weight:500">Leider ausgebucht.</p>`;
+    }
+    body+=`</div>`;
+  }
+
+  $('detailBody').innerHTML=body;
+  let footer='';
+  if(isAdmin){
+    footer+=`<button class="btn-sm btn-secondary" onclick="openEditModal(${id})"><i data-lucide="pencil" style="width:12px;height:12px"></i> Bearbeiten</button>`;
+    footer+=`<button class="btn-sm btn-danger" onclick="deleteEvent(${id})"><i data-lucide="trash-2" style="width:12px;height:12px"></i> Löschen</button>`;
+  }
+  footer+=`<button class="btn-sm btn-primary" onclick="closeModal('detailModal')">Schließen</button>`;
+  $('detailFooter').innerHTML=footer;
+  showModal('detailModal');
+  lucide.createIcons();
+}
+
+function bookSlot(evId, slotId){
+  const e=events.find(ev=>ev.id===evId);
+  if(!e) return;
+  const sl=e.timeslots.find(s=>s.id===slotId);
+  if(!sl) return;
+  const name=$(`slotName_${slotId}`)?.value?.trim();
+  if(!name){alert('Bitte deinen Namen eingeben.');return;}
+  const klasse=$(`slotKlasse_${slotId}`)?.value?.trim()||'';
+  if(sl.registrants.length>=sl.capacity){alert('Dieser Slot ist leider bereits ausgebucht.');return;}
+  sl.registrants.push({name,klasse});
+  openDetail(evId);
+}
+function workshopSignupSubmit(evId){
+  const e=events.find(ev=>ev.id===evId);
+  if(!e) return;
+  const name=$(`wsName_${evId}`)?.value?.trim();
+  if(!name){alert('Bitte deinen Namen eingeben.');return;}
+  const klasse=$(`wsKlasse_${evId}`)?.value?.trim()||'';
+  if(!e.workshopRegistrants) e.workshopRegistrants=[];
+  if(e.workshopCapacity&&e.workshopRegistrants.length>=e.workshopCapacity){alert('Leider ausgebucht.');return;}
+  e.workshopRegistrants.push({name,klasse});
+  openDetail(evId);
+}
+function removeRegistrant(evId,kind,slotId,idx){
+  const e=events.find(ev=>ev.id===evId);
+  if(!e) return;
+  if(kind==='slot'){
+    const sl=e.timeslots.find(s=>s.id===slotId);
+    if(sl) sl.registrants.splice(idx,1);
+  } else {
+    e.workshopRegistrants.splice(idx,1);
+  }
+  openDetail(evId);
+}
+
+// ===== ADD/EDIT MODAL =====
+function openAddModal(){
+  editingId=null;
+  $('eventModalTitle').textContent = currentRole==='partner' ? 'Termin einreichen' : 'Termin hinzufügen';
+  $('saveEventBtn').textContent = currentRole==='partner' ? 'Einreichen' : 'Speichern';
+  resetEventForm();
+  showModal('eventModal');
+}
+function openEditModal(id){
+  editingId=id;
+  $('eventModalTitle').textContent='Termin bearbeiten';
+  $('saveEventBtn').textContent='Speichern';
+  closeModal('detailModal');
+  const e=events.find(ev=>ev.id===id);
+  if(!e) return;
+  $('evTitle').value=e.title;
+  $('evDate').value=e.date;
+  $('evDateEnd').value=e.dateEnd||'';
+  $('evTime').value=e.time||'';
+  $('evLocation').value=e.location||'';
+  $('evDesc').value=e.desc||'';
+  $('evLink').value=e.link||'';
+  // Category
+  document.querySelectorAll('#catSelector .sel-chip').forEach(c=>{
+    c.classList.toggle('selected', c.dataset.cat===e.category);
+  });
+  // Type
+  document.querySelectorAll('#typeSelector .sel-chip').forEach(c=>{
+    c.classList.toggle('selected', c.dataset.type===e.type);
+  });
+  // Audience
+  document.querySelectorAll('[data-aud]').forEach(c=>{
+    c.classList.toggle('selected', e.audience.includes(c.dataset.aud));
+  });
+  updateClassFormGroup();
+  // Classes
+  document.querySelectorAll('#classSelector .sel-chip').forEach(c=>{
+    if(c.dataset.cls==='alle') c.classList.toggle('selected',e.classes.length===0);
+    else c.classList.toggle('selected',e.classes.includes(c.dataset.cls));
+  });
+  // Timeslots
+  $('timeslotList').innerHTML='';
+  (e.timeslots||[]).forEach(sl=>addTimeslotRow(sl.name,sl.capacity));
+  // Workshop
+  $('evWorkshopSignup').checked=!!e.workshopSignup;
+  $('workshopCapacityGroup').classList.toggle('hidden',!e.workshopSignup);
+  $('evWorkshopCap').value=e.workshopCapacity||'';
+  showModal('eventModal');
+}
+function resetEventForm(){
+  ['evTitle','evDate','evDateEnd','evTime','evLocation','evDesc','evLink'].forEach(id=>{const el=$(id);if(el)el.value='';});
+  document.querySelectorAll('#catSelector .sel-chip').forEach((c,i)=>c.classList.toggle('selected',i===0));
+  document.querySelectorAll('#typeSelector .sel-chip').forEach((c,i)=>c.classList.toggle('selected',i===0));
+  document.querySelectorAll('[data-aud]').forEach((c,i)=>c.classList.toggle('selected',i===0));
+  document.querySelectorAll('#classSelector .sel-chip').forEach((c,i)=>c.classList.toggle('selected',c.dataset.cls==='alle'));
+  $('timeslotList').innerHTML='';
+  $('evWorkshopSignup').checked=false;
+  $('workshopCapacityGroup').classList.add('hidden');
+  $('evWorkshopCap').value='';
+  _repeatType = 'none';
+  const evRepeat = document.getElementById('evRepeat'); if(evRepeat) evRepeat.value='none';
+  document.querySelectorAll('.repeat-tab').forEach(t=>t.classList.toggle('active',t.dataset.rt==='none'));
+  const rRO = document.getElementById('repeatRhythmOpts');
+  const rCO = document.getElementById('repeatCustomOpts');
+  if(rRO) rRO.classList.remove('visible');
+  if(rCO) rCO.classList.remove('visible');
+  const cdl = document.getElementById('customDatesList');
+  if(cdl) cdl.innerHTML='';
+  const eru = document.getElementById('evRepeatEnd');
+  if(eru) eru.value='';
+  $('evTitleError').classList.add('hidden');
+  updateClassFormGroup();
+}
+
+function toggleCat(el){
+  document.querySelectorAll('#catSelector .sel-chip').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function selectType(el){
+  document.querySelectorAll('#typeSelector .sel-chip').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function toggleAud(el){
+  el.classList.toggle('selected');
+  updateClassFormGroup();
+}
+function updateClassFormGroup(){
+  const audSel=Array.from(document.querySelectorAll('[data-aud].selected')).map(c=>c.dataset.aud);
+  $('classFormGroup').style.display=audSel.includes('schueler')?'block':'none';
+}
+function toggleCls(el,cls){
+  if(cls==='alle'){
+    document.querySelectorAll('#classSelector .sel-chip').forEach(c=>c.classList.remove('selected'));
+    el.classList.add('selected');
+  } else {
+    const allChip=document.querySelector('#classSelector [data-cls="alle"]');
+    allChip.classList.remove('selected');
+    el.classList.toggle('selected');
+    const anySelected=document.querySelectorAll('#classSelector .sel-chip.selected:not([data-cls="alle"])').length>0;
+    if(!anySelected) allChip.classList.add('selected');
+  }
+}
+
+// Timeslots
+function addTimeslot(){ addTimeslotRow('','1'); }
+function addTimeslotRow(name='',cap='1'){
+  const id='ts_'+Date.now()+'_'+Math.random().toString(36).slice(2,6);
+  const row=document.createElement('div');
+  row.className='timeslot-row'; row.id=id;
+  row.innerHTML=`<input type="text" class="form-input" placeholder="Name des Slots (z. B. 1. Stunde, 09:00–09:30 Uhr)" value="${name}" style="flex:1">
+  <input type="number" class="form-input capacity-input" min="1" max="99" value="${cap}" placeholder="Plätze" title="Anzahl Plätze">
+  <button type="button" class="slot-remove" onclick="document.getElementById('${id}').remove()" aria-label="Slot entfernen"><i data-lucide="x" style="width:14px;height:14px"></i></button>`;
+  $('timeslotList').appendChild(row);
+  lucide.createIcons();
+}
+
+// ── REPEAT TABS ──────────────────────────────────────────────────────────────
+let _repeatType = 'none';
+document.querySelectorAll('.repeat-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    _repeatType = tab.dataset.rt;
+    document.querySelectorAll('.repeat-tab').forEach(t=>t.classList.toggle('active',t===tab));
+    const isRhythm = ['weekly','biweekly','monthly'].includes(_repeatType);
+    const isCustom = _repeatType === 'custom';
+    document.getElementById('repeatRhythmOpts').classList.toggle('visible', isRhythm);
+    document.getElementById('repeatCustomOpts').classList.toggle('visible', isCustom);
+  });
+});
+function toggleRepeatOptions(){
+  const sel = document.getElementById('evRepeat');
+  if(!sel) return;
+
+  _repeatType = sel.value;
+
+  const rhythm = document.getElementById('repeatRhythmOpts');
+  const custom = document.getElementById('repeatCustomOpts');
+  const old = document.getElementById('repeatOptions');
+
+  if(old) old.classList.add('hidden');
+
+  if(rhythm){
+    const showRhythm = ['weekly','biweekly','monthly'].includes(_repeatType);
+    rhythm.classList.toggle('hidden', !showRhythm);
+    rhythm.classList.toggle('visible', showRhythm);
+  }
+
+  if(custom){
+    const showCustom = _repeatType === 'custom';
+    custom.classList.toggle('hidden', !showCustom);
+    custom.classList.toggle('visible', showCustom);
+
+    if(showCustom){
+      const list = document.getElementById('customDatesList');
+      if(list && list.children.length === 0){
+        addCustomDateRow();
+      }
+    }
+  }
+}
+function addCustomDateRow(val=''){
+  const row = document.createElement('div');
+  row.className = 'custom-date-row';
+  row.innerHTML = `<input type="date" class="form-input custom-date-input" value="${val}"><button type="button" class="btn-remove-date" onclick="this.parentElement.remove()">✕</button>`;
+  document.getElementById('customDatesList').appendChild(row);
+}
+
+function generateRepeatDates(baseDate, repeatType, untilDate){
+  const dates = [];
+  let current = baseDate;
+  const until = untilDate || (()=>{ const d=new Date(baseDate); d.setFullYear(d.getFullYear()+1); return d.toISOString().split('T')[0]; })();
+  while(current <= until){
+    if(current !== baseDate) dates.push(current);
+    const d = new Date(current);
+    if(repeatType === 'weekly') d.setDate(d.getDate()+7);
+    else if(repeatType === 'biweekly') d.setDate(d.getDate()+14);
+    else if(repeatType === 'monthly') d.setMonth(d.getMonth()+1);
+    else break;
+    current = d.toISOString().split('T')[0];
+    if(dates.length > 52) break;
+  }
+  return dates;
+}
+
+function toggleWorkshopSignup(){
+  $('workshopCapacityGroup').classList.toggle('hidden',!$('evWorkshopSignup').checked);
+}
+
+// repeat tabs handle their own state via _repeatType
+
+function saveEvent(){
+  const title=$('evTitle').value.trim();
+  if(!title){$('evTitleError').classList.remove('hidden');$('evTitle').focus();return;}
+  $('evTitleError').classList.add('hidden');
+  const date=$('evDate').value;
+  if(!date){alert('Bitte ein Datum wählen.');return;}
+  const cat=document.querySelector('#catSelector .sel-chip.selected')?.dataset.cat||'Sonstiges';
+  const type=document.querySelector('#typeSelector .sel-chip.selected')?.dataset.type||'freiwillig';
+  const audience=Array.from(document.querySelectorAll('[data-aud].selected')).map(c=>c.dataset.aud);
+  if(!audience.length){alert('Bitte eine Zielgruppe wählen.');return;}
+  const allCls=document.querySelector('#classSelector [data-cls="alle"]')?.classList.contains('selected');
+  const classes=allCls?[]:Array.from(document.querySelectorAll('#classSelector .sel-chip.selected:not([data-cls="alle"])')).map(c=>c.dataset.cls);
+  // Timeslots
+  const timeslots=[];
+  $('timeslotList').querySelectorAll('.timeslot-row').forEach((row,i)=>{
+    const inputs=row.querySelectorAll('input');
+    const slotName=inputs[0]?.value?.trim();
+    const slotCap=parseInt(inputs[1]?.value)||1;
+    if(slotName) timeslots.push({id:'sl_'+i+'_'+Date.now(),name:slotName,capacity:slotCap,registrants:[]});
+  });
+  const workshopSignup=$('evWorkshopSignup').checked;
+  const workshopCapacity=workshopSignup?(parseInt($('evWorkshopCap').value)||999):0;
+  const base={
+    title, date, dateEnd:$('evDateEnd').value||null,
+    time:$('evTime').value||null, location:$('evLocation').value.trim()||null,
+    category:cat, type, audience, classes,
+    desc:$('evDesc').value.trim()||null, link:$('evLink').value.trim()||null,
+    timeslots, workshopSignup, workshopCapacity,
+    workshopRegistrants: [],
+    approved: currentRole==='admin',
+    recurring: _repeatType !== 'none'
+  };
+  if(editingId){
+    const idx=events.findIndex(e=>e.id===editingId);
+    if(idx!==-1){
+      base.workshopRegistrants=events[idx].workshopRegistrants||[];
+      base.timeslots=timeslots.length?timeslots:events[idx].timeslots;
+      events[idx]={...events[idx],...base,id:editingId};
+    }
+    closeModal('eventModal');
+    render();
+    return;
+  }
+  // New
+  // Handle repeat
+  if(_repeatType === 'custom'){
+    const extraDates = [];
+    document.querySelectorAll('.custom-date-input').forEach(inp=>{
+      if(inp.value) extraDates.push(inp.value);
+    });
+    extraDates.forEach((d,i)=>{
+      events.push({...base,id:nextId++,date:d,dateEnd:null,recurring:true,workshopRegistrants:[],timeslots:timeslots.map(s=>({...s,id:s.id+'_c'+i,registrants:[]}))});
+    });
+  } else if(['weekly','biweekly','monthly'].includes(_repeatType)){
+    const until = $('evRepeatEnd')?.value || '';
+    const addlDates = generateRepeatDates(base.date, _repeatType, until);
+    addlDates.forEach((d,i)=>{
+      events.push({...base,id:nextId++,date:d,dateEnd:null,recurring:true,workshopRegistrants:[],timeslots:timeslots.map(s=>({...s,id:s.id+'_r'+i,registrants:[]}))});
+    });
+  } else {
+    events.push({...base,id:nextId++});
+  }
+  closeModal('eventModal');
+  updatePendingBanner();
+  render();
+}
+
+function deleteEvent(id){
+  if(!confirm('Termin wirklich löschen?')) return;
+  events=events.filter(e=>e.id!==id);
+  closeModal('detailModal');
+  render();
+}
+
+// ===== PENDING =====
+function getPending(){ return events.filter(e=>!e.approved); }
+function updatePendingBanner(){
+  const p=getPending();
+  $('pendingBanner').classList.toggle('hidden', currentRole!=='admin'||p.length===0);
+  $('pendingCount').textContent=p.length;
+}
+function showPendingModal(){
+  const pending=getPending();
+  if(!pending.length){$('pendingBody').innerHTML='<p style="color:var(--color-text-muted);font-size:var(--text-sm)">Keine ausstehenden Termine.</p>';showModal('pendingModal');return;}
+  let html='';
+  pending.forEach(e=>{
+    html+=`<div style="border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-4);margin-bottom:var(--space-3)">
+      <div style="font-weight:600;margin-bottom:var(--space-1)">${e.title}</div>
+      <div style="font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-3)">${formatDate(e.date)} · ${e.category}</div>
+      <div style="display:flex;gap:var(--space-2)">
+        <button class="btn-sm btn-success" onclick="approveEvent(${e.id})"><i data-lucide="check" style="width:12px;height:12px"></i> Freigeben</button>
+        <button class="btn-sm btn-danger" onclick="rejectEvent(${e.id})"><i data-lucide="x" style="width:12px;height:12px"></i> Ablehnen</button>
+      </div>
+    </div>`;
+  });
+  $('pendingBody').innerHTML=html;
+  showModal('pendingModal');
+  lucide.createIcons();
+}
+function approveEvent(id){
+  const e=events.find(ev=>ev.id===id);
+  if(e) e.approved=true;
+  showPendingModal();
+  updatePendingBanner();
+  render();
+}
+function rejectEvent(id){
+  if(!confirm('Termin ablehnen und löschen?')) return;
+  events=events.filter(e=>e.id!==id);
+  showPendingModal();
+  updatePendingBanner();
+  render();
+}
+
+// ===== EXPORT / IMPORT =====
+function exportData(){
+  const json=JSON.stringify({events,exportedAt:new Date().toISOString()},null,2);
+  const blob=new Blob([json],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download=`bb-termine-${new Date().toISOString().slice(0,10)}.json`; a.click();
+}
+function importData(ev){
+  const file=ev.target.files[0]; if(!file) return;
+  const r=new FileReader();
+  r.onload=e=>{
+    try{
+      const data=JSON.parse(e.target.result);
+      if(Array.isArray(data.events)){
+        events=data.events;
+        nextId=Math.max(...events.map(e=>e.id))+1;
+        updatePendingBanner();render();
+        alert(`${events.length} Termine erfolgreich importiert.`);
+      } else alert('Ungültiges Format.');
+    }catch{alert('Fehler beim Importieren.');}
+  };
+  r.readAsText(file);
+  ev.target.value='';
+}
+
+// ===== SAVE AS HTML =====
+
+
+// ===== ICAL EXPORT =====
+function pad2(n){ return String(n).padStart(2,'0'); }
+function toICSDate(dateStr, timeStr=''){
+  const [y,m,d] = dateStr.split('-');
+  if(!timeStr) return `${y}${m}${d}`;
+  const [hh,mm] = (timeStr || '00:00').split(':');
+  return `${y}${m}${d}T${hh}${mm}00`;
+}
+function escapeICS(str=''){
+  return String(str)
+    .replace(/\\/g,'\\\\')
+    .replace(/;/g,'\\;')
+    .replace(/,/g,'\\,')
+    .replace(/\r?\n/g,'\\n');
+}
+function addOneDay(dateStr){
+  const d = new Date(dateStr + 'T12:00:00');
+  d.setDate(d.getDate()+1);
+  return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+}
+function formatStamp(dt=new Date()){
+  return `${dt.getUTCFullYear()}${pad2(dt.getUTCMonth()+1)}${pad2(dt.getUTCDate())}T${pad2(dt.getUTCHours())}${pad2(dt.getUTCMinutes())}${pad2(dt.getUTCSeconds())}Z`;
+}
+function visibleEventsForExport(){
+  return getFilteredEvents().filter(ev => !isPastEvent(ev));
+}
+function eventCategoryLabel(ev){
+  const aud = (ev.audience||[]).join(', ');
+  const cls = (ev.classes||[]).join(', ');
+  return `Kategorie: ${ev.category || '-'} | Art: ${ev.type || '-'} | Zielgruppen: ${aud || '-'} | Klassen: ${cls || '-'}`;
+}
+function exportICS(){
+  const list = events.filter(ev => ev.approved !== false);
+
+  if(!list.length){
+    alert('Es sind keine Termine für den iCal-Export vorhanden.');
+    return;
+  }
+
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Gymnasium Beverungen//Berufliche Bildung//DE',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'X-WR-CALNAME:Berufliche Bildung – Gymnasium Beverungen',
+    'X-WR-TIMEZONE:Europe/Berlin',
+    'BEGIN:VTIMEZONE',
+    'TZID:Europe/Berlin',
+    'BEGIN:DAYLIGHT',
+    'TZOFFSETFROM:+0100',
+    'TZOFFSETTO:+0200',
+    'TZNAME:CEST',
+    'DTSTART:19700329T020000',
+    'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU',
+    'END:DAYLIGHT',
+    'BEGIN:STANDARD',
+    'TZOFFSETFROM:+0200',
+    'TZOFFSETTO:+0100',
+    'TZNAME:CET',
+    'DTSTART:19701025T030000',
+    'RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU',
+    'END:STANDARD',
+    'END:VTIMEZONE'
+  ];
+  list.forEach(ev => {
+    const uid = `bb-${ev.id}@gymbevstubo.local`;
+    const stamp = formatStamp();
+    const title = escapeICS(ev.title || 'Termin');
+    const descParts = [];
+
+    if(ev.desc) descParts.push(ev.desc);
+    descParts.push(eventCategoryLabel(ev));
+    if(ev.link) descParts.push(`Link: ${ev.link}`);
+
+    const desc = escapeICS(descParts.join('\n\n'));
+    const loc = escapeICS(ev.location || '');
+
+    lines.push('BEGIN:VEVENT');
+    lines.push(`UID:${uid}`);
+    lines.push(`DTSTAMP:${stamp}`);
+
+   if(ev.time){
+  // lokale Zeit mit TZID
+  lines.push(`DTSTART;TZID=Europe/Berlin:${toICSDate(ev.date, ev.time)}`);
+  if(ev.dateEnd){
+    lines.push(`DTEND;TZID=Europe/Berlin:${toICSDate(addOneDay(ev.dateEnd), ev.time)}`);
+  } else {
+    const [hh,mm] = ev.time.split(':');
+    const start = new Date(`${ev.date}T${hh}:${mm}:00`);
+    start.setHours(start.getHours()+1);
+    const end = `${start.getFullYear()}${pad2(start.getMonth()+1)}${pad2(start.getDate())}T${pad2(start.getHours())}${pad2(start.getMinutes())}00`;
+    lines.push(`DTEND;TZID=Europe/Berlin:${end}`);
+  }
+} else {
+  // ganztägig bleibt wie bisher
+  lines.push(`DTSTART;VALUE=DATE:${toICSDate(ev.date)}`);
+  lines.push(`DTEND;VALUE=DATE:${toICSDate(addOneDay(ev.dateEnd || ev.date))}`);
+}
+
+    lines.push(`SUMMARY:${title}`);
+    if(loc) lines.push(`LOCATION:${loc}`);
+    if(desc) lines.push(`DESCRIPTION:${desc}`);
+    if(ev.link) lines.push(`URL:${escapeICS(ev.link)}`);
+    lines.push('END:VEVENT');
+  });
+
+  lines.push('END:VCALENDAR');
+
+  const ics = lines.join('\\r\\n');
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const a = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+  a.href = url;
+  a.download = 'berufliche-bildung-calendar.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+// ===== EMBED CODE =====
+function showEmbedCode(){
+  const code=`<a href="DEINE-URL" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:#01696f;color:white;border-radius:8px;text-decoration:none;font-weight:600;font-family:sans-serif">📅 Berufliche Bildung – Terminübersicht</a>`;
+  $('embedCode').textContent=code;
+  $('embedCopied').classList.add('hidden');
+  showModal('embedModal');
+}
+function copyEmbedCode(){
+  navigator.clipboard.writeText($('embedCode').textContent).then(()=>{
+    $('embedCopied').classList.remove('hidden');
+  });
+}
+
+// ===== MODAL HELPERS =====
+function showModal(id){ $(id).classList.remove('hidden'); }
+function closeModal(id){ $(id).classList.add('hidden'); }
+document.querySelectorAll('.modal-backdrop').forEach(m=>{
+  m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id);});
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape') document.querySelectorAll('.modal-backdrop:not(.hidden)').forEach(m=>closeModal(m.id));
+});
+
+// ===== THEME =====
+(function(){
+  const t=$('themeToggle'),r=document.documentElement;
+  let d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  r.setAttribute('data-theme',d);
+  updateThemeIcon(d);
+  t.addEventListener('click',()=>{
+    d=d==='dark'?'light':'dark';
+    r.setAttribute('data-theme',d);
+    updateThemeIcon(d);
+  });
+  function updateThemeIcon(m){
+    t.innerHTML=m==='dark'
+      ?'<i data-lucide="sun" style="width:18px;height:18px"></i>'
+      :'<i data-lucide="moon" style="width:18px;height:18px"></i>';
+    lucide.createIcons();
+  }
+})();
+
+// ===== GITHUB CONFIG =====
+const GITHUB_CONFIG = {
+  owner: 'gymbev',
+  repo: 'Gymnasium-Beverungen-Studien--und-Berufsberatung---timeline',
+  branch: 'main',
+  path: 'events.json'
+};
+
+async function loadEventsFromGitHub(){
+  const { owner, repo, branch, path } = GITHUB_CONFIG;
+  const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}?nocache=${Date.now()}`;
+  try {
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const data = await resp.json();
+    events = Array.isArray(data) ? data : (Array.isArray(data.events) ? data.events : []);
+    nextId = (events.reduce((mx, e) => Math.max(mx, e.id || 0), 0) || 0) + 1;
+    _eventsLoaded = true;
+  } catch (e) {
+    console.error('Fehler beim Laden der events.json:', e);
+    events = [];
+    nextId = 1;
+  }
+}
+
+async function saveEventsToGitHub(){
+  const { owner, repo, branch, path } = GITHUB_CONFIG;
+  const token = prompt('GitHub Personal Access Token eingeben:\n(Wird NICHT gespeichert – nur für diesen Vorgang.)');
+  if (!token) return;
+  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+  const contentObj = { events, exportedAt: new Date().toISOString() };
+  const json = JSON.stringify(contentObj, null, 2);
+  const base64Content = btoa(unescape(encodeURIComponent(json)));
+  let sha = undefined;
+  try {
+    const getResp = await fetch(`${apiUrl}?ref=${branch}`, {
+      headers: { 'Accept': 'application/vnd.github+json', 'Authorization': `Bearer ${token}` }
+    });
+    if (getResp.ok) { const meta = await getResp.json(); sha = meta.sha; }
+  } catch(e) {}
+  try {
+    const putResp = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: { 'Accept': 'application/vnd.github+json', 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Update events.json', content: base64Content, sha, branch })
+    });
+    if (!putResp.ok) {
+      const txt = await putResp.text();
+      alert('Fehler: ' + putResp.status + '\n' + txt);
+      return;
+    }
+    alert('✓ Gespeichert! Alle Nutzer sehen die neuen Termine beim nächsten Laden.');
+  } catch(e) { alert('Netzwerkfehler: ' + e.message); }
+}
 
 // ===== INIT =====
-(async function initApp(){
+(async function(){
   lucide.createIcons();
   updateClassFilterVisibility();
   updateRoleUI();
@@ -1389,3 +1993,7 @@ function calNav(dir){
   render();
 })();
 </script>
+
+
+
+</body></html>
