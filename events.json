@@ -23,7 +23,31 @@
       "approved": true,
       "recurring": false,
       "id": 2
+    },
+    {
+      "title": "Geburtstag",
+      "date": "2026-11-11",
+      "dateEnd": null,
+      "time": "11:11",
+      "location": "2025",
+      "category": "Praktikum",
+      "type": "pflicht",
+      "audience": [
+        "schueler"
+      ],
+      "classes": [
+        "9"
+      ],
+      "desc": "2 Stunden",
+      "link": null,
+      "timeslots": [],
+      "workshopSignup": false,
+      "workshopCapacity": 0,
+      "workshopRegistrants": [],
+      "approved": true,
+      "recurring": false,
+      "id": 3
     }
   ],
-  "exportedAt": "2026-07-10T20:22:11.590Z"
+  "exportedAt": "2026-07-10T20:50:53.460Z"
 }
