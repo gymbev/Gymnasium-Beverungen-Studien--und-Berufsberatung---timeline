@@ -5,7 +5,7 @@
       "title": "Boys & Girls Day",
       "date": "2026-04-23",
       "time": "08:00",
-      "location": "Schulgebäude",
+      "location": "SchulgebÃ¤ude",
       "category": "Boys & Girls Day",
       "type": "freiwillig",
       "audience": [
@@ -15,7 +15,7 @@
         "8",
         "9"
       ],
-      "desc": "Einblick in Berufe, die als untypisch für das eigene Geschlecht gelten.",
+      "desc": "Einblick in Berufe, die als untypisch fÃ¼r das eigene Geschlecht gelten.",
       "approved": true,
       "workshopSignup": true,
       "workshopCapacity": 30,
@@ -79,17 +79,17 @@
         "10",
         "EF"
       ],
-      "desc": "Besuch im Berufsinformationszentrum der Bundesagentur für Arbeit.",
+      "desc": "Besuch im Berufsinformationszentrum der Bundesagentur fÃ¼r Arbeit.",
       "approved": true,
       "workshopSignup": false,
       "timeslots": []
     },
     {
-      "title": "Berufsberatung -Einzelgespräche",
+      "title": "Berufsberatung -EinzelgesprÃ¤che",
       "date": "2026-05-28",
       "dateEnd": null,
       "time": null,
-      "location": "Stubo-Raum (gegenüber R201)",
+      "location": "Stubo-Raum (gegenÃ¼ber R201)",
       "category": "Berufsberatung",
       "type": "freiwillig",
       "audience": [
@@ -97,7 +97,7 @@
         "eltern"
       ],
       "classes": [],
-      "desc": "Bei Frau Reckert-Paixao (Agentur für Arbeit)",
+      "desc": "Bei Frau Reckert-Paixao (Agentur fÃ¼r Arbeit)",
       "link": null,
       "timeslots": [],
       "workshopSignup": false,
@@ -108,11 +108,11 @@
       "id": 20
     },
     {
-      "title": "Berufsberatung - Einzelgespräche",
+      "title": "Berufsberatung - EinzelgesprÃ¤che",
       "date": "2026-06-18",
       "dateEnd": null,
       "time": null,
-      "location": "Stubo Raum (gegenüber von R201)",
+      "location": "Stubo Raum (gegenÃ¼ber von R201)",
       "category": "Berufsberatung",
       "type": "freiwillig",
       "audience": [
@@ -120,7 +120,7 @@
         "eltern"
       ],
       "classes": [],
-      "desc": "Bei Frau Reckert-Paixao (Agentur für Arbeit)",
+      "desc": "Bei Frau Reckert-Paixao (Agentur fÃ¼r Arbeit)",
       "link": null,
       "timeslots": [],
       "workshopSignup": false,
@@ -135,7 +135,7 @@
       "date": "2026-05-18",
       "dateEnd": null,
       "time": "15:00",
-      "location": "Stubo Raum (gegenüber von R201)",
+      "location": "Stubo Raum (gegenÃ¼ber von R201)",
       "category": "Berufsberatung",
       "type": "freiwillig",
       "audience": [
@@ -158,7 +158,7 @@
       "date": "2026-06-11",
       "dateEnd": null,
       "time": "13:30",
-      "location": "ÜK",
+      "location": "ÃK",
       "category": "Workshop",
       "type": "wahlpflicht",
       "audience": [
@@ -169,7 +169,7 @@
         "Q1",
         "Q2"
       ],
-      "desc": "angeboten von Frau Reckert-Paixao (Agentur für Arbeit)",
+      "desc": "angeboten von Frau Reckert-Paixao (Agentur fÃ¼r Arbeit)",
       "link": null,
       "timeslots": [],
       "workshopSignup": false,
@@ -233,8 +233,34 @@
       "approved": true,
       "recurring": false,
       "id": 26
+    },
+    {
+      "title": "geburtstag",
+      "date": "2027-04-02",
+      "dateEnd": null,
+      "time": "11:11",
+      "location": null,
+      "category": "Berufsberatung",
+      "type": "pflicht",
+      "audience": [
+        "schueler",
+        "lehrer",
+        "eltern"
+      ],
+      "classes": [
+        "Q2"
+      ],
+      "desc": null,
+      "link": null,
+      "timeslots": [],
+      "workshopSignup": false,
+      "workshopCapacity": 0,
+      "workshopRegistrants": [],
+      "approved": true,
+      "recurring": false,
+      "id": 27
     }
   ],
-  "nextId": 27,
-  "savedAt": "2026-07-10T19:04:00.451Z"
+  "nextId": 28,
+  "savedAt": "2026-07-10T19:26:10.327Z"
 }
