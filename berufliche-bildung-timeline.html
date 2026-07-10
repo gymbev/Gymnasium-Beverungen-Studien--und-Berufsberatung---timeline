@@ -371,22 +371,21 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
       <div class="header-actions">
         <div class="toolbar" id="adminToolbar" style="display: flex;">
           <button class="btn-sm btn-secondary" onclick="exportData()" title="Termine exportieren">
-            <i data-lucide="download" style="width:14px;height:14px"></i> Export
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="download" aria-hidden="true" style="width:14px;height:14px" class="lucide lucide-download"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg> Export
           </button>
           <label class="btn-sm btn-secondary" style="cursor:pointer" title="Termine importieren">
-            <i data-lucide="upload" style="width:14px;height:14px"></i> Import
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="upload" aria-hidden="true" style="width:14px;height:14px" class="lucide lucide-upload"><path d="M12 3v12"></path><path d="m17 8-5-5-5 5"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path></svg> Import
             <input type="file" accept=".json" onchange="importData(event)" style="display:none">
           </label>
           <button class="btn-sm btn-secondary" onclick="showEmbedCode()" title="Einbettungscode">
-            <i data-lucide="code" style="width:14px;height:14px"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="code" aria-hidden="true" style="width:14px;height:14px" class="lucide lucide-code"><path d="m16 18 6-6-6-6"></path><path d="m8 6-6 6 6 6"></path></svg>
+          </button>
+          <button class="btn-sm btn-primary" onclick="saveHTML()" title="Aktuelle Datei mit allen Terminen als HTML herunterladen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-down" aria-hidden="true" style="width:14px;height:14px" class="lucide lucide-file-down"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="M12 18v-6"></path><path d="m9 15 3 3 3-3"></path></svg>&nbsp;HTML&nbsp;speichern
           </button>
           <button class="btn-sm btn-secondary" onclick="exportICS()" title="Als iCal-Datei exportieren">
             <i data-lucide="calendar-down" style="width:14px;height:14px"></i> iCal
           </button>
-          <button class="btn-sm btn-secondary" onclick="showGitHubSettings()" title="GitHub-Sync einrichten" id="githubSettingsBtn">
-            <i data-lucide="settings-2" style="width:14px;height:14px"></i> GitHub
-          </button>
-          <span id="syncStatus" style="font-size:var(--text-xs);display:flex;align-items:center;gap:4px;"></span>
         </div>
         <button class="icon-btn" id="authBtn" onclick="showAuthModal()" aria-label="Anmelden" title="Admin / Partner">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="lock" aria-hidden="true" class="lucide lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
@@ -965,79 +964,10 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
     </div>
   </div>
 </div>
-<!-- GITHUB SETTINGS MODAL -->
-<div class="modal-backdrop hidden" id="githubModal" role="dialog" aria-modal="true">
-  <div class="modal">
-    <div class="modal-header">
-      <i data-lucide="github" style="width:20px;height:20px;color:var(--color-primary)"></i>
-      <h2>GitHub-Sync einrichten</h2>
-      <button class="icon-btn" onclick="closeModal('githubModal')"><i data-lucide="x"></i></button>
-    </div>
-    <div class="modal-body">
-      <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-4)">
-        Termine werden automatisch in deinem GitHub-Repository gespeichert und sind sofort in allen Browsern sichtbar – ohne Datei-Upload.
-      </p>
-      <div class="form-group">
-        <label class="form-label" for="ghOwner">GitHub-Benutzername / Organisation</label>
-        <input type="text" id="ghOwner" class="form-input" placeholder="z. B. gymbev">
-        <div class="form-hint">Dein GitHub-Username oder die Organisation</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="ghRepo">Repository-Name</label>
-        <input type="text" id="ghRepo" class="form-input" placeholder="z. B. Gymnasium-Beverungen-Studien--und-Berufsberatung---timeline">
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="ghFile">Pfad zur events.json-Datei</label>
-        <input type="text" id="ghFile" class="form-input" placeholder="events.json" value="events.json">
-        <div class="form-hint">Standardmäßig im Wurzelverzeichnis des Repos</div>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="ghBranch">Branch</label>
-        <input type="text" id="ghBranch" class="form-input" placeholder="main" value="main">
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="ghToken">Personal Access Token (PAT)</label>
-        <input type="password" id="ghToken" class="form-input" placeholder="ghp_xxxxxxxxxxxx">
-        <div class="form-hint">
-          Erstelle einen Token unter <strong>github.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens</strong>.
-          Berechtigung: <strong>Contents: Read and write</strong> für dieses Repository. Der Token wird nur im Browser gespeichert.
-        </div>
-      </div>
-      <div id="ghTestResult" style="display:none;padding:var(--space-3);border-radius:var(--radius-md);font-size:var(--text-sm);margin-top:var(--space-2)"></div>
-    </div>
-    <div class="modal-footer" style="justify-content:space-between">
-      <button class="btn-sm btn-secondary" onclick="testGitHubConnection()">
-        <i data-lucide="plug" style="width:12px;height:12px"></i> Verbindung testen
-      </button>
-      <div style="display:flex;gap:var(--space-2)">
-        <button class="btn-sm btn-secondary" onclick="closeModal('githubModal')">Abbrechen</button>
-        <button class="btn-sm btn-primary" onclick="saveGitHubSettings()">
-          <i data-lucide="save" style="width:12px;height:12px"></i> Speichern
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 <script>
 // ===== STATE =====
 const PASSWORDS = { admin: 'gymbevstubo', partner: 'gymbevpartner' };
-// ===== GITHUB SYNC STATE =====
-let ghConfig = { owner:'', repo:'', file:'events.json', branch:'main', token:'' };
-let ghFileSHA = null; // SHA der aktuellen events.json für Updates
-
-function loadGHConfig(){
-  try {
-    const raw = sessionStorage.getItem('ghConfig');
-    if(raw){ const c = JSON.parse(raw); Object.assign(ghConfig, c); }
-  } catch(e){}
-}
-function saveGHConfigToSession(){
-  try { sessionStorage.setItem('ghConfig', JSON.stringify(ghConfig)); } catch(e){}
-}
-
 let currentRole = null; // null | 'admin' | 'partner' // null | 'admin' | 'partner'
 let currentView = 'timeline';
 let calendarDate = new Date();
@@ -1939,7 +1869,6 @@ function saveEvent(){
     }
     closeModal('eventModal');
     render();
-    persistEvents();
     return;
   }
   // New
@@ -1964,7 +1893,6 @@ function saveEvent(){
   closeModal('eventModal');
   updatePendingBanner();
   render();
-  persistEvents();
 }
 
 function deleteEvent(id){
@@ -1972,7 +1900,6 @@ function deleteEvent(id){
   events=events.filter(e=>e.id!==id);
   closeModal('detailModal');
   render();
-  persistEvents();
 }
 
 // ===== PENDING =====
@@ -2006,7 +1933,6 @@ function approveEvent(id){
   showPendingModal();
   updatePendingBanner();
   render();
-  persistEvents();
 }
 function rejectEvent(id){
   if(!confirm('Termin ablehnen und löschen?')) return;
@@ -2014,7 +1940,6 @@ function rejectEvent(id){
   showPendingModal();
   updatePendingBanner();
   render();
-  persistEvents();
 }
 
 // ===== EXPORT / IMPORT =====
@@ -2034,7 +1959,6 @@ function importData(ev){
         events=data.events;
         nextId=Math.max(...events.map(e=>e.id))+1;
         updatePendingBanner();render();
-        persistEvents();
         alert(`${events.length} Termine erfolgreich importiert.`);
       } else alert('Ungültiges Format.');
     }catch{alert('Fehler beim Importieren.');}
@@ -2245,171 +2169,10 @@ document.addEventListener('keydown',e=>{
   }
 })();
 
-
-// ===== GITHUB SYNC FUNCTIONS =====
-
-function setSyncStatus(state, msg){
-  const el = document.getElementById('syncStatus');
-  if(!el) return;
-  const icons = { loading:'⟳', ok:'✓', error:'✗', '' :'' };
-  const colors = { loading:'var(--color-text-muted)', ok:'var(--color-success)', error:'var(--color-error)', '':'var(--color-text-faint)' };
-  el.style.color = colors[state] || colors[''];
-  el.textContent = (icons[state] ? icons[state] + ' ' : '') + msg;
-}
-
-async function loadFromGitHub(){
-  if(!ghConfig.token || !ghConfig.owner || !ghConfig.repo){
-    // No config yet - use embedded events (normal behavior)
-    return;
-  }
-  setSyncStatus('loading', 'Lade…');
-  try {
-    const url = `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.file}?ref=${ghConfig.branch}`;
-    const res = await fetch(url, {
-      headers: {
-        'Authorization': `token ${ghConfig.token}`,
-        'Accept': 'application/vnd.github.v3+json'
-      }
-    });
-    if(res.status === 404){
-      // File doesn't exist yet - create it with current embedded events
-      setSyncStatus('ok', 'Neue Datei wird angelegt…');
-      await persistEvents();
-      return;
-    }
-    if(!res.ok) throw new Error(`GitHub API Fehler: ${res.status}`);
-    const data = await res.json();
-    ghFileSHA = data.sha;
-    const decoded = atob(data.content.replace(/\n/g,''));
-    const parsed = JSON.parse(decoded);
-    if(Array.isArray(parsed.events)){
-      events = parsed.events;
-      nextId = parsed.nextId || (Math.max(...events.map(e=>e.id||0), 0) + 1);
-      updatePendingBanner();
-      render();
-      setSyncStatus('ok', 'Synchronisiert');
-    }
-  } catch(e){
-    setSyncStatus('error', 'Ladefehler');
-    console.error('GitHub load error:', e);
-  }
-}
-
-async function persistEvents(){
-  if(!ghConfig.token || !ghConfig.owner || !ghConfig.repo) return;
-  setSyncStatus('loading', 'Speichere…');
-  try {
-    const payload = JSON.stringify({ events, nextId, savedAt: new Date().toISOString() }, null, 2);
-    const encoded = btoa(unescape(encodeURIComponent(payload)));
-    const body = {
-      message: `Termine aktualisiert (${new Date().toLocaleString('de-DE')})`,
-      content: encoded,
-      branch: ghConfig.branch
-    };
-    if(ghFileSHA) body.sha = ghFileSHA;
-    const url = `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.file}`;
-    const res = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${ghConfig.token}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    });
-    if(!res.ok){
-      const err = await res.json().catch(()=>({}));
-      if(res.status === 409){
-        // Conflict - SHA out of date, reload and retry
-        await reloadSHA();
-        await persistEvents();
-        return;
-      }
-      throw new Error(err.message || `Status ${res.status}`);
-    }
-    const result = await res.json();
-    ghFileSHA = result.content?.sha || ghFileSHA;
-    setSyncStatus('ok', 'Gespeichert ✓');
-    setTimeout(()=>setSyncStatus('',''),3000);
-  } catch(e){
-    setSyncStatus('error', 'Fehler beim Speichern');
-    console.error('GitHub save error:', e);
-  }
-}
-
-async function reloadSHA(){
-  try {
-    const url = `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.file}?ref=${ghConfig.branch}`;
-    const res = await fetch(url, { headers: { 'Authorization': `token ${ghConfig.token}`, 'Accept': 'application/vnd.github.v3+json' }});
-    if(res.ok){ const d = await res.json(); ghFileSHA = d.sha; }
-  } catch(e){}
-}
-
-function showGitHubSettings(){
-  loadGHConfig();
-  $('ghOwner').value = ghConfig.owner;
-  $('ghRepo').value = ghConfig.repo;
-  $('ghFile').value = ghConfig.file || 'events.json';
-  $('ghBranch').value = ghConfig.branch || 'main';
-  $('ghToken').value = ghConfig.token;
-  $('ghTestResult').style.display='none';
-  showModal('githubModal');
-  lucide.createIcons();
-}
-
-function saveGitHubSettings(){
-  ghConfig.owner = $('ghOwner').value.trim();
-  ghConfig.repo = $('ghRepo').value.trim();
-  ghConfig.file = $('ghFile').value.trim() || 'events.json';
-  ghConfig.branch = $('ghBranch').value.trim() || 'main';
-  ghConfig.token = $('ghToken').value.trim();
-  saveGHConfigToSession();
-  closeModal('githubModal');
-  loadFromGitHub();
-}
-
-async function testGitHubConnection(){
-  const owner = $('ghOwner').value.trim();
-  const repo = $('ghRepo').value.trim();
-  const token = $('ghToken').value.trim();
-  const branch = $('ghBranch').value.trim() || 'main';
-  const file = $('ghFile').value.trim() || 'events.json';
-  const res_el = $('ghTestResult');
-  res_el.style.display = 'block';
-  res_el.style.background = 'var(--color-surface-offset)';
-  res_el.textContent = '⟳ Verbindung wird getestet…';
-  try {
-    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${file}?ref=${branch}`;
-    const res = await fetch(url, { headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }});
-    if(res.ok){
-      res_el.style.background = 'var(--color-success-highlight)';
-      res_el.style.color = 'var(--color-success)';
-      res_el.textContent = '✓ Verbindung erfolgreich! Datei gefunden und lesbar.';
-    } else if(res.status === 404){
-      res_el.style.background = 'var(--color-warning-highlight)';
-      res_el.style.color = 'var(--color-warning)';
-      res_el.textContent = '⚠ Repository erreichbar, aber events.json noch nicht vorhanden – wird beim ersten Speichern angelegt.';
-    } else if(res.status === 401){
-      res_el.style.background = 'var(--color-error-highlight)';
-      res_el.style.color = 'var(--color-error)';
-      res_el.textContent = '✗ Authentifizierung fehlgeschlagen – Token ungültig oder abgelaufen.';
-    } else {
-      throw new Error(`HTTP ${res.status}`);
-    }
-  } catch(e){
-    res_el.style.background = 'var(--color-error-highlight)';
-    res_el.style.color = 'var(--color-error)';
-    res_el.textContent = `✗ Fehler: ${e.message}`;
-  }
-}
-
 // ===== INIT =====
-loadGHConfig();
 lucide.createIcons();
 updateClassFilterVisibility();
 updateRoleUI();
-// Load events from GitHub if configured
-loadFromGitHub();
 </script>
 
 
