@@ -1,20 +1,18 @@
 {
   "events": [
     {
-      "title": "Geburtstag2",
-      "date": "2026-11-11",
+      "title": "Testika",
+      "date": "2026-07-17",
       "dateEnd": null,
-      "time": "11:11",
-      "location": null,
+      "time": "17:17",
+      "location": "2015",
       "category": "Berufsberatung",
       "type": "pflicht",
       "audience": [
         "schueler"
       ],
       "classes": [
-        "9",
-        "10",
-        "EF"
+        "8"
       ],
       "desc": null,
       "link": null,
@@ -24,8 +22,8 @@
       "workshopRegistrants": [],
       "approved": true,
       "recurring": false,
-      "id": 1
+      "id": 2
     }
   ],
-  "exportedAt": "2026-07-10T20:20:43.981Z"
+  "exportedAt": "2026-07-10T20:22:11.590Z"
 }
