@@ -1,7 +1,31 @@
 {
   "events": [
-    { "id": 2, "title": "...", "date": "...", ... },
-    ...
+    {
+      "title": "Geburtstag2",
+      "date": "2026-11-11",
+      "dateEnd": null,
+      "time": "11:11",
+      "location": null,
+      "category": "Berufsberatung",
+      "type": "pflicht",
+      "audience": [
+        "schueler"
+      ],
+      "classes": [
+        "9",
+        "10",
+        "EF"
+      ],
+      "desc": null,
+      "link": null,
+      "timeslots": [],
+      "workshopSignup": false,
+      "workshopCapacity": 0,
+      "workshopRegistrants": [],
+      "approved": true,
+      "recurring": false,
+      "id": 1
+    }
   ],
-  "exportedAt": "2026-07-10T19:56:42.383Z"
+  "exportedAt": "2026-07-10T20:20:43.981Z"
 }
