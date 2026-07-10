@@ -2257,6 +2257,34 @@ function setSyncStatus(state, msg){
   el.textContent = (icons[state] ? icons[state] + ' ' : '') + msg;
 }
 
+
+// ===== PUBLIC EVENTS LOAD (ohne Token, für alle Nutzer) =====
+
+async function publicLoadEvents(){
+  // Nutzt die öffentliche raw.githubusercontent.com-URL, um events.json zu laden
+  if(!ghConfig.owner || !ghConfig.repo){
+    // Fallback: Eingebettete Events verwenden
+    return;
+  }
+  const url = `https://raw.githubusercontent.com/${ghConfig.owner}/${ghConfig.repo}/${ghConfig.branch || 'main'}/${ghConfig.file || 'events.json'}`;
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    if(!res.ok){
+      console.warn('publicLoadEvents – HTTP Status', res.status);
+      return;
+    }
+    const data = await res.json();
+    if(Array.isArray(data.events)){
+      events = data.events;
+      nextId = data.nextId || (Math.max(...events.map(e=>e.id || 0), 0) + 1);
+      updatePendingBanner();
+      render();
+    }
+  } catch(e){
+    console.error('publicLoadEvents error', e);
+  }
+}
+
 async function loadFromGitHub(){
   if(!ghConfig.token || !ghConfig.owner || !ghConfig.repo){
     // No config yet - use embedded events (normal behavior)
@@ -2408,7 +2436,9 @@ loadGHConfig();
 lucide.createIcons();
 updateClassFilterVisibility();
 updateRoleUI();
-// Load events from GitHub if configured
+// Öffentliche Events laden (für alle Nutzer)
+publicLoadEvents();
+// Wenn ein Token konfiguriert ist, zusätzlich GitHub-Sync aktivieren
 loadFromGitHub();
 </script>
 
