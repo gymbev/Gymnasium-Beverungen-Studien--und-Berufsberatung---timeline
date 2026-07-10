@@ -205,8 +205,36 @@
       "approved": true,
       "recurring": false,
       "id": 25
+    },
+    {
+      "title": "test",
+      "date": "2026-07-17",
+      "dateEnd": null,
+      "time": "08:00",
+      "location": "Stubo",
+      "category": "Berufsberatung",
+      "type": "pflicht",
+      "audience": [
+        "schueler",
+        "lehrer",
+        "eltern"
+      ],
+      "classes": [
+        "9",
+        "10",
+        "EF"
+      ],
+      "desc": null,
+      "link": null,
+      "timeslots": [],
+      "workshopSignup": false,
+      "workshopCapacity": 0,
+      "workshopRegistrants": [],
+      "approved": true,
+      "recurring": false,
+      "id": 26
     }
   ],
-  "nextId": 26,
-  "savedAt": "2026-07-10T19:02:53.314Z"
+  "nextId": 27,
+  "savedAt": "2026-07-10T19:04:00.451Z"
 }
