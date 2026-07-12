@@ -249,35 +249,6 @@
     "seriesId": null
   },
   {
-    "id": 27,
-    "title": "test",
-    "date": "2026-07-20",
-    "dateEnd": null,
-    "dateISO": "2026-07-20",
-    "time": "22:22",
-    "location": null,
-    "category": "Berufsberatung",
-    "type": "pflicht",
-    "audience": [
-      "schueler"
-    ],
-    "classes": [
-      "9",
-      "Q1",
-      "Q2"
-    ],
-    "desc": null,
-    "link": null,
-    "duration": "2 Std.",
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": true,
-    "seriesId": "series_1783887894919"
-  },
-  {
     "id": 28,
     "title": "test",
     "date": "2026-08-06",
