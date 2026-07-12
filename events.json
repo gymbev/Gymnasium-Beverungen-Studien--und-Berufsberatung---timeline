@@ -249,33 +249,6 @@
     "seriesId": null
   },
   {
-    "id": 26,
-    "title": "KIomg",
-    "date": "2026-07-17",
-    "dateEnd": null,
-    "dateISO": "2026-07-17",
-    "time": "17:17",
-    "location": "Stubo_Raum",
-    "category": "Berufsberatung",
-    "type": "pflicht",
-    "audience": [
-      "schueler"
-    ],
-    "classes": [
-      "EF"
-    ],
-    "desc": null,
-    "link": null,
-    "duration": "1 Std. 5 Min.",
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": true,
-    "seriesId": null
-  },
-  {
     "id": 27,
     "title": "test",
     "date": "2026-07-20",
