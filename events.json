@@ -222,30 +222,4 @@
     "recurring": false,
     "seriesId": null
   },
-  {
-    "id": 21,
-    "title": "Berufsberatung - Einzelgespräche",
-    "date": "2026-06-18",
-    "dateEnd": null,
-    "dateISO": "2026-06-18",
-    "time": null,
-    "location": "Stubo Raum (gegenüber von R201)",
-    "category": "Berufsberatung",
-    "type": "freiwillig",
-    "audience": [
-      "schueler",
-      "eltern"
-    ],
-    "classes": [],
-    "desc": "Bei Frau Reckert-Paixao (Agentur für Arbeit)",
-    "link": null,
-    "duration": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  }
 ]
