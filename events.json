@@ -247,33 +247,5 @@
     "approved": true,
     "recurring": false,
     "seriesId": null
-  },
-  
-  {
-    "id": 29,
-    "title": "Maria",
-    "date": "2026-07-13",
-    "dateEnd": null,
-    "dateISO": "2026-07-13",
-    "time": null,
-    "location": null,
-    "category": "Berufsberatung",
-    "type": "pflicht",
-    "audience": [
-      "schueler"
-    ],
-    "classes": [
-      "9"
-    ],
-    "desc": null,
-    "link": null,
-    "duration": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
   }
 ]
