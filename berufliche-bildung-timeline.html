@@ -371,6 +371,9 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
       <div class="header-actions">
         <div class="toolbar" id="adminToolbar" style="display: flex;">
           <button class="btn-sm btn-secondary" onclick="exportData()" title="Termine exportieren">
+          <button class="btn-sm btn-primary" onclick="saveEventsToGitHub()" title="Termine auf GitHub speichern – alle Nutzer sehen die Änderung" style="gap:var(--space-1)">
+            <i data-lucide="cloud-upload" style="width:14px;height:14px"></i>Auf GitHub speichern
+          </button>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="download" aria-hidden="true" style="width:14px;height:14px" class="lucide lucide-download"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg> Export
           </button>
           <label class="btn-sm btn-secondary" style="cursor:pointer" title="Termine importieren">
@@ -387,7 +390,7 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
             <i data-lucide="calendar-down" style="width:14px;height:14px"></i> iCal
           </button>
         </div>
-        <button class="icon-btn" id="authBtn" onclick="showAuthModal()" aria-label="Anmelden" title="Admin / Partner">
+        <button class="icon-btn" id="authBtn" onclick="showAuthModal()" aria-label="Anmelden" title="Admin">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="lock" aria-hidden="true" class="lucide lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
         </button>
         <button class="icon-btn" id="themeToggle" data-theme-toggle="" aria-label="Dark Mode umschalten"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sun" aria-hidden="true" style="width:18px;height:18px" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg></button>
@@ -444,7 +447,6 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
       <div class="class-filter-row" id="classFilterRow" style="display: flex;">
         <span class="filter-label">Klasse</span>
         <button class="class-chip all-classes selected" id="classAll" onclick="selectAllClasses()">Alle</button>
-        <button class="class-chip" data-class="8" onclick="toggleClass('8')">Kl. 8</button>
         <button class="class-chip" data-class="9" onclick="toggleClass('9')">Kl. 9</button>
         <button class="class-chip" data-class="10" onclick="toggleClass('10')">Kl. 10</button>
         <button class="class-chip" data-class="EF" onclick="toggleClass('EF')">EF</button>
@@ -727,12 +729,6 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
               <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Voller Zugriff – Termine erstellen, bearbeiten, löschen</div>
             </div>
           </div>
-          <div class="auth-option partner-opt" onclick="selectRole('partner')">
-            <div class="auth-option-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="users" aria-hidden="true" style="width:20px;height:20px" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><path d="M16 3.128a4 4 0 0 1 0 7.744"></path><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></svg></div>
-            <div>
-              <div style="font-weight:600;font-size:var(--text-sm)">Partner / Kooperationspartner</div>
-              <div style="font-size:var(--text-xs);color:var(--color-text-muted)">Termine einreichen – werden vom Admin freigeschaltet</div>
-            </div>
           </div>
         </div>
       </div>
@@ -782,6 +778,18 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
           <input type="time" id="evTime" class="form-input">
         </div>
         <div class="form-group">
+          <label class="form-label">Dauer <span>(optional)</span></label>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0">
+              <input type="number" id="evDurationHours" class="form-input" min="0" max="9" step="1" placeholder="Stunden">
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <input type="number" id="evDurationMinutes" class="form-input" min="0" max="55" step="5" placeholder="Minuten">
+            </div>
+          </div>
+          <div class="form-hint">0 bis 9 Stunden und 0 bis 55 Minuten in 5er-Schritten.</div>
+        </div>
+        <div class="form-group">
           <label class="form-label" for="evLocation">Ort <span>(optional)</span></label>
           <input type="text" id="evLocation" class="form-input" placeholder="z. B. Aula, Raum 114">
         </div>
@@ -820,7 +828,6 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
         <label class="form-label">Klassen / Stufen <span>(Mehrfachauswahl)</span></label>
         <div class="chip-selector" id="classSelector">
           <span class="sel-chip class-chip-sel" data-cls="alle" onclick="toggleCls(this,'alle')">Alle Klassen</span>
-          <span class="sel-chip class-chip-sel selected" data-cls="8" onclick="toggleCls(this,'8')">Kl. 8</span>
           <span class="sel-chip class-chip-sel selected" data-cls="9" onclick="toggleCls(this,'9')">Kl. 9</span>
           <span class="sel-chip class-chip-sel selected" data-cls="10" onclick="toggleCls(this,'10')">Kl. 10</span>
           <span class="sel-chip class-chip-sel" data-cls="EF" onclick="toggleCls(this,'EF')">EF</span>
@@ -863,6 +870,9 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
 
 <!-- REPEAT -->
 <div class="form-group">
+<div id="seriesEditHint" class="hidden" style="font-size:var(--text-xs);color:var(--color-primary);background:var(--color-primary-highlight);padding:6px 10px;border-radius:var(--radius-md);margin-bottom:var(--space-2)">
+  <strong>Serientermin:</strong> Du bearbeitest diesen einzelnen Termin. Andere Termine der Serie bleiben unverändert.
+</div>
 <label class="form-label" for="evRepeat">Wiederholung</label>
 <select id="evRepeat" class="form-select" onchange="toggleRepeatOptions()">
   <option value="none">Kein Wiederholungstermin</option>
@@ -928,7 +938,7 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
     
     <a href="https://beverungen-marketing.de/ausbildungsmesse-2026-anmeldephase-gestartet/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;margin-top:var(--space-3);font-size:var(--text-sm);color:var(--color-primary);text-decoration:underline">Mehr Infos <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="external-link" aria-hidden="true" style="width:12px;height:12px" class="lucide lucide-external-link"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
   </div></div>
-    <div class="modal-footer" id="detailFooter"><button class="btn-sm btn-secondary" onclick="openEditModal(25)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pencil" aria-hidden="true" style="width:12px;height:12px" class="lucide lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></svg> Bearbeiten</button><button class="btn-sm btn-danger" onclick="deleteEvent(25)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" style="width:12px;height:12px" class="lucide lucide-trash-2"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg> Löschen</button><button class="btn-sm btn-primary" onclick="closeModal('detailModal')">Schließen</button></div>
+    <div class="modal-footer" id="detailFooter"><button class="btn-sm btn-secondary" onclick="openEditModal(25)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pencil" aria-hidden="true" style="width:12px;height:12px" class="lucide lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></svg> Bearbeiten</button><button class="btn-sm btn-danger" onclick="window.deleteEvent(25); return false;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" style="width:12px;height:12px" class="lucide lucide-trash-2"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg> Löschen</button><button class="btn-sm btn-primary" onclick="closeModal('detailModal')">Schließen</button></div>
   </div>
 </div>
 
@@ -967,8 +977,8 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
 
 <script>
 // ===== STATE =====
-const PASSWORDS = { admin: 'gymbevstubo', partner: 'gymbevpartner' };
-let currentRole = null; // null | 'admin' | 'partner' // null | 'admin' | 'partner'
+const PASSWORDS = { admin: 'gymbevstubo' };
+let currentRole = null; // null | 'admin'
 let currentView = 'timeline';
 let calendarDate = new Date();
 let editingId = null;
@@ -990,9 +1000,216 @@ function d(mo, day) {
   return new Date(ny, mo - 1, day).toISOString().split('T')[0];
 }
 
-let events = []; // __EVENTS_START__
-// Daten werden beim Start aus events.json geladen.
-// __EVENTS_END__
+let events = [ // __EVENTS_START__
+
+  {
+    "id": 2,
+    "title": "Boys & Girls Day",
+    "date": "2026-04-23",
+    "time": "08:00",
+    "location": "Schulgebäude",
+    "category": "Boys & Girls Day",
+    "type": "freiwillig",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "8",
+      "9"
+    ],
+    "desc": "Einblick in Berufe, die als untypisch für das eigene Geschlecht gelten.",
+    "approved": true,
+    "workshopSignup": true,
+    "workshopCapacity": 30,
+    "workshopRegistrants": [],
+    "timeslots": []
+  },
+  {
+    "id": 6,
+    "title": "Elternabend Berufliche Orientierung (Kl. 9)",
+    "date": "2026-03-17",
+    "time": "19:00",
+    "location": "Aula",
+    "category": "Elternabend",
+    "type": "pflicht",
+    "audience": [
+      "eltern",
+      "lehrer"
+    ],
+    "classes": [
+      "9"
+    ],
+    "desc": "Informationen zum Betriebspraktikum und zur Bewerbungsvorbereitung.",
+    "approved": true,
+    "workshopSignup": false,
+    "timeslots": []
+  },
+  {
+    "id": 8,
+    "title": "Workshop Bewerbungsunterlagen",
+    "date": "2026-04-28",
+    "time": "10:00",
+    "location": "Computerraum 2",
+    "category": "Workshop",
+    "type": "wahlpflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "10",
+      "EF"
+    ],
+    "desc": "Lebenslauf und Anschreiben professionell erstellen. Laptop mitbringen.",
+    "approved": true,
+    "workshopSignup": true,
+    "workshopCapacity": 18,
+    "workshopRegistrants": [],
+    "timeslots": []
+  },
+  {
+    "id": 14,
+    "title": "Berufsinformationszentrum Besuch",
+    "date": "2026-04-07",
+    "time": "09:00",
+    "location": "BiZ Paderborn",
+    "category": "Berufsberatung",
+    "type": "wahlpflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "10",
+      "EF"
+    ],
+    "desc": "Besuch im Berufsinformationszentrum der Bundesagentur für Arbeit.",
+    "approved": true,
+    "workshopSignup": false,
+    "timeslots": []
+  },
+  {
+    "title": "Berufsberatung -Einzelgespräche",
+    "date": "2026-05-28",
+    "dateEnd": null,
+    "time": null,
+    "location": "Stubo-Raum (gegenüber R201)",
+    "category": "Berufsberatung",
+    "type": "freiwillig",
+    "audience": [
+      "schueler",
+      "eltern"
+    ],
+    "classes": [],
+    "desc": "Bei Frau Reckert-Paixao (Agentur für Arbeit)",
+    "link": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "id": 20
+  },
+  {
+    "title": "Berufsberatung - Einzelgespräche",
+    "date": "2026-06-18",
+    "dateEnd": null,
+    "time": null,
+    "location": "Stubo Raum (gegenüber von R201)",
+    "category": "Berufsberatung",
+    "type": "freiwillig",
+    "audience": [
+      "schueler",
+      "eltern"
+    ],
+    "classes": [],
+    "desc": "Bei Frau Reckert-Paixao (Agentur für Arbeit)",
+    "link": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "id": 21
+  },
+  {
+    "title": "Berufsberatung am Elternsprechtag",
+    "date": "2026-05-18",
+    "dateEnd": null,
+    "time": "15:00",
+    "location": "Stubo Raum (gegenüber von R201)",
+    "category": "Berufsberatung",
+    "type": "freiwillig",
+    "audience": [
+      "schueler",
+      "eltern"
+    ],
+    "classes": [],
+    "desc": null,
+    "link": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "id": 22
+  },
+  {
+    "title": "Workshop \"Was kostet das Leben?\"",
+    "date": "2026-06-11",
+    "dateEnd": null,
+    "time": "13:30",
+    "location": "ÜK",
+    "category": "Workshop",
+    "type": "wahlpflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "EF",
+      "Q1",
+      "Q2"
+    ],
+    "desc": "angeboten von Frau Reckert-Paixao (Agentur für Arbeit)",
+    "link": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "id": 23
+  },
+  {
+    "title": "Beverunger Ausbildungsmesse",
+    "date": "2026-06-10",
+    "dateEnd": null,
+    "time": null,
+    "location": null,
+    "category": "Ausbildungsmesse",
+    "type": "pflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "8",
+      "9",
+      "10",
+      "Q1"
+    ],
+    "desc": null,
+    "link": "https://beverungen-marketing.de/ausbildungsmesse-2026-anmeldephase-gestartet/",
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "id": 25
+  }
+
+]; // __EVENTS_END__
 let nextId = 26;
 
 // ===== HELPERS =====
@@ -1037,12 +1254,10 @@ function showAuthModal(){
   showModal('authModal');
 }
 function selectRole(role){
-  authTargetRole = role;
+  authTargetRole = 'admin';
   $('authOptions').classList.add('hidden');
   $('authForm').classList.remove('hidden');
-  $('authFormDesc').textContent = role==='admin'
-    ? 'Bitte das Administrator-Passwort eingeben:'
-    : 'Bitte das Partner-Passwort eingeben:';
+  $('authFormDesc').textContent = 'Bitte das Administrator-Passwort eingeben:';
   setTimeout(()=>$('pwInput').focus(),50);
 }
 function backToAuthOptions(){
@@ -1067,8 +1282,8 @@ function logout(){
 }
 function updateRoleUI(){
   $('adminBar').classList.toggle('hidden', currentRole!=='admin');
-  $('partnerBar').classList.toggle('hidden', currentRole!=='partner');
-  $('fab').classList.toggle('hidden', currentRole!=='admin' && currentRole!=='partner');
+  if($('partnerBar')) $('partnerBar').classList.add('hidden');
+  $('fab').classList.toggle('hidden', currentRole!=='admin');
   $('adminToolbar').style.display = currentRole==='admin' ? 'flex' : 'none';
   updatePendingBanner();
   render();
@@ -1219,6 +1434,7 @@ function renderEventCard(e, isNext=false){
   const cd=isNext?countdownText(e.date):'';
   const meta=[];
   if(e.time) meta.push(`<span class="meta-item"><i data-lucide="clock" style="width:12px;height:12px"></i>${e.time} Uhr</span>`);
+  if(e.duration) meta.push(`<span class="meta-item"><i data-lucide="timer" style="width:12px;height:12px"></i>${e.duration}</span>`);
   if(e.dateEnd) meta.push(`<span class="meta-item"><i data-lucide="arrow-right" style="width:12px;height:12px"></i>bis ${formatDate(e.dateEnd)}</span>`);
   if(e.location) meta.push(`<span class="meta-item"><i data-lucide="map-pin" style="width:12px;height:12px"></i>${e.location}</span>`);
   if(e.category) meta.push(`<span class="meta-item"><i data-lucide="tag" style="width:12px;height:12px"></i>${e.category}</span>`);
@@ -1388,10 +1604,10 @@ function openDetail(id){
   $('detailBody').innerHTML=body;
   let footer='';
   if(isAdmin){
-    footer+=`<button class="btn-sm btn-secondary" onclick="openEditModal(${id})"><i data-lucide="pencil" style="width:12px;height:12px"></i> Bearbeiten</button>`;
-    footer+=`<button class="btn-sm btn-danger" onclick="deleteEvent(${id})"><i data-lucide="trash-2" style="width:12px;height:12px"></i> Löschen</button>`;
+    footer+=`<button type="button" class="btn-sm btn-secondary" onclick="openEditModal(${id}); return false;"><i data-lucide="pencil" style="width:12px;height:12px"></i> Bearbeiten</button>`;
+    footer+=`<button type="button" class="btn-sm btn-danger" onclick="window.deleteEvent(${id}); return false;"><i data-lucide="trash-2" style="width:12px;height:12px"></i> Löschen</button>`;
   }
-  footer+=`<button class="btn-sm btn-primary" onclick="closeModal('detailModal')">Schließen</button>`;
+  footer+=`<button type="button" class="btn-sm btn-primary" onclick="closeModal('detailModal'); return false;">Schließen</button>`;
   $('detailFooter').innerHTML=footer;
   showModal('detailModal');
   lucide.createIcons();
@@ -1435,8 +1651,8 @@ function removeRegistrant(evId,kind,slotId,idx){
 // ===== ADD/EDIT MODAL =====
 function openAddModal(){
   editingId=null;
-  $('eventModalTitle').textContent = currentRole==='partner' ? 'Termin einreichen' : 'Termin hinzufügen';
-  $('saveEventBtn').textContent = currentRole==='partner' ? 'Einreichen' : 'Speichern';
+  $('eventModalTitle').textContent = 'Termin hinzufügen';
+  $('saveEventBtn').textContent = 'Speichern';
   resetEventForm();
   showModal('eventModal');
 }
@@ -1479,6 +1695,19 @@ function openEditModal(id){
   $('evWorkshopSignup').checked=!!e.workshopSignup;
   $('workshopCapacityGroup').classList.toggle('hidden',!e.workshopSignup);
   $('evWorkshopCap').value=e.workshopCapacity||'';
+  // Duration
+  setDurationFields(e.duration||'');
+  // Wiederholung: bereits gesplittete Termine haben recurring=true aber sollen einzeln bearbeitbar sein
+  _repeatType = 'none';
+  const evRepeatEl = document.getElementById('evRepeat');
+  if(evRepeatEl) evRepeatEl.value = 'none';
+  const rRhythm = document.getElementById('repeatRhythmOpts');
+  const rCustom = document.getElementById('repeatCustomOpts');
+  if(rRhythm){ rRhythm.classList.add('hidden'); rRhythm.classList.remove('visible'); }
+  if(rCustom){ rCustom.classList.add('hidden'); rCustom.classList.remove('visible'); }
+  // Hinweis wenn Serientermin
+  const seriesHint = document.getElementById('seriesEditHint');
+  if(seriesHint) seriesHint.classList.toggle('hidden', !e.seriesId);
   showModal('eventModal');
 }
 function resetEventForm(){
@@ -1621,6 +1850,61 @@ function toggleWorkshopSignup(){
 
 // repeat tabs handle their own state via _repeatType
 
+function getDurationLabel(){
+  const hEl = $('evDurationHours');
+  const mEl = $('evDurationMinutes');
+  if(!hEl || !mEl) return '';
+  const h = Math.max(0, Math.min(9, parseInt(hEl.value || '0', 10) || 0));
+  let m = Math.max(0, Math.min(55, parseInt(mEl.value || '0', 10) || 0));
+  m = m - (m % 5);
+  hEl.value = String(h);
+  mEl.value = String(m);
+  if(h === 0 && m === 0) return '';
+  const parts = [];
+  if(h > 0) parts.push(`${h} Std.`);
+  if(m > 0) parts.push(`${m} Min.`);
+  return parts.join(' ');
+}
+
+function setDurationFields(value){
+  const hEl = $('evDurationHours');
+  const mEl = $('evDurationMinutes');
+  if(!hEl || !mEl) return;
+  const str = String(value || '');
+  const hm = str.match(/(\d+)\s*Std\.?/i);
+  const mm = str.match(/(\d+)\s*Min\.?/i);
+  const h = hm ? Math.min(9, parseInt(hm[1],10) || 0) : 0;
+  let m = mm ? parseInt(mm[1],10) || 0 : 0;
+  m = Math.max(0, Math.min(55, m - (m % 5)));
+  hEl.value = String(h);
+  mEl.value = String(m);
+}
+
+function getEventEndDate(ev){
+  if(!ev || !ev.date) return null;
+  const base = ev.dateObj || (ev.dateISO ? new Date(ev.dateISO + 'T12:00:00') : null) || parseDate(ev.date);
+  if(!(base instanceof Date) || isNaN(base)) return null;
+  const d = new Date(base);
+  const duration = (ev.duration||'').trim();
+  if(/^\d+\s*Tag(e)?$/i.test(duration)) {
+    const days = parseInt(duration,10);
+    d.setDate(d.getDate() + Math.max(0, days-1));
+  }
+  return d;
+}
+
+function isEventPast(ev){
+  const end = getEventEndDate(ev);
+  if(!end) return false;
+  end.setHours(23,59,59,999);
+  return end < new Date();
+}
+
+function getVisibleEvents(list){
+  const source = Array.isArray(list) ? list : events;
+  return source.filter(ev => !isEventPast(ev));
+}
+
 function saveEvent(){
   const title=$('evTitle').value.trim();
   if(!title){$('evTitleError').classList.remove('hidden');$('evTitle').focus();return;}
@@ -1644,10 +1928,11 @@ function saveEvent(){
   const workshopSignup=$('evWorkshopSignup').checked;
   const workshopCapacity=workshopSignup?(parseInt($('evWorkshopCap').value)||999):0;
   const base={
-    title, date, dateEnd:$('evDateEnd').value||null,
+    title, date, dateEnd:$('evDateEnd').value||null, dateISO: date,
     time:$('evTime').value||null, location:$('evLocation').value.trim()||null,
     category:cat, type, audience, classes,
     desc:$('evDesc').value.trim()||null, link:$('evLink').value.trim()||null,
+    duration:getDurationLabel()||null,
     timeslots, workshopSignup, workshopCapacity,
     workshopRegistrants: [],
     approved: currentRole==='admin',
@@ -1658,7 +1943,7 @@ function saveEvent(){
     if(idx!==-1){
       base.workshopRegistrants=events[idx].workshopRegistrants||[];
       base.timeslots=timeslots.length?timeslots:events[idx].timeslots;
-      events[idx]={...events[idx],...base,id:editingId};
+      events[idx]={...events[idx],...base,id:editingId,dateISO:base.date};
     }
     closeModal('eventModal');
     render();
@@ -1671,28 +1956,50 @@ function saveEvent(){
     document.querySelectorAll('.custom-date-input').forEach(inp=>{
       if(inp.value) extraDates.push(inp.value);
     });
+    const seriesId = 'series_' + Date.now();
+    // Erst den Haupttermin eintragen
+    events.push({...base, id:nextId++, dateISO:base.date, recurring:true, seriesId, workshopRegistrants:[], timeslots:timeslots.map((s,i)=>({...s,id:s.id+'_b'+i,registrants:[]}))});
+    // Dann alle Wiederholungstermine
     extraDates.forEach((d,i)=>{
-      events.push({...base,id:nextId++,date:d,dateEnd:null,recurring:true,workshopRegistrants:[],timeslots:timeslots.map(s=>({...s,id:s.id+'_c'+i,registrants:[]}))});
+      events.push({...base,id:nextId++,date:d,dateISO:d,dateEnd:null,recurring:true,seriesId,workshopRegistrants:[],timeslots:timeslots.map(s=>({...s,id:s.id+'_c'+i,registrants:[]}))});
     });
   } else if(['weekly','biweekly','monthly'].includes(_repeatType)){
     const until = $('evRepeatEnd')?.value || '';
     const addlDates = generateRepeatDates(base.date, _repeatType, until);
+    const seriesId = 'series_' + Date.now();
+    // Erst den Haupttermin eintragen
+    events.push({...base, id:nextId++, dateISO:base.date, recurring:true, seriesId, workshopRegistrants:[], timeslots:timeslots.map((s,i)=>({...s,id:s.id+'_b'+i,registrants:[]}))});
+    // Dann alle generierten Wiederholungstermine
     addlDates.forEach((d,i)=>{
-      events.push({...base,id:nextId++,date:d,dateEnd:null,recurring:true,workshopRegistrants:[],timeslots:timeslots.map(s=>({...s,id:s.id+'_r'+i,registrants:[]}))});
+      events.push({...base,id:nextId++,date:d,dateISO:d,dateEnd:null,recurring:true,seriesId,workshopRegistrants:[],timeslots:timeslots.map(s=>({...s,id:s.id+'_r'+i,registrants:[]}))});
     });
   } else {
-    events.push({...base,id:nextId++});
+    events.push({...base,id:nextId++,dateISO:base.date});
   }
   closeModal('eventModal');
   updatePendingBanner();
   render();
 }
 
-function deleteEvent(id){
+window.deleteEvent = async function deleteEvent(id){
   if(!confirm('Termin wirklich löschen?')) return;
-  events=events.filter(e=>e.id!==id);
+  const before = events.length;
+  events = events.filter(e => String(e.id) !== String(id));
+  if(events.length === before){
+    alert('Der Termin konnte nicht gelöscht werden.');
+    return;
+  }
   closeModal('detailModal');
+  updatePendingBanner();
   render();
+  if(currentRole === 'admin'){
+    try {
+      await saveEventsToGitHub(true);
+    } catch (err) {
+      console.error(err);
+      alert('Der Termin wurde lokal gelöscht, konnte aber nicht direkt auf GitHub gespeichert werden.');
+    }
+  }
 }
 
 // ===== PENDING =====
@@ -1736,6 +2043,55 @@ function rejectEvent(id){
 }
 
 // ===== EXPORT / IMPORT =====
+const GITHUB_CONFIG = {
+  owner: 'gymbev',
+  repo: 'Gymnasium-Beverungen-Studien--und-Berufsberatung---timeline',
+  branch: 'main',
+  path: 'events.json',
+  token: ''
+};
+
+async function saveEventsToGitHub(silent=false){
+  const token = window.prompt('GitHub Token eingeben (classic oder fine-grained mit Contents: write):', GITHUB_CONFIG.token || '');
+  if(!token) return;
+  GITHUB_CONFIG.token = token.trim();
+  const content = JSON.stringify(events, null, 2);
+  const api = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
+  try {
+    let sha = null;
+    const current = await fetch(api + `?ref=${GITHUB_CONFIG.branch}`, {
+      headers: { 'Authorization': `Bearer ${GITHUB_CONFIG.token}`, 'Accept': 'application/vnd.github+json' }
+    });
+    if (current.ok) {
+      const data = await current.json();
+      sha = data.sha || null;
+    }
+    const payload = {
+      message: `Update events.json ${new Date().toISOString()}`,
+      content: btoa(unescape(encodeURIComponent(content))),
+      branch: GITHUB_CONFIG.branch
+    };
+    if (sha) payload.sha = sha;
+    const res = await fetch(api, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${GITHUB_CONFIG.token}`,
+        'Accept': 'application/vnd.github+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(err || 'GitHub-Speichern fehlgeschlagen');
+    }
+    alert('Erfolgreich auf GitHub gespeichert.');
+  } catch (err) {
+    console.error(err);
+    alert('GitHub-Speichern fehlgeschlagen. Prüfe Token, Repo und Dateipfad.');
+  }
+}
+
 function exportData(){
   const json=JSON.stringify({events,exportedAt:new Date().toISOString()},null,2);
   const blob=new Blob([json],{type:'application/json'});
@@ -1796,13 +2152,6 @@ updatedFinal = updatedFinal.replace(
   a.download = 'berufliche-bildung-timeline.html';
   a.click();
   URL.revokeObjectURL(a.href);
-
-  const jsonBlob = new Blob([JSON.stringify(events, null, 2)], {type: 'application/json;charset=utf-8'});
-  const j = document.createElement('a');
-  j.href = URL.createObjectURL(jsonBlob);
-  j.download = 'events.json';
-  j.click();
-  URL.revokeObjectURL(j.href);
 }
 
 
@@ -1969,31 +2318,10 @@ document.addEventListener('keydown',e=>{
   }
 })();
 
-// ===== LOAD EVENTS JSON =====
-async function loadEventsFromJson(){
-  try{
-    const response = await fetch('./events.json', { cache: 'no-store' });
-    if(!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    if(!Array.isArray(data)) throw new Error('Ungültiges JSON-Format');
-    events = data;
-    nextId = events.reduce((max, ev) => Math.max(max, Number(ev.id) || 0), 0) + 1;
-    updatePendingBanner();
-  }catch(error){
-    console.error('Fehler beim Laden von events.json:', error);
-    events = [];
-    nextId = 1;
-    updatePendingBanner();
-    alert('Die Datei events.json konnte nicht geladen werden.');
-  }
-  render();
-}
-
 // ===== INIT =====
 lucide.createIcons();
 updateClassFilterVisibility();
 updateRoleUI();
-loadEventsFromJson();
 </script>
 
 
