@@ -1232,10 +1232,9 @@ function updateClassChipAvailability(){
 }
 
 function getFilteredEventsForClass(cls){
-  const ts = todayStr();
   return events.filter(e =>
     e.approved &&
-    (e.dateEnd || e.date) >= ts &&
+    !isEventPast(e) &&
     (e.classes.length===0 || e.classes.includes(cls))
   );
 }
@@ -1295,7 +1294,7 @@ function isEventPast(ev){
 function getVisibleEvents(){
   return events.filter(e=>{
     if(currentRole!=='admin' && e.approved===false) return false;
-    if(currentRole!=='admin' && isEventPast(e)) return false;
+    if(isEventPast(e)) return false;
 
     const audMatch = (e.audience || []).some(a => filters.audience[a]);
     if(!audMatch) return false;
