@@ -249,11 +249,11 @@
     "seriesId": null
   },
   {
-    "id": 29,
+    "id": 28,
     "title": "test",
-    "date": "2026-08-08",
+    "date": "2026-08-06",
     "dateEnd": null,
-    "dateISO": "2026-08-08",
+    "dateISO": "2026-08-06",
     "time": "22:22",
     "location": null,
     "category": "Berufsberatung",
