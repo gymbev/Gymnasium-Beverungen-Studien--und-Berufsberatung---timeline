@@ -2115,21 +2115,36 @@ async function loadPublicAvailability(eventId){
   return data.event;
 }
 
+let adminApiKey = '';
+
 async function loadAdminAvailability(eventId){
-  let key = sessionStorage.getItem(ADMIN_API_KEY_STORAGE) || '';
-  if(!key) key = prompt('Admin-API-Key eingeben, um Schülernamen zu sehen:','') || '';
-  if(!key) throw new Error('Admin-API-Key fehlt.');
-  sessionStorage.setItem(ADMIN_API_KEY_STORAGE, key);
+  let key = adminApiKey;
+
+  if(!key){
+    key = prompt('Admin-API-Key eingeben, um Schülernamen zu sehen:') || '';
+    key = key.trim();
+    if(!key) throw new Error('Admin-API-Key fehlt.');
+    adminApiKey = key;
+  }
+
   const res = await fetch(`${BOOKING_API_BASE}/api/admin-bookings`, {
-    method:'POST',
-    headers:{'Content-Type':'application/json','x-admin-key':key},
-    body: JSON.stringify({eventId})
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-admin-key': key
+    },
+    body: JSON.stringify({ eventId })
   });
+
   const data = await res.json();
+
   if(!res.ok){
-    if(res.status===403) sessionStorage.removeItem(ADMIN_API_KEY_STORAGE);
+    if(res.status === 403){
+      adminApiKey = '';
+    }
     throw new Error(data.error || 'Admin-Daten konnten nicht geladen werden.');
   }
+
   return data.event;
 }
 
