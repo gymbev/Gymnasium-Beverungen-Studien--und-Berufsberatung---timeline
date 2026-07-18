@@ -856,6 +856,13 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
         </div>
       </div>
 
+      <!-- BOOKING CODE für Zeitslots und Workshop-Anmeldung -->
+      <div class="form-group">
+        <label class="form-label" for="evBookingCode">Buchungscode für Schüler:innen <span>(nötig für Zeitslot- oder Workshop-Buchung)</span></label>
+        <input type="text" id="evBookingCode" class="form-input" placeholder="z. B. BB27" style="max-width:220px;text-transform:uppercase">
+        <p class="form-hint" style="margin-top:var(--space-2)">Diesen Code gibst du den Schüler:innen bekannt (z. B. mündlich oder auf Papier). Nur wer den Code kennt, kann einen Slot buchen oder sich zum Workshop anmelden. Der Code ist nur für dich als Admin im Termin sichtbar.</p>
+      </div>
+
       <!-- WORKSHOP SIGNUP -->
       <div class="form-group">
         <label class="form-label" style="display:flex;align-items:center;gap:var(--space-2);cursor:pointer">
@@ -1003,6 +1010,12 @@ const GITHUB_CONFIG = {
   path: 'events.json',
   token: ''
 };
+
+// ===== BOOKING API (Cloudflare Worker) =====
+// WICHTIG: Hier die URL deines Cloudflare Workers eintragen (siehe Anleitung).
+// Beispiel: 'https://gymbev-booking.DEIN-NAME.workers.dev'
+const BOOKING_API_BASE = 'https://gymbev-booking.example.workers.dev';
+const ADMIN_API_KEY_STORAGE = 'gymbev_admin_api_key';
 
 // ===== HELPERS =====
 const $ = id => document.getElementById(id);
@@ -1558,8 +1571,9 @@ async function openDetail(id){
 
       if(pct<100){
         body+=`<div style="margin-top:var(--space-2)">
-          <input type="text" class="form-input" placeholder="Dein Name" id="slotName_${sl.id}" style="margin-bottom:var(--space-2)">
+          <input type="text" class="form-input" placeholder="Dein Name *" id="slotName_${sl.id}" style="margin-bottom:var(--space-2)">
           <input type="text" class="form-input" placeholder="Klasse (optional)" id="slotKlasse_${sl.id}" style="margin-bottom:var(--space-2)">
+          <input type="text" class="form-input" placeholder="Buchungscode *" id="slotCode_${sl.id}" style="margin-bottom:var(--space-2);max-width:200px;text-transform:uppercase">
      <button class="btn-sm btn-primary" onclick="bookEventSlot(${id},'${sl.id}')">Buchen</button>
         </div>`;
       } else {
@@ -1586,9 +1600,10 @@ async function openDetail(id){
     }
 
     if(!full){
-      body+=`<div class="signup-form-row">
+      body+=`<div class="signup-form-row" style="flex-wrap:wrap">
         <input type="text" class="form-input" placeholder="Vor- und Nachname *" id="wsName_${id}">
         <input type="text" class="form-input" placeholder="Klasse" id="wsKlasse_${id}">
+        <input type="text" class="form-input" placeholder="Buchungscode *" id="wsCode_${id}" style="max-width:180px;text-transform:uppercase">
         <button class="btn-sm btn-primary" onclick="bookWorkshop(${id})">Anmelden</button>
       </div>`;
     } else {
@@ -1710,6 +1725,7 @@ function resetEventForm(){
   document.querySelectorAll('#classSelector .sel-chip').forEach(c=>c.classList.toggle('selected',c.dataset.cls==='alle'));
 
   $('timeslotList').innerHTML='';
+  $('evBookingCode').value='';
   $('evWorkshopSignup').checked=false;
   $('workshopCapacityGroup').classList.add('hidden');
   $('evWorkshopCap').value='';
@@ -2140,36 +2156,40 @@ async function bookWorkshopViaApi(eventId, studentName, bookingCode){
 }
 
 window.bookEventSlot = async function(eventId, slotId){
-  const studentName = prompt('Bitte Namen eingeben:','');
-  if(!studentName) return;
+  const nameInput = $('slotName_'+slotId);
+  const codeInput = $('slotCode_'+slotId);
+  const studentName = nameInput ? nameInput.value.trim() : '';
+  const bookingCode = codeInput ? codeInput.value.trim() : '';
 
-  const bookingCode = prompt('Bitte Buchungscode eingeben:','');
-  if(!bookingCode) return;
+  if(!studentName){ alert('Bitte deinen Namen eingeben.'); nameInput?.focus(); return; }
+  if(!bookingCode){ alert('Bitte den Buchungscode eingeben.'); codeInput?.focus(); return; }
 
   try{
-    await bookSlotViaApi(eventId, slotId, studentName.trim(), bookingCode.trim());
+    await bookSlotViaApi(eventId, slotId, studentName, bookingCode);
     alert('Buchung gespeichert.');
     await openDetail(eventId);
   }catch(err){
     console.error(err);
-    alert(err.message || 'Buchung fehlgeschlagen.');
+    alert(err.message || 'Buchung fehlgeschlagen. Bitte prüfe den Buchungscode.');
   }
 };
 
 window.bookWorkshop = async function(eventId){
-  const studentName = prompt('Bitte Namen eingeben:','');
-  if(!studentName) return;
+  const nameInput = $('wsName_'+eventId);
+  const codeInput = $('wsCode_'+eventId);
+  const studentName = nameInput ? nameInput.value.trim() : '';
+  const bookingCode = codeInput ? codeInput.value.trim() : '';
 
-  const bookingCode = prompt('Bitte Buchungscode eingeben:','');
-  if(!bookingCode) return;
+  if(!studentName){ alert('Bitte Vor- und Nachnamen eingeben.'); nameInput?.focus(); return; }
+  if(!bookingCode){ alert('Bitte den Buchungscode eingeben.'); codeInput?.focus(); return; }
 
   try{
-    await bookWorkshopViaApi(eventId, studentName.trim(), bookingCode.trim());
+    await bookWorkshopViaApi(eventId, studentName, bookingCode);
     alert('Anmeldung gespeichert.');
     await openDetail(eventId);
   }catch(err){
     console.error(err);
-    alert(err.message || 'Anmeldung fehlgeschlagen.');
+    alert(err.message || 'Anmeldung fehlgeschlagen. Bitte prüfe den Buchungscode.');
   }
 };
 
