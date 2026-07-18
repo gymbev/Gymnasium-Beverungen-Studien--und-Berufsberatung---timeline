@@ -1551,7 +1551,7 @@ async function openDetail(id){
       if(isAdmin && sl.registrants.length>0){
         body+=`<div class="registrant-list">`;
         sl.registrants.forEach((r,i)=>{
-          body+=`<div class="registrant-item">${r.name}${r.klasse?' ('+r.klasse+')':''}<button class="btn-sm btn-danger" onclick="removeRegistrant(${id},'slot','${sl.id}',${i});event.stopPropagation()">×</button></div>`;
+          body+=`<div class="registrant-item">${r.name}${r.klasse?' ('+r.klasse+')':''}<button class="btn-sm btn-danger" onclick="(${id},'slot','${sl.id}',${i});event.stopPropagation()">×</button></div>`;
         });
         body+=`</div>`;
       }
@@ -1580,7 +1580,7 @@ async function openDetail(id){
     if(isAdmin && regs.length>0){
       body+=`<div class="registrant-list" style="margin-bottom:var(--space-3)">`;
       regs.forEach((r,i)=>{
-        body+=`<div class="registrant-item" style="padding:var(--space-2) 0">${r.name}${r.klasse?' ('+r.klasse+')':''}<button class="btn-sm btn-danger" onclick="removeRegistrant(${id},'workshop',null,${i});event.stopPropagation()">×</button></div>`;
+        body+=`<div class="registrant-item" style="padding:var(--space-2) 0">${r.name}${r.klasse?' ('+r.klasse+')':''}<button class="btn-sm btn-danger" onclick="(${id},'workshop',null,${i});event.stopPropagation()">×</button></div>`;
       });
       body+=`</div>`;
     }
@@ -1623,18 +1623,9 @@ lucide.createIcons();
 
 
 
-function removeRegistrant(evId,kind,slotId,idx){
-  const e=events.find(ev=>ev.id===evId);
-  if(!e) return;
-
-  if(kind==='slot'){
-    const sl=e.timeslots.find(s=>s.id===slotId);
-    if(sl) sl.registrants.splice(idx,1);
-  } else {
-    e.workshopRegistrants.splice(idx,1);
-  }
-
-  openDetail(evId);
+async function removeRegistrant(evId,kind,slotId,idx){
+  alert('Das Entfernen von Anmeldungen ist in dieser Version noch nicht aktiv.');
+  return;
 }
 
 // ===== ADD/EDIT MODAL =====
