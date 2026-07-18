@@ -7,6 +7,14 @@
       "mode": "workshop",
       "studentName": "Daniel",
       "createdAt": "2026-07-18T22:10:40.476Z"
+    },
+    {
+      "id": "93846af8-76ce-4426-bd40-e83574b3e143",
+      "eventId": "2",
+      "slotId": "sl_0_1784412431119",
+      "mode": "slot",
+      "studentName": "Peter",
+      "createdAt": "2026-07-18T22:11:34.660Z"
     }
   ]
 }
