@@ -1493,10 +1493,12 @@ function calNav(dir){
   renderCalendar();
 }
 
-// ===== DETAIL MODAL =====
 async function openDetail(id){
-  let e = events.find(ev => ev.id === id);
-  if(!e) return;
+  let e = events.find(ev => String(ev.id) === String(id));
+  if(!e){
+    alert('Termin konnte nicht gefunden werden.');
+    return;
+  }
 
   const isAdmin = currentRole === 'admin';
 
@@ -1504,19 +1506,21 @@ async function openDetail(id){
     let liveEvent = null;
 
     if(isAdmin){
+      console.log('Admin: hole Live-Daten für Event', id);
       liveEvent = await loadAdminAvailability(id);
     } else {
       liveEvent = await loadPublicAvailability(id);
     }
 
-    if(liveEvent){
-      const idx = events.findIndex(ev => String(ev.id) === String(id));
+    if(liveEvent && typeof liveEvent === 'object'){
+      console.log('Live-Event erhalten:', liveEvent);
       const normalizedLive = normalizeEvent({
         ...e,
         ...liveEvent,
-        id: e.id
+        id: e.id // ID aus lokalem Event erzwingen
       });
 
+      const idx = events.findIndex(ev => String(ev.id) === String(id));
       if(idx !== -1){
         events[idx] = normalizedLive;
         e = events[idx];
@@ -1527,13 +1531,24 @@ async function openDetail(id){
   } catch(err){
     console.error('Live-Buchungsdaten konnten nicht geladen werden:', err);
     if(isAdmin){
-      alert('Die aktuellen Buchungsdaten konnten nicht geladen werden. Es werden nur die lokal vorhandenen Daten angezeigt.');
+      alert(`Die aktuellen Buchungsdaten konnten nicht geladen werden.\nEs werden nur die lokal vorhandenen Daten angezeigt.\n\n${err.message || err}`);
     }
+    // WICHTIG: e bleibt hier unverändert (lokales Event),
+    // danach wird das Modal trotzdem gebaut.
+  }
+
+  // ab hier sicherstellen, dass e existiert:
+  if(!e){
+    alert('Interner Fehler: Event ist nicht verfügbar.');
+    return;
   }
 
   editingId = id;
-  $('detailTypeIndicator').style.background = TYPE_COLORS[e.type];
-  $('detailTitle').textContent = e.title;
+  $('detailTypeIndicator').style.background = TYPE_COLORS[e.type] || 'var(--color-primary)';
+  $('detailTitle').textContent = e.title || 'Ohne Titel';
+
+  // … dein bisheriger Body-Aufbau für detailBody/detailFooter bleibt unverändert …
+}
 
   let body = `<div class="detail-section">
     <div class="detail-grid">
