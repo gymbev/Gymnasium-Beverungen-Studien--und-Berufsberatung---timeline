@@ -1481,16 +1481,48 @@ function calNav(dir){
 }
 
 // ===== DETAIL MODAL =====
-function openDetail(id){
-  const e=events.find(ev=>ev.id===id);
+async function openDetail(id){
+  let e = events.find(ev => ev.id === id);
   if(!e) return;
 
-  editingId=id;
-  $('detailTypeIndicator').style.background=TYPE_COLORS[e.type];
-  $('detailTitle').textContent=e.title;
+  const isAdmin = currentRole === 'admin';
 
-  const isAdmin=currentRole==='admin';
-  let body=`<div class="detail-section">
+  try{
+    let liveEvent = null;
+
+    if(isAdmin){
+      liveEvent = await loadAdminAvailability(id);
+    } else {
+      liveEvent = await loadPublicAvailability(id);
+    }
+
+    if(liveEvent){
+      const idx = events.findIndex(ev => String(ev.id) === String(id));
+      const normalizedLive = normalizeEvent({
+        ...e,
+        ...liveEvent,
+        id: e.id
+      });
+
+      if(idx !== -1){
+        events[idx] = normalizedLive;
+        e = events[idx];
+      } else {
+        e = normalizedLive;
+      }
+    }
+  } catch(err){
+    console.error('Live-Buchungsdaten konnten nicht geladen werden:', err);
+    if(isAdmin){
+      alert('Die aktuellen Buchungsdaten konnten nicht geladen werden. Es werden nur die lokal vorhandenen Daten angezeigt.');
+    }
+  }
+
+  editingId = id;
+  $('detailTypeIndicator').style.background = TYPE_COLORS[e.type];
+  $('detailTitle').textContent = e.title;
+
+  let body = `<div class="detail-section">
     <div class="detail-grid">
       <div class="detail-item"><span class="detail-item-label">Datum</span><span class="detail-item-value">${formatDateLong(e.date)}${e.dateEnd?' bis '+formatDateLong(e.dateEnd):''}</span></div>
       ${e.time?`<div class="detail-item"><span class="detail-item-label">Uhrzeit</span><span class="detail-item-value">${e.time} Uhr</span></div>`:''}
@@ -1504,7 +1536,6 @@ function openDetail(id){
     ${e.desc?`<p style="margin-top:var(--space-4);font-size:var(--text-sm);color:var(--color-text-muted)">${e.desc}</p>`:''}
     ${e.link?`<a href="${e.link}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;margin-top:var(--space-3);font-size:var(--text-sm);color:var(--color-primary);text-decoration:underline">Mehr Infos <i data-lucide="external-link" style="width:12px;height:12px"></i></a>`:''}
   </div>`;
-
   if(e.timeslots && e.timeslots.length>0){
     body+=`<div class="detail-section"><h3>Zeitslots & Buchungen</h3>`;
     e.timeslots.forEach(sl=>{
@@ -2120,12 +2151,14 @@ async function bookWorkshopViaApi(eventId, studentName, bookingCode){
 window.bookEventSlot = async function(eventId, slotId){
   const studentName = prompt('Bitte Namen eingeben:','');
   if(!studentName) return;
+
   const bookingCode = prompt('Bitte Buchungscode eingeben:','');
   if(!bookingCode) return;
+
   try{
     await bookSlotViaApi(eventId, slotId, studentName.trim(), bookingCode.trim());
     alert('Buchung gespeichert.');
-    openDetail(eventId);
+    await openDetail(eventId);
   }catch(err){
     console.error(err);
     alert(err.message || 'Buchung fehlgeschlagen.');
@@ -2135,12 +2168,14 @@ window.bookEventSlot = async function(eventId, slotId){
 window.bookWorkshop = async function(eventId){
   const studentName = prompt('Bitte Namen eingeben:','');
   if(!studentName) return;
+
   const bookingCode = prompt('Bitte Buchungscode eingeben:','');
   if(!bookingCode) return;
+
   try{
     await bookWorkshopViaApi(eventId, studentName.trim(), bookingCode.trim());
     alert('Anmeldung gespeichert.');
-    openDetail(eventId);
+    await openDetail(eventId);
   }catch(err){
     console.error(err);
     alert(err.message || 'Anmeldung fehlgeschlagen.');
