@@ -2388,4 +2388,292 @@ document.addEventListener('DOMContentLoaded', async () => {
 </script>
 
 
+
+
+<!-- BOOKING PATCH INFO: injected extension -->
+<script>
+(function(){
+  const BOOKING_API = {
+    enabled: false,
+    baseUrl: 'https://DEIN-WORKER.example.workers.dev',
+    publicAvailabilityPath: '/api/public-availability',
+    bookSlotPath: '/api/book-slot',
+    adminBookingsPath: '/api/admin-bookings'
+  };
+
+  window.BOOKING_API = BOOKING_API;
+
+  function eventHasBooking(event){
+    return !!(event && ((Array.isArray(event.timeslots) && event.timeslots.length) || event.workshopSignup));
+  }
+
+  function getSlotOccupancy(slot){
+    const count = Array.isArray(slot.registrants) ? slot.registrants.length : 0;
+    const capacity = Number(slot.capacity || 1);
+    return { count, capacity, full: count >= capacity };
+  }
+
+  function getPublicSlotStatus(slot){
+    const occ = getSlotOccupancy(slot);
+    if(occ.full) return 'Belegt';
+    if(occ.count > 0) return `${occ.count}/${occ.capacity} belegt`;
+    return 'Frei';
+  }
+
+  function sanitizeName(name){
+    return String(name || '').trim().replace(/\s+/g,' ');
+  }
+
+  async function fetchPublicAvailability(eventId){
+    if(!BOOKING_API.enabled || !BOOKING_API.baseUrl || BOOKING_API.baseUrl.includes('DEIN-WORKER')) return null;
+    const url = `${BOOKING_API.baseUrl}${BOOKING_API.publicAvailabilityPath}?eventId=${encodeURIComponent(eventId)}`;
+    const res = await fetch(url, { headers: { 'Accept':'application/json' } });
+    if(!res.ok) throw new Error('Belegungsdaten konnten nicht geladen werden.');
+    return await res.json();
+  }
+
+  async function submitBooking(payload){
+    if(!BOOKING_API.enabled || !BOOKING_API.baseUrl || BOOKING_API.baseUrl.includes('DEIN-WORKER')) {
+      throw new Error('Die Buchungs-API ist noch nicht eingerichtet.');
+    }
+    const res = await fetch(`${BOOKING_API.baseUrl}${BOOKING_API.bookSlotPath}`, {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(()=>({}));
+    if(!res.ok) throw new Error(data.error || 'Buchung fehlgeschlagen.');
+    return data;
+  }
+
+  function ensureBookingStyles(){
+    if(document.getElementById('bookingPatchStyles')) return;
+    const style = document.createElement('style');
+    style.id = 'bookingPatchStyles';
+    style.textContent = `
+      .booking-box{margin-top:var(--space-4);padding:var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface-offset)}
+      .booking-box h3{font-size:var(--text-sm);margin-bottom:var(--space-2);color:var(--color-text)}
+      .booking-hint{font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-3)}
+      .slot-public-state{font-size:var(--text-xs);font-weight:600;padding:2px 8px;border-radius:999px;background:var(--color-surface-dynamic);color:var(--color-text-muted)}
+      .slot-public-state.free{background:var(--color-success-highlight);color:var(--color-success)}
+      .slot-public-state.busy{background:var(--color-warning-highlight);color:var(--color-warning)}
+      .slot-public-state.full{background:var(--color-error-highlight);color:var(--color-error)}
+      .booking-inline-form{display:grid;grid-template-columns:1fr 1fr auto;gap:var(--space-2);margin-top:var(--space-3)}
+      .booking-inline-form.single{grid-template-columns:1fr 1fr}
+      .booking-note{font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-2)}
+      .admin-booking-list{margin-top:var(--space-3);padding-top:var(--space-3);border-top:1px solid var(--color-divider)}
+      .admin-booking-item{display:flex;justify-content:space-between;gap:var(--space-2);padding:4px 0;font-size:var(--text-xs);border-bottom:1px solid var(--color-divider)}
+      .admin-booking-item:last-child{border-bottom:none}
+      @media (max-width:768px){.booking-inline-form,.booking-inline-form.single{grid-template-columns:1fr}}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function patchRenderDetail(){
+    ensureBookingStyles();
+    if(typeof window.openDetail !== 'function') return;
+    const originalOpenDetail = window.openDetail;
+    if(window.__bookingOpenDetailPatched) return;
+    window.__bookingOpenDetailPatched = true;
+
+    window.openDetail = async function(id){
+      await originalOpenDetail(id);
+      const event = (window.events || []).find(e => String(e.id) === String(id));
+      if(!event || !eventHasBooking(event)) return;
+      const body = document.querySelector('#detailModal .modal-body');
+      if(!body) return;
+
+      let liveEvent = event;
+      try {
+        const remote = await fetchPublicAvailability(event.id);
+        if(remote && remote.event){
+          liveEvent = { ...event, ...remote.event };
+        }
+      } catch(e) {}
+
+      const old = document.getElementById('bookingPatchArea');
+      if(old) old.remove();
+      const box = document.createElement('section');
+      box.className = 'booking-box';
+      box.id = 'bookingPatchArea';
+
+      let slotsHtml = '';
+      if(Array.isArray(liveEvent.timeslots) && liveEvent.timeslots.length){
+        slotsHtml = liveEvent.timeslots.map(slot => {
+          const occ = getSlotOccupancy(slot);
+          const stateClass = occ.full ? 'full' : (occ.count > 0 ? 'busy' : 'free');
+          const disabled = occ.full ? 'disabled' : '';
+          const status = getPublicSlotStatus(slot);
+          const adminList = (window.currentRole === 'admin' && Array.isArray(slot.registrants) && slot.registrants.length)
+            ? `<div class="admin-booking-list">${slot.registrants.map(name => `<div class="admin-booking-item"><span>${String(name)}</span><span>${slot.name}</span></div>`).join('')}</div>`
+            : '';
+          const form = window.currentRole === 'admin' ? '' : `
+            <div class="booking-inline-form">
+              <input class="form-input" data-booking-name="${slot.id}" placeholder="Name" ${disabled}>
+              <input class="form-input" data-booking-code="${slot.id}" placeholder="Buchungscode" ${disabled}>
+              <button class="btn-sm btn-primary" data-booking-submit="${slot.id}" ${disabled}>Buchen</button>
+            </div>
+          `;
+          return `
+            <div class="slot-card" data-slot-card="${slot.id}">
+              <div class="slot-card-header">
+                <h4>${slot.name}</h4>
+                <span class="slot-public-state ${stateClass}">${status}</span>
+              </div>
+              <div class="booking-note">Schüler:innen sehen nur den Belegungsstatus, nicht die Namen.</div>
+              ${form}
+              ${adminList}
+            </div>
+          `;
+        }).join('');
+      }
+
+      let workshopHtml = '';
+      if(liveEvent.workshopSignup){
+        const count = Array.isArray(liveEvent.workshopRegistrants) ? liveEvent.workshopRegistrants.length : 0;
+        const cap = Number(liveEvent.workshopCapacity || 999);
+        const free = count < cap;
+        const adminList = (window.currentRole === 'admin' && Array.isArray(liveEvent.workshopRegistrants) && liveEvent.workshopRegistrants.length)
+          ? `<div class="admin-booking-list">${liveEvent.workshopRegistrants.map(name => `<div class="admin-booking-item"><span>${String(name)}</span><span>Workshop</span></div>`).join('')}</div>`
+          : '';
+        workshopHtml = `
+          <div class="slot-card" data-slot-card="__workshop__">
+            <div class="slot-card-header">
+              <h4>Workshop-Anmeldung</h4>
+              <span class="slot-public-state ${free ? (count ? 'busy' : 'free') : 'full'}">${free ? `${count}/${cap} belegt` : 'Belegt'}</span>
+            </div>
+            <div class="booking-note">Nur der Admin sieht die Namen der angemeldeten Personen.</div>
+            ${window.currentRole === 'admin' ? '' : `
+              <div class="booking-inline-form single">
+                <input class="form-input" data-booking-name="__workshop__" placeholder="Name" ${free ? '' : 'disabled'}>
+                <input class="form-input" data-booking-code="__workshop__" placeholder="Buchungscode" ${free ? '' : 'disabled'}>
+                <button class="btn-sm btn-primary" data-booking-submit="__workshop__" ${free ? '' : 'disabled'}>Anmelden</button>
+              </div>`}
+            ${adminList}
+          </div>`;
+      }
+
+      box.innerHTML = `
+        <h3>Anmeldung</h3>
+        <div class="booking-hint">Normale Termine ohne Buchungsfunktion bleiben unverändert. Nur Termine mit Zeitslots oder Workshop-Anmeldung verwenden diese zusätzliche Speicherung.</div>
+        ${slotsHtml}
+        ${workshopHtml}
+      `;
+      body.appendChild(box);
+
+      box.querySelectorAll('[data-booking-submit]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const key = btn.getAttribute('data-booking-submit');
+          const nameInput = box.querySelector(`[data-booking-name="${key}"]`);
+          const codeInput = box.querySelector(`[data-booking-code="${key}"]`);
+          const studentName = sanitizeName(nameInput?.value);
+          const bookingCode = sanitizeName(codeInput?.value);
+          if(!studentName){ alert('Bitte einen Namen eingeben.'); return; }
+          if(!bookingCode){ alert('Bitte den Buchungscode eingeben.'); return; }
+          try {
+            btn.disabled = true;
+            await submitBooking({
+              eventId: liveEvent.id,
+              slotId: key === '__workshop__' ? null : key,
+              mode: key === '__workshop__' ? 'workshop' : 'slot',
+              studentName,
+              bookingCode
+            });
+            alert('Die Anmeldung wurde gespeichert.');
+            await window.openDetail(liveEvent.id);
+            if(typeof window.render === 'function') window.render();
+          } catch(err){
+            alert(err.message || 'Buchung fehlgeschlagen.');
+          } finally {
+            btn.disabled = false;
+          }
+        });
+      });
+    };
+  }
+
+  function patchNormalize(){
+    if(typeof window.normalizeEvent !== 'function' || window.__bookingNormalizePatched) return;
+    const original = window.normalizeEvent;
+    window.__bookingNormalizePatched = true;
+    window.normalizeEvent = function(ev){
+      const out = original(ev);
+      if(!('bookingCode' in out)) out.bookingCode = ev?.bookingCode || '';
+      if(!('bookingMode' in out)) out.bookingMode = (out.timeslots?.length ? 'slot' : (out.workshopSignup ? 'workshop' : 'none'));
+      return out;
+    };
+  }
+
+  function patchEventSave(){
+    const saveBtn = document.getElementById('saveEventBtn');
+    const modalBody = document.querySelector('#eventModal .modal-body');
+    if(!modalBody || document.getElementById('bookingCodeWrap')) return;
+    const block = document.createElement('div');
+    block.className = 'form-group';
+    block.id = 'bookingCodeWrap';
+    block.innerHTML = `
+      <label class="form-label" for="evBookingCode">Buchungscode <span>nur für Termine mit Zeitslots oder Workshop-Anmeldung</span></label>
+      <input type="text" id="evBookingCode" class="form-input" placeholder="z. B. BB10A">
+      <div class="form-hint">Der Code wird an Schüler:innen weitergegeben. Ohne richtigen Code ist keine Anmeldung möglich.</div>
+    `;
+    modalBody.appendChild(block);
+  }
+
+  function patchCreateOrUpdate(){
+    if(typeof window.createOrUpdateEvent !== 'function' || window.__bookingCreatePatched) return;
+    const original = window.createOrUpdateEvent;
+    window.__bookingCreatePatched = true;
+    window.createOrUpdateEvent = function(){
+      const codeInput = document.getElementById('evBookingCode');
+      const code = codeInput ? codeInput.value.trim() : '';
+      const result = original.apply(this, arguments);
+      const last = (window.events || [])[window.events.length - 1];
+      if(last && ((Array.isArray(last.timeslots) && last.timeslots.length) || last.workshopSignup)){
+        last.bookingCode = code;
+        last.bookingMode = (last.timeslots?.length ? 'slot' : 'workshop');
+      }
+      return result;
+    };
+  }
+
+  function patchRenderCards(){
+    if(typeof window.render !== 'function' || window.__bookingRenderPatched) return;
+    const original = window.render;
+    window.__bookingRenderPatched = true;
+    window.render = async function(){
+      const res = await original.apply(this, arguments);
+      document.querySelectorAll('.event-card').forEach(card => {
+        const onclick = card.getAttribute('onclick') || '';
+        const match = onclick.match(/openDetail\(([^)]+)\)/);
+        if(!match) return;
+        const id = String(match[1]).replace(/['"]/g,'').trim();
+        const ev = (window.events || []).find(e => String(e.id) === id);
+        if(!ev || !eventHasBooking(ev) || card.querySelector('.booking-badge-public')) return;
+        const row = card.querySelector('.badge-row');
+        if(row){
+          const span = document.createElement('span');
+          span.className = 'badge registrations booking-badge-public';
+          span.textContent = ev.timeslots?.length ? 'Buchung möglich' : 'Anmeldung möglich';
+          row.appendChild(span);
+        }
+      });
+      return res;
+    };
+  }
+
+  function initPatch(){
+    patchNormalize();
+    patchEventSave();
+    patchCreateOrUpdate();
+    patchRenderCards();
+    patchRenderDetail();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(initPatch, 300);
+    setTimeout(initPatch, 1200);
+  });
+})();
+</script>
+
 </body></html>
