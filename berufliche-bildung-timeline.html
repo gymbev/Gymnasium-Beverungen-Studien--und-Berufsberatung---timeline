@@ -1529,7 +1529,7 @@ function openDetail(id){
         body+=`<div style="margin-top:var(--space-2)">
           <input type="text" class="form-input" placeholder="Dein Name" id="slotName_${sl.id}" style="margin-bottom:var(--space-2)">
           <input type="text" class="form-input" placeholder="Klasse (optional)" id="slotKlasse_${sl.id}" style="margin-bottom:var(--space-2)">
-          <button class="btn-sm btn-primary" onclick="bookSlot(${id},'${sl.id}')">Buchen</button>
+     <button class="btn-sm btn-primary" onclick="bookEventSlot(${id},'${sl.id}')">Buchen</button>
         </div>`;
       } else {
         body+=`<p style="font-size:var(--text-xs);color:var(--color-error);margin-top:var(--space-2)">Dieser Slot ist ausgebucht.</p>`;
@@ -1558,7 +1558,7 @@ function openDetail(id){
       body+=`<div class="signup-form-row">
         <input type="text" class="form-input" placeholder="Vor- und Nachname *" id="wsName_${id}">
         <input type="text" class="form-input" placeholder="Klasse" id="wsKlasse_${id}">
-        <button class="btn-sm btn-primary" onclick="workshopSignupSubmit(${id})">Anmelden</button>
+        <button class="btn-sm btn-primary" onclick="bookWorkshop(${id})">Anmelden</button>
       </div>`;
     } else {
       body+=`<p style="font-size:var(--text-sm);color:var(--color-error);font-weight:500">Leider ausgebucht.</p>`;
@@ -1590,42 +1590,7 @@ showModal('detailModal');
 lucide.createIcons();
 }
 
-function bookSlot(evId, slotId){
-  const e=events.find(ev=>ev.id===evId);
-  if(!e) return;
-  const sl=e.timeslots.find(s=>s.id===slotId);
-  if(!sl) return;
 
-  const name=$(`slotName_${slotId}`)?.value?.trim();
-  if(!name){ alert('Bitte deinen Namen eingeben.'); return; }
-
-  const klasse=$(`slotKlasse_${slotId}`)?.value?.trim()||'';
-  if(sl.registrants.length>=sl.capacity){
-    alert('Dieser Slot ist leider bereits ausgebucht.');
-    return;
-  }
-
-  sl.registrants.push({name,klasse});
-  openDetail(evId);
-}
-
-function workshopSignupSubmit(evId){
-  const e=events.find(ev=>ev.id===evId);
-  if(!e) return;
-
-  const name=$(`wsName_${evId}`)?.value?.trim();
-  if(!name){ alert('Bitte deinen Namen eingeben.'); return; }
-
-  const klasse=$(`wsKlasse_${evId}`)?.value?.trim()||'';
-  if(!e.workshopRegistrants) e.workshopRegistrants=[];
-  if(e.workshopCapacity && e.workshopRegistrants.length>=e.workshopCapacity){
-    alert('Leider ausgebucht.');
-    return;
-  }
-
-  e.workshopRegistrants.push({name,klasse});
-  openDetail(evId);
-}
 
 function removeRegistrant(evId,kind,slotId,idx){
   const e=events.find(ev=>ev.id===evId);
