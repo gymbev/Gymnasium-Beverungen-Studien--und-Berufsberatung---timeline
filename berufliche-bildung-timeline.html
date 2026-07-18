@@ -1036,7 +1036,6 @@ function countdownText(str){
   if(n<0) return null;
   return `in ${n} Tagen`;
 }
-
 function normalizeEvent(raw){
   return {
     id: Number(raw.id) || 0,
@@ -1053,6 +1052,7 @@ function normalizeEvent(raw){
     desc: raw.desc || null,
     link: raw.link || null,
     duration: raw.duration || null,
+    bookingCode: raw.bookingCode || null,
     timeslots: Array.isArray(raw.timeslots) ? raw.timeslots.map((sl, i) => ({
       id: sl.id || `sl_${Date.now()}_${i}`,
       name: sl.name || `Slot ${i+1}`,
@@ -1666,6 +1666,7 @@ function openEditModal(id){
   $('evLocation').value=e.location||'';
   $('evDesc').value=e.desc||'';
   $('evLink').value=e.link||'';
+  $('evBookingCode').value = e.bookingCode || '';
 
   document.querySelectorAll('#catSelector .sel-chip').forEach(c=>{
     c.classList.toggle('selected', c.dataset.cat===e.category);
