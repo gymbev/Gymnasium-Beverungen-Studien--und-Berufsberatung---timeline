@@ -1,3 +1,12 @@
 {
-  "bookings": []
+  "bookings": [
+    {
+      "id": "67376c59-7983-4dbc-8283-009c46d7c071",
+      "eventId": "3",
+      "slotId": null,
+      "mode": "workshop",
+      "studentName": "Daniel",
+      "createdAt": "2026-07-18T22:10:40.476Z"
+    }
+  ]
 }
