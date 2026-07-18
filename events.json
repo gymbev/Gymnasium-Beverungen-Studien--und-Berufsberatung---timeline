@@ -28,5 +28,80 @@
     "approved": true,
     "recurring": false,
     "seriesId": null
+  },
+  {
+    "id": 2,
+    "title": "Buchung Test",
+    "date": "2026-07-28",
+    "dateEnd": null,
+    "dateISO": "2026-07-28",
+    "time": "08:00",
+    "location": "Stubo",
+    "category": "Berufsberatung",
+    "type": "pflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [],
+    "desc": null,
+    "link": null,
+    "duration": null,
+    "bookingCode": "gym26",
+    "timeslots": [
+      {
+        "id": "sl_0_1784412431119",
+        "name": "1",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_1_1784412431119",
+        "name": "2",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_2_1784412431119",
+        "name": "3",
+        "capacity": 1,
+        "registrants": []
+      }
+    ],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
+  },
+  {
+    "id": 3,
+    "title": "Workshop Test",
+    "date": "2026-07-29",
+    "dateEnd": null,
+    "dateISO": "2026-07-29",
+    "time": "14:00",
+    "location": null,
+    "category": "Workshop",
+    "type": "pflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "9",
+      "10",
+      "EF"
+    ],
+    "desc": null,
+    "link": null,
+    "duration": "45 Min.",
+    "bookingCode": "gym26",
+    "timeslots": [],
+    "workshopSignup": true,
+    "workshopCapacity": 15,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
   }
 ]
