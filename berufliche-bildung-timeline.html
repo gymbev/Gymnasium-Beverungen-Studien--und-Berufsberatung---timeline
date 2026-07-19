@@ -1024,7 +1024,7 @@ function normalizeRegistrant(raw){
   return {
     id: item.id || item.registrationId || item.registrantId || item.slotRegistrationId || '',
     name: item.name || item.studentName || item.fullName || item.student || item.student_name || 'Unbekannter Eintrag',
-    className: item.className || item.class || item.studentClass || item.klasse || ''
+    className: item.className || item.class || item.studentClass || item.klasse || item.grade || item.year || item.group || item.class_label || item.classLevel || item.klassse || ''
   };
 }
 
@@ -1037,6 +1037,35 @@ function totalRegistrationCount(event){
   const slotCount = Array.isArray(event.timeslots) ? event.timeslots.reduce((sum, sl) => sum + ((Array.isArray(sl.registrants) ? sl.registrants.length : 0)), 0) : 0;
   const workshopCount = Array.isArray(event.workshopRegistrants) ? event.workshopRegistrants.length : 0;
   return Math.max(slotCount, workshopCount, Number(event.registrationCount) || 0, Number(event.registrations) || 0, Number(event.registrantsCount) || 0);
+}
+
+function mergeLiveEventData(baseEvent, liveEvent){
+  const merged = normalizeEvent({ ...(baseEvent || {}), ...(liveEvent || {}), id: (baseEvent && baseEvent.id) || (liveEvent && liveEvent.id) || 0 });
+  if(Array.isArray(liveEvent?.timeslots) && liveEvent.timeslots.length){
+    merged.timeslots = liveEvent.timeslots.map((sl,i)=>({
+      id: sl.id || `sl_${Date.now()}_${i}` ,
+      name: sl.name || `Slot ${i+1}`,
+      capacity: Number(sl.capacity) || 1,
+      registrants: Array.isArray(sl.registrants) ? sl.registrants.map(normalizeRegistrant) : []
+    }));
+  }
+  if(Array.isArray(liveEvent?.workshopRegistrants)){
+    merged.workshopRegistrants = liveEvent.workshopRegistrants.map(normalizeRegistrant);
+  }
+  merged.registrationCount = Number(liveEvent?.registrationCount ?? liveEvent?.registrations ?? liveEvent?.registrantsCount ?? totalRegistrationCount(merged)) || totalRegistrationCount(merged);
+  return merged;
+}
+
+async function refreshLiveCounts(){
+  const tasks = events.map(async (ev) => {
+    try{
+      const live = await loadPublicAvailability(ev.id);
+      return mergeLiveEventData(ev, live);
+    }catch(_){
+      return ev;
+    }
+  });
+  events = await Promise.all(tasks);
 }
 
 // ===== HELPERS =====
@@ -1533,11 +1562,7 @@ async function openDetail(id){
 
     if(liveEvent){
       const idx = events.findIndex(ev => String(ev.id) === String(id));
-      const normalizedLive = normalizeEvent({
-        ...e,
-        ...liveEvent,
-        id: e.id
-      });
+      const normalizedLive = mergeLiveEventData(e, liveEvent);
 
       if(idx !== -1){
         events[idx] = normalizedLive;
