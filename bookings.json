@@ -89,6 +89,15 @@
       "studentName": "Hubert Linnemann",
       "studentClass": "",
       "createdAt": "2026-07-19T14:44:27.882Z"
+    },
+    {
+      "id": "28d9b7a7-12f6-46df-8729-cb84b7928c50",
+      "eventId": "7",
+      "slotId": null,
+      "mode": "workshop",
+      "studentName": "Peter Justus",
+      "studentClass": "",
+      "createdAt": "2026-07-19T15:33:42.374Z"
     }
   ]
 }
