@@ -1,5 +1,53 @@
 [
   {
+    "id": 6,
+    "title": "Test 4",
+    "date": "2026-07-22",
+    "dateEnd": null,
+    "dateISO": "2026-07-22",
+    "time": "13:13",
+    "location": null,
+    "category": "Berufsberatung",
+    "type": "wahlpflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "9",
+      "10"
+    ],
+    "desc": null,
+    "link": null,
+    "duration": null,
+    "bookingCode": "gym26",
+    "timeslots": [
+      {
+        "id": "sl_0_1784459631556",
+        "name": "1",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_1_1784459631556",
+        "name": "3",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_2_1784459631556",
+        "name": "5",
+        "capacity": 1,
+        "registrants": []
+      }
+    ],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
+  },
+  {
     "id": 1,
     "title": "Test Termin 2",
     "date": "2026-07-27",
@@ -108,13 +156,24 @@
     "workshopRegistrants": [
       {
         "id": "",
-        "name": "Daniel",
+        "name": "belegt",
+        "className": ""
+      },
+      {
+        "id": "",
+        "name": "belegt",
+        "className": ""
+      },
+      {
+        "id": "",
+        "name": "belegt",
         "className": ""
       }
     ],
     "approved": true,
     "recurring": false,
-    "seriesId": null
+    "seriesId": null,
+    "registrationCount": 3
   },
   {
     "id": 4,
@@ -171,8 +230,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 1
+    "seriesId": null
   },
   {
     "id": 5,
@@ -201,18 +259,23 @@
     "workshopCapacity": 15,
     "workshopRegistrants": [
       {
-        "id": "",
+        "id": "17aabb9b-b976-4d98-a44e-5c9a1f9baf46",
         "name": "Frau Holle",
         "className": ""
       },
       {
-        "id": "",
+        "id": "cecb4303-d0e7-49b5-880a-6c42429e0b41",
         "name": "Geo Maskapo",
         "className": ""
       },
       {
-        "id": "",
+        "id": "960e3664-52a3-447e-9806-bdee297a3cae",
         "name": "Uschi Bernd",
+        "className": ""
+      },
+      {
+        "id": "afa38574-d645-4644-8562-1470767bd2ce",
+        "name": "Narti Marti",
         "className": ""
       }
     ],
@@ -222,48 +285,26 @@
     "registrationCount": 3
   },
   {
-    "id": 6,
-    "title": "Test 4",
-    "date": "2026-07-22",
+    "id": 7,
+    "title": "Test neu Klase",
+    "date": "2026-07-20",
     "dateEnd": null,
-    "dateISO": "2026-07-22",
-    "time": "13:13",
+    "dateISO": "2026-07-20",
+    "time": "14:00",
     "location": null,
     "category": "Berufsberatung",
-    "type": "wahlpflicht",
+    "type": "pflicht",
     "audience": [
       "schueler"
     ],
-    "classes": [
-      "9",
-      "10"
-    ],
+    "classes": [],
     "desc": null,
     "link": null,
     "duration": null,
     "bookingCode": "gym26",
-    "timeslots": [
-      {
-        "id": "sl_0_1784459631556",
-        "name": "1",
-        "capacity": 1,
-        "registrants": []
-      },
-      {
-        "id": "sl_1_1784459631556",
-        "name": "3",
-        "capacity": 1,
-        "registrants": []
-      },
-      {
-        "id": "sl_2_1784459631556",
-        "name": "5",
-        "capacity": 1,
-        "registrants": []
-      }
-    ],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
+    "timeslots": [],
+    "workshopSignup": true,
+    "workshopCapacity": 10,
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
