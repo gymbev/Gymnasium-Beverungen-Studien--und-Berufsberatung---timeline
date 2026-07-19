@@ -55,6 +55,14 @@
       "mode": "workshop",
       "studentName": "Uschi Bernd",
       "createdAt": "2026-07-19T10:28:40.673Z"
+    },
+    {
+      "id": "41e8eef6-1398-401a-94a1-c8f1d357cf98",
+      "eventId": "3",
+      "slotId": null,
+      "mode": "workshop",
+      "studentName": "Nauendorf Daniel",
+      "createdAt": "2026-07-19T10:35:18.846Z"
     }
   ]
 }
