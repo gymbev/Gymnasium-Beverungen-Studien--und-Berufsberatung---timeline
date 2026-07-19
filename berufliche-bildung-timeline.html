@@ -107,7 +107,7 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
 .filters{background:var(--color-surface-2);border-bottom:1px solid var(--color-divider);padding:var(--space-3) var(--space-6)}
 .filters-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-3)}
 .filter-row{display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap}
-.filter-label{font-size:var(--text-xs);color:var(--color-text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap;min-width:80px}
+.filter-label{font-size:var(--text-xs);color:var(--color-text-muted);font-weight:600;text-transform:none;letter-spacing:0.05em;white-space:nowrap;min-width:80px}
 .chip{display:inline-flex;align-items:center;gap:var(--space-1);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:500;border:1.5px solid transparent;cursor:pointer;transition:all var(--transition)}
 .chip.inactive{background:var(--color-surface-offset);color:var(--color-text-muted);border-color:var(--color-border)}
 .chip.inactive:hover{border-color:var(--color-text-faint)}
@@ -174,7 +174,7 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
 .event-header{display:flex;align-items:flex-start;gap:var(--space-3);margin-bottom:var(--space-2)}
 .event-date-block{text-align:center;min-width:44px;flex-shrink:0}
 .event-day{font-size:var(--text-xl);font-weight:700;line-height:1;color:var(--color-primary)}
-.event-month{font-size:var(--text-xs);color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.05em}
+.event-month{font-size:var(--text-xs);color:var(--color-text-muted);text-transform:none;letter-spacing:0.05em}
 .event-title-block{flex:1}
 .event-title{font-size:var(--text-base);font-weight:600;margin-bottom:var(--space-1)}
 .event-meta{display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center;font-size:var(--text-xs);color:var(--color-text-muted)}
@@ -210,7 +210,7 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
 .cal-nav{display:flex;align-items:center;gap:var(--space-2)}
 .cal-month-year{font-family:var(--font-display);font-size:var(--text-xl)}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.cal-day-name{text-align:center;font-size:var(--text-xs);color:var(--color-text-muted);font-weight:600;padding:var(--space-2) 0;text-transform:uppercase;letter-spacing:0.05em}
+.cal-day-name{text-align:center;font-size:var(--text-xs);color:var(--color-text-muted);font-weight:600;padding:var(--space-2) 0;text-transform:none;letter-spacing:0.05em}
 .cal-day{min-height:80px;background:var(--color-surface);border-radius:var(--radius-md);padding:var(--space-2);border:1px solid transparent;transition:border-color var(--transition)}
 .cal-day:hover{border-color:var(--color-border)}
 .cal-day.other-month{opacity:0.35}
@@ -281,7 +281,7 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
 /* Repeat */
 /* WIEDERHOLUNG */
 .repeat-section{display:flex;flex-direction:column;gap:var(--space-2);padding:var(--space-3);background:var(--color-surface-offset);border-radius:var(--radius-lg);border:1px solid var(--color-border)}
-.repeat-section-title{font-size:var(--text-xs);font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.05em}
+.repeat-section-title{font-size:var(--text-xs);font-weight:600;color:var(--color-text-muted);text-transform:none;letter-spacing:.05em}
 .repeat-tabs{display:flex;gap:var(--space-1);flex-wrap:wrap}
 .repeat-tab{padding:3px 10px;border:1.5px solid var(--color-border);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:500;background:var(--color-surface);color:var(--color-text-muted);cursor:pointer;transition:all var(--transition-fast)}
 .repeat-tab.active{background:var(--color-primary-highlight);color:var(--color-primary);border-color:var(--color-primary)}
@@ -296,7 +296,7 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
 
 /* Detail modal */
 .detail-section{margin-bottom:var(--space-5)}
-.detail-section h3{font-size:var(--text-sm);font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:var(--space-3)}
+.detail-section h3{font-size:var(--text-sm);font-weight:600;color:var(--color-text-muted);text-transform:none;letter-spacing:0.05em;margin-bottom:var(--space-3)}
 .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)}
 .detail-item{display:flex;flex-direction:column;gap:2px}
 .detail-item-label{font-size:var(--text-xs);color:var(--color-text-muted)}
@@ -859,7 +859,7 @@ a,button,[role="button"],input,textarea,select{transition:color var(--transition
       <!-- BOOKING CODE für Zeitslots und Workshop-Anmeldung -->
       <div class="form-group">
         <label class="form-label" for="evBookingCode">Buchungscode für Schüler:innen <span>(nötig für Zeitslot- oder Workshop-Buchung)</span></label>
-        <input type="text" id="evBookingCode" class="form-input" placeholder="z. B. BB27" style="max-width:220px;text-transform:uppercase">
+        <input type="text" id="evBookingCode" class="form-input" placeholder="z. B. BB27" style="max-width:220px;text-transform:none">
         <p class="form-hint" style="margin-top:var(--space-2)">Diesen Code gibst du den Schüler:innen bekannt (z. B. mündlich oder auf Papier). Nur wer den Code kennt, kann einen Slot buchen oder sich zum Workshop anmelden. Der Code ist nur für dich als Admin im Termin sichtbar.</p>
       </div>
 
@@ -1018,6 +1018,27 @@ const BOOKING_API_BASE = 'https://timeline-booking-api.daniel-nauendorf.workers.
 const ADMIN_API_KEY_STORAGE = 'gymbev_admin_api_key';
 let adminApiKeyMemory = '';
 
+function normalizeRegistrant(raw){
+  if(typeof raw === 'string') return { id:'', name: raw, className:'' };
+  const item = raw || {};
+  return {
+    id: item.id || item.registrationId || item.registrantId || item.slotRegistrationId || '',
+    name: item.name || item.studentName || item.fullName || item.student || item.student_name || 'Unbekannter Eintrag',
+    className: item.className || item.class || item.studentClass || item.klasse || ''
+  };
+}
+
+function normalizeBookingCode(value){
+  return String(value || '').trim();
+}
+
+function totalRegistrationCount(event){
+  if(!event) return 0;
+  const slotCount = Array.isArray(event.timeslots) ? event.timeslots.reduce((sum, sl) => sum + ((Array.isArray(sl.registrants) ? sl.registrants.length : 0)), 0) : 0;
+  const workshopCount = Array.isArray(event.workshopRegistrants) ? event.workshopRegistrants.length : 0;
+  return Math.max(slotCount, workshopCount, Number(event.registrationCount) || 0, Number(event.registrations) || 0, Number(event.registrantsCount) || 0);
+}
+
 // ===== HELPERS =====
 const $ = id => document.getElementById(id);
 const todayStr = () => new Date().toISOString().split('T')[0];
@@ -1066,16 +1087,16 @@ function normalizeEvent(raw){
     desc: raw.desc || null,
     link: raw.link || null,
     duration: raw.duration || null,
-    bookingCode: raw.bookingCode || null,
+    bookingCode: normalizeBookingCode(raw.bookingCode || '' ) || null,
     timeslots: Array.isArray(raw.timeslots) ? raw.timeslots.map((sl, i) => ({
       id: sl.id || `sl_${Date.now()}_${i}`,
       name: sl.name || `Slot ${i+1}`,
       capacity: Number(sl.capacity) || 1,
-      registrants: Array.isArray(sl.registrants) ? sl.registrants : []
+      registrants: Array.isArray(sl.registrants) ? sl.registrants.map(normalizeRegistrant) : []
     })) : [],
     workshopSignup: !!raw.workshopSignup,
     workshopCapacity: Number(raw.workshopCapacity) || 0,
-    workshopRegistrants: Array.isArray(raw.workshopRegistrants) ? raw.workshopRegistrants : [],
+    workshopRegistrants: Array.isArray(raw.workshopRegistrants) ? raw.workshopRegistrants.map(normalizeRegistrant) : [],
     approved: raw.approved !== false,
     recurring: !!raw.recurring,
     seriesId: raw.seriesId || null
@@ -1528,12 +1549,13 @@ async function openDetail(id){
   } catch(err){
     console.error('Live-Buchungsdaten konnten nicht geladen werden:', err);
     if(isAdmin){
-      alert('Die aktuellen Buchungsdaten konnten nicht geladen werden. Bitte prüfe BOOKING_API_BASE, den Admin-API-Key und den Cloudflare-Worker. Es werden nur lokal vorhandene Daten angezeigt.');
+      alert('Die aktuellen Buchungsdaten konnten nicht geladen werden. Es werden nur die lokal vorhandenen Daten angezeigt.');
     }
   }
 
   editingId = id;
   $('detailTypeIndicator').style.background = TYPE_COLORS[e.type];
+  const liveCount = totalRegistrationCount(e);
   $('detailTitle').textContent = e.title;
 
   let body = `<div class="detail-section">
@@ -1553,7 +1575,7 @@ async function openDetail(id){
   if(e.timeslots && e.timeslots.length>0){
     body+=`<div class="detail-section"><h3>Zeitslots & Buchungen</h3>`;
     e.timeslots.forEach(sl=>{
-      const used=sl.registrants.length, cap=sl.capacity, pct=Math.round((used/cap)*100);
+      const used=(Array.isArray(sl.registrants)?sl.registrants:[]).length, cap=sl.capacity, pct=Math.round((used/cap)*100);
       const fillClass=pct>=100?'full':pct>=70?'warn':'';
       body+=`<div class="slot-card">
         <div class="slot-card-header">
@@ -1574,7 +1596,7 @@ async function openDetail(id){
         body+=`<div style="margin-top:var(--space-2)">
           <input type="text" class="form-input" placeholder="Dein Name *" id="slotName_${sl.id}" style="margin-bottom:var(--space-2)">
           <input type="text" class="form-input" placeholder="Klasse (optional)" id="slotKlasse_${sl.id}" style="margin-bottom:var(--space-2)">
-          <input type="text" class="form-input" placeholder="Buchungscode *" id="slotCode_${sl.id}" style="margin-bottom:var(--space-2);max-width:200px;text-transform:uppercase">
+          <input type="text" class="form-input" placeholder="Buchungscode *" id="slotCode_${sl.id}" style="margin-bottom:var(--space-2);max-width:200px;text-transform:none">
      <button class="btn-sm btn-primary" onclick="bookEventSlot(${id},'${sl.id}')">Buchen</button>
         </div>`;
       } else {
@@ -1604,7 +1626,7 @@ async function openDetail(id){
       body+=`<div class="signup-form-row" style="flex-wrap:wrap">
         <input type="text" class="form-input" placeholder="Vor- und Nachname *" id="wsName_${id}">
         <input type="text" class="form-input" placeholder="Klasse" id="wsKlasse_${id}">
-        <input type="text" class="form-input" placeholder="Buchungscode *" id="wsCode_${id}" style="max-width:180px;text-transform:uppercase">
+        <input type="text" class="form-input" placeholder="Buchungscode *" id="wsCode_${id}" style="max-width:180px;text-transform:none">
         <button class="btn-sm btn-primary" onclick="bookWorkshop(${id})">Anmelden</button>
       </div>`;
     } else {
@@ -2123,26 +2145,17 @@ async function loadAdminAvailability(eventId){
   key = String(key || '').trim();
   if(!key) throw new Error('Admin-API-Key fehlt.');
   adminApiKeyMemory = key;
-
   const res = await fetch(`${BOOKING_API_BASE}/api/admin-bookings`, {
     method:'POST',
     headers:{'Content-Type':'application/json','x-admin-key':key,'Accept':'application/json'},
     body: JSON.stringify({eventId})
   });
-
   let data = {};
-  try {
-    data = await res.json();
-  } catch(_) {
-    if(res.status===403) adminApiKeyMemory = '';
-    throw new Error('Admin-Daten konnten nicht als JSON gelesen werden.');
-  }
-
+  try { data = await res.json(); } catch(_) { if(res.status===403) adminApiKeyMemory = ''; throw new Error('Admin-Daten konnten nicht als JSON gelesen werden.'); }
   if(!res.ok){
     if(res.status===403) adminApiKeyMemory = '';
     throw new Error(data.error || 'Admin-Daten konnten nicht geladen werden.');
   }
-
   return data.event || data;
 }
 
@@ -2174,7 +2187,8 @@ window.bookEventSlot = async function(eventId, slotId){
   const nameInput = $('slotName_'+slotId);
   const codeInput = $('slotCode_'+slotId);
   const studentName = nameInput ? nameInput.value.trim() : '';
-  const bookingCode = codeInput ? codeInput.value.trim() : '';
+  const bookingCode = codeInput ? normalizeBookingCode(codeInput.value) : '';
+  if(codeInput) codeInput.value = bookingCode;
 
   if(!studentName){ alert('Bitte deinen Namen eingeben.'); nameInput?.focus(); return; }
   if(!bookingCode){ alert('Bitte den Buchungscode eingeben.'); codeInput?.focus(); return; }
@@ -2193,7 +2207,8 @@ window.bookWorkshop = async function(eventId){
   const nameInput = $('wsName_'+eventId);
   const codeInput = $('wsCode_'+eventId);
   const studentName = nameInput ? nameInput.value.trim() : '';
-  const bookingCode = codeInput ? codeInput.value.trim() : '';
+  const bookingCode = codeInput ? normalizeBookingCode(codeInput.value) : '';
+  if(codeInput) codeInput.value = bookingCode;
 
   if(!studentName){ alert('Bitte Vor- und Nachnamen eingeben.'); nameInput?.focus(); return; }
   if(!bookingCode){ alert('Bitte den Buchungscode eingeben.'); codeInput?.focus(); return; }
