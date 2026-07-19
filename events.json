@@ -1,5 +1,43 @@
 [
   {
+    "id": 7,
+    "title": "Test neu Klase",
+    "date": "2026-07-20",
+    "dateEnd": null,
+    "dateISO": "2026-07-20",
+    "time": "14:00",
+    "location": null,
+    "category": "Berufsberatung",
+    "type": "pflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [],
+    "desc": null,
+    "link": null,
+    "duration": null,
+    "bookingCode": "gym26",
+    "timeslots": [],
+    "workshopSignup": true,
+    "workshopCapacity": 10,
+    "workshopRegistrants": [
+      {
+        "id": "d28d3f5a-c4fb-40c6-9436-34279afa8b13",
+        "name": "Hubert Linnemann",
+        "className": ""
+      },
+      {
+        "id": "28d9b7a7-12f6-46df-8729-cb84b7928c50",
+        "name": "Peter Justus",
+        "className": ""
+      }
+    ],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null,
+    "registrationCount": 2
+  },
+  {
     "id": 6,
     "title": "Test 4",
     "date": "2026-07-22",
@@ -172,8 +210,7 @@
     ],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 3
+    "seriesId": null
   },
   {
     "id": 4,
@@ -281,23 +318,25 @@
     ],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 3
+    "seriesId": null
   },
   {
-    "id": 7,
-    "title": "Test neu Klase",
-    "date": "2026-07-20",
+    "id": 8,
+    "title": "Test 100005",
+    "date": "2026-07-21",
     "dateEnd": null,
-    "dateISO": "2026-07-20",
+    "dateISO": "2026-07-21",
     "time": "14:00",
     "location": null,
-    "category": "Berufsberatung",
-    "type": "pflicht",
+    "category": "Workshop",
+    "type": "freiwillig",
     "audience": [
       "schueler"
     ],
-    "classes": [],
+    "classes": [
+      "10",
+      "EF"
+    ],
     "desc": null,
     "link": null,
     "duration": null,
