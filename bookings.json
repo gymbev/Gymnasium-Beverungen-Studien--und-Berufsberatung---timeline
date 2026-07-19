@@ -80,6 +80,15 @@
       "studentName": "Narti Marti",
       "studentClass": "",
       "createdAt": "2026-07-19T14:40:18.297Z"
+    },
+    {
+      "id": "d28d3f5a-c4fb-40c6-9436-34279afa8b13",
+      "eventId": "7",
+      "slotId": null,
+      "mode": "workshop",
+      "studentName": "Hubert Linnemann",
+      "studentClass": "",
+      "createdAt": "2026-07-19T14:44:27.882Z"
     }
   ]
 }
