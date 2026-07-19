@@ -31,6 +31,14 @@
       "mode": "workshop",
       "studentName": "Peter Pan",
       "createdAt": "2026-07-19T08:59:08.239Z"
+    },
+    {
+      "id": "17aabb9b-b976-4d98-a44e-5c9a1f9baf46",
+      "eventId": "5",
+      "slotId": null,
+      "mode": "workshop",
+      "studentName": "Frau Holle",
+      "createdAt": "2026-07-19T09:23:50.648Z"
     }
   ]
 }
