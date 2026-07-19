@@ -39,6 +39,14 @@
       "mode": "workshop",
       "studentName": "Frau Holle",
       "createdAt": "2026-07-19T09:23:50.648Z"
+    },
+    {
+      "id": "cecb4303-d0e7-49b5-880a-6c42429e0b41",
+      "eventId": "5",
+      "slotId": null,
+      "mode": "workshop",
+      "studentName": "Geo Maskapo",
+      "createdAt": "2026-07-19T09:42:31.939Z"
     }
   ]
 }
