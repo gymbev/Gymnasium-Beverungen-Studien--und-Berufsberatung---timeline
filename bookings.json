@@ -98,6 +98,15 @@
       "studentName": "Peter Justus",
       "studentClass": "",
       "createdAt": "2026-07-19T15:33:42.374Z"
+    },
+    {
+      "id": "6c342169-e770-45f2-a5de-14b9f76a1aee",
+      "eventId": "8",
+      "slotId": null,
+      "mode": "workshop",
+      "studentName": "Hans Georg",
+      "studentClass": "",
+      "createdAt": "2026-07-19T15:35:59.201Z"
     }
   ]
 }
