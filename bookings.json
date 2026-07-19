@@ -71,6 +71,15 @@
       "mode": "slot",
       "studentName": "Mara Becker",
       "createdAt": "2026-07-19T11:15:33.883Z"
+    },
+    {
+      "id": "afa38574-d645-4644-8562-1470767bd2ce",
+      "eventId": "5",
+      "slotId": null,
+      "mode": "workshop",
+      "studentName": "Narti Marti",
+      "studentClass": "",
+      "createdAt": "2026-07-19T14:40:18.297Z"
     }
   ]
 }
