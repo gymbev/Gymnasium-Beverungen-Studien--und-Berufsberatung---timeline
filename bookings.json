@@ -63,6 +63,14 @@
       "mode": "workshop",
       "studentName": "Nauendorf Daniel",
       "createdAt": "2026-07-19T10:35:18.846Z"
+    },
+    {
+      "id": "f4d62cf3-b499-45b8-8039-ec2100f4b322",
+      "eventId": "6",
+      "slotId": "sl_0_1784459631556",
+      "mode": "slot",
+      "studentName": "Mara Becker",
+      "createdAt": "2026-07-19T11:15:33.883Z"
     }
   ]
 }
