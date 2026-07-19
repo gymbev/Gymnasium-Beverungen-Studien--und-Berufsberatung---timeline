@@ -1014,8 +1014,9 @@ const GITHUB_CONFIG = {
 // ===== BOOKING API (Cloudflare Worker) =====
 // WICHTIG: Hier die URL deines Cloudflare Workers eintragen (siehe Anleitung).
 // Beispiel: 'https://gymbev-booking.DEIN-NAME.workers.dev'
-const BOOKING_API_BASE = 'https://gymbev-booking.example.workers.dev';
+const BOOKING_API_BASE = 'https://timeline-booking-api.daniel-nauendorf.workers.dev';
 const ADMIN_API_KEY_STORAGE = 'gymbev_admin_api_key';
+let adminApiKeyMemory = '';
 
 // ===== HELPERS =====
 const $ = id => document.getElementById(id);
@@ -1527,7 +1528,7 @@ async function openDetail(id){
   } catch(err){
     console.error('Live-Buchungsdaten konnten nicht geladen werden:', err);
     if(isAdmin){
-      alert('Die aktuellen Buchungsdaten konnten nicht geladen werden. Es werden nur die lokal vorhandenen Daten angezeigt.');
+      alert('Die aktuellen Buchungsdaten konnten nicht geladen werden. Bitte prüfe BOOKING_API_BASE, den Admin-API-Key und den Cloudflare-Worker. Es werden nur lokal vorhandene Daten angezeigt.');
     }
   }
 
@@ -2110,27 +2111,39 @@ async function loadPublicAvailability(eventId){
   const res = await fetch(`${BOOKING_API_BASE}/api/public-availability?eventId=${encodeURIComponent(eventId)}`, {
     headers:{'Accept':'application/json'}
   });
-  const data = await res.json();
+  let data = {};
+  try { data = await res.json(); } catch(_) { throw new Error('Verfügbarkeit konnte nicht als JSON gelesen werden.'); }
   if(!res.ok) throw new Error(data.error || 'Verfügbarkeit konnte nicht geladen werden.');
-  return data.event;
+  return data.event || data;
 }
 
 async function loadAdminAvailability(eventId){
-  let key = sessionStorage.getItem(ADMIN_API_KEY_STORAGE) || '';
+  let key = adminApiKeyMemory || '';
   if(!key) key = prompt('Admin-API-Key eingeben, um Schülernamen zu sehen:','') || '';
+  key = String(key || '').trim();
   if(!key) throw new Error('Admin-API-Key fehlt.');
-  sessionStorage.setItem(ADMIN_API_KEY_STORAGE, key);
+  adminApiKeyMemory = key;
+
   const res = await fetch(`${BOOKING_API_BASE}/api/admin-bookings`, {
     method:'POST',
-    headers:{'Content-Type':'application/json','x-admin-key':key},
+    headers:{'Content-Type':'application/json','x-admin-key':key,'Accept':'application/json'},
     body: JSON.stringify({eventId})
   });
-  const data = await res.json();
+
+  let data = {};
+  try {
+    data = await res.json();
+  } catch(_) {
+    if(res.status===403) adminApiKeyMemory = '';
+    throw new Error('Admin-Daten konnten nicht als JSON gelesen werden.');
+  }
+
   if(!res.ok){
-    if(res.status===403) sessionStorage.removeItem(ADMIN_API_KEY_STORAGE);
+    if(res.status===403) adminApiKeyMemory = '';
     throw new Error(data.error || 'Admin-Daten konnten nicht geladen werden.');
   }
-  return data.event;
+
+  return data.event || data;
 }
 
 async function bookSlotViaApi(eventId, slotId, studentName, bookingCode){
@@ -2139,8 +2152,9 @@ async function bookSlotViaApi(eventId, slotId, studentName, bookingCode){
     headers:{'Content-Type':'application/json'},
     body: JSON.stringify({eventId,slotId,mode:'slot',studentName,bookingCode})
   });
-  const data = await res.json();
-  if(!res.ok || !data.ok) throw new Error(data.error || 'Buchung fehlgeschlagen.');
+  let data = {};
+  try { data = await res.json(); } catch(_) { throw new Error('Antwort der Buchungs-API war kein gültiges JSON.'); }
+  if(!res.ok || data.ok === false) throw new Error(data.error || data.message || 'Buchung fehlgeschlagen.');
   return data;
 }
 
@@ -2150,8 +2164,9 @@ async function bookWorkshopViaApi(eventId, studentName, bookingCode){
     headers:{'Content-Type':'application/json'},
     body: JSON.stringify({eventId,slotId:null,mode:'workshop',studentName,bookingCode})
   });
-  const data = await res.json();
-  if(!res.ok || !data.ok) throw new Error(data.error || 'Workshop-Anmeldung fehlgeschlagen.');
+  let data = {};
+  try { data = await res.json(); } catch(_) { throw new Error('Antwort der Workshop-API war kein gültiges JSON.'); }
+  if(!res.ok || data.ok === false) throw new Error(data.error || data.message || 'Workshop-Anmeldung fehlgeschlagen.');
   return data;
 }
 
