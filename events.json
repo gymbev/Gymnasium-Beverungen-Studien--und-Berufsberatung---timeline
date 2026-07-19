@@ -344,9 +344,16 @@
     "timeslots": [],
     "workshopSignup": true,
     "workshopCapacity": 10,
-    "workshopRegistrants": [],
+    "workshopRegistrants": [
+      {
+        "id": "6c342169-e770-45f2-a5de-14b9f76a1aee",
+        "name": "Hans Georg",
+        "className": ""
+      }
+    ],
     "approved": true,
     "recurring": false,
-    "seriesId": null
+    "seriesId": null,
+    "registrationCount": 1
   }
 ]
