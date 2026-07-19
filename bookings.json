@@ -23,6 +23,14 @@
       "mode": "slot",
       "studentName": "Peter Pan",
       "createdAt": "2026-07-19T08:52:25.541Z"
+    },
+    {
+      "id": "ac4a5395-594b-4a7c-bdbf-7b45913e5bde",
+      "eventId": "3",
+      "slotId": null,
+      "mode": "workshop",
+      "studentName": "Peter Pan",
+      "createdAt": "2026-07-19T08:59:08.239Z"
     }
   ]
 }
