@@ -53,7 +53,11 @@
         "name": "1",
         "capacity": 1,
         "registrants": [
-          "Peter"
+          {
+            "id": "",
+            "name": "Peter",
+            "className": ""
+          }
         ]
       },
       {
@@ -102,7 +106,11 @@
     "workshopSignup": true,
     "workshopCapacity": 15,
     "workshopRegistrants": [
-      "Daniel"
+      {
+        "id": "",
+        "name": "Daniel",
+        "className": ""
+      }
     ],
     "approved": true,
     "recurring": false,
@@ -131,7 +139,13 @@
         "id": "sl_0_1784414588952",
         "name": "1",
         "capacity": 1,
-        "registrants": []
+        "registrants": [
+          {
+            "id": "",
+            "name": "Peter Pan",
+            "className": ""
+          }
+        ]
       },
       {
         "id": "sl_1_1784414588953",
@@ -154,6 +168,36 @@
     ],
     "workshopSignup": false,
     "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
+  },
+  {
+    "id": 5,
+    "title": "Test 3",
+    "date": "2026-08-10",
+    "dateEnd": null,
+    "dateISO": "2026-08-10",
+    "time": "14:00",
+    "location": null,
+    "category": "Berufsberatung",
+    "type": "pflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "EF",
+      "Q1",
+      "Q2"
+    ],
+    "desc": null,
+    "link": null,
+    "duration": null,
+    "bookingCode": "gym26",
+    "timeslots": [],
+    "workshopSignup": true,
+    "workshopCapacity": 15,
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
