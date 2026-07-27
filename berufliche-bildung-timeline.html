@@ -2212,11 +2212,11 @@ async function loadAdminAvailability(eventId){
   return data.event || data;
 }
 
-async function bookSlotViaApi(eventId, slotId, studentName, bookingCode){
+async function bookSlotViaApi(eventId, slotId, studentName, bookingCode, studentClass){
   const res = await fetch(`${BOOKING_API_BASE}/api/book-slot`, {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({eventId,slotId,mode:'slot',studentName,bookingCode})
+    body: JSON.stringify({eventId,slotId,mode:'slot',studentName,bookingCode,studentClass})
   });
   let data = {};
   try { data = await res.json(); } catch(_) { throw new Error('Antwort der Buchungs-API war kein gültiges JSON.'); }
@@ -2224,11 +2224,11 @@ async function bookSlotViaApi(eventId, slotId, studentName, bookingCode){
   return data;
 }
 
-async function bookWorkshopViaApi(eventId, studentName, bookingCode){
+async function bookWorkshopViaApi(eventId, studentName, bookingCode, studentClass){
   const res = await fetch(`${BOOKING_API_BASE}/api/book-slot`, {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({eventId,slotId:null,mode:'workshop',studentName,bookingCode})
+    body: JSON.stringify({eventId,slotId:null,mode:'workshop',studentName,bookingCode,studentClass})
   });
   let data = {};
   try { data = await res.json(); } catch(_) { throw new Error('Antwort der Workshop-API war kein gültiges JSON.'); }
@@ -2238,8 +2238,10 @@ async function bookWorkshopViaApi(eventId, studentName, bookingCode){
 
 window.bookEventSlot = async function(eventId, slotId){
   const nameInput = $('slotName_'+slotId);
+  const klasseInput = $('slotKlasse_'+slotId);
   const codeInput = $('slotCode_'+slotId);
   const studentName = nameInput ? nameInput.value.trim() : '';
+  const studentClass = klasseInput ? klasseInput.value.trim() : '';
   const bookingCode = codeInput ? normalizeBookingCode(codeInput.value) : '';
   if(codeInput) codeInput.value = bookingCode;
 
@@ -2247,7 +2249,7 @@ window.bookEventSlot = async function(eventId, slotId){
   if(!bookingCode){ alert('Bitte den Buchungscode eingeben.'); codeInput?.focus(); return; }
 
   try{
-    await bookSlotViaApi(eventId, slotId, studentName, bookingCode);
+    await bookSlotViaApi(eventId, slotId, studentName, bookingCode, studentClass);
     alert('Buchung gespeichert.');
     await openDetail(eventId);
   }catch(err){
@@ -2258,8 +2260,10 @@ window.bookEventSlot = async function(eventId, slotId){
 
 window.bookWorkshop = async function(eventId){
   const nameInput = $('wsName_'+eventId);
+  const klasseInput = $('wsKlasse_'+eventId);
   const codeInput = $('wsCode_'+eventId);
   const studentName = nameInput ? nameInput.value.trim() : '';
+  const studentClass = klasseInput ? klasseInput.value.trim() : '';
   const bookingCode = codeInput ? normalizeBookingCode(codeInput.value) : '';
   if(codeInput) codeInput.value = bookingCode;
 
@@ -2267,7 +2271,7 @@ window.bookWorkshop = async function(eventId){
   if(!bookingCode){ alert('Bitte den Buchungscode eingeben.'); codeInput?.focus(); return; }
 
   try{
-    await bookWorkshopViaApi(eventId, studentName, bookingCode);
+    await bookWorkshopViaApi(eventId, studentName, bookingCode, studentClass);
     alert('Anmeldung gespeichert.');
     await openDetail(eventId);
   }catch(err){
