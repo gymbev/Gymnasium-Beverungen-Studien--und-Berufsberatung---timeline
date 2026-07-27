@@ -227,24 +227,15 @@
     "workshopCapacity": 15,
     "workshopRegistrants": [
       {
-        "id": "",
-        "name": "belegt",
-        "className": ""
-      },
-      {
-        "id": "",
-        "name": "belegt",
-        "className": ""
-      },
-      {
-        "id": "",
-        "name": "belegt",
+        "id": "ac4a5395-594b-4a7c-bdbf-7b45913e5bde",
+        "name": "Peter Pan",
         "className": ""
       }
     ],
     "approved": true,
     "recurring": false,
-    "seriesId": null
+    "seriesId": null,
+    "registrationCount": 1
   },
   {
     "id": 9,
@@ -441,13 +432,25 @@
         "id": "sl_0_1785182113591",
         "name": "1",
         "capacity": 2,
-        "registrants": []
+        "registrants": [
+          {
+            "id": "05bab673-8597-4049-8ec8-ee12e56dc148",
+            "name": "tester 1",
+            "className": ""
+          }
+        ]
       },
       {
         "id": "sl_1_1785182113591",
         "name": "2",
         "capacity": 1,
-        "registrants": []
+        "registrants": [
+          {
+            "id": "073eb227-d9f0-41e1-82cb-48d3e081ffa6",
+            "name": "Tester 2",
+            "className": ""
+          }
+        ]
       },
       {
         "id": "sl_2_1785182113591",
@@ -467,6 +470,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null
+    "seriesId": null,
+    "registrationCount": 2
   }
 ]
