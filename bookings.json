@@ -108,6 +108,15 @@
       "studentName": "Mama Mia",
       "studentClass": "",
       "createdAt": "2026-07-27T19:37:36.190Z"
+    },
+    {
+      "id": "e026dd1d-09c4-4398-9ef7-2ca0a4c5658b",
+      "eventId": "9",
+      "slotId": "sl_0_1785181188665",
+      "mode": "slot",
+      "studentName": "Daniel Meppert",
+      "studentClass": "",
+      "createdAt": "2026-07-27T19:42:54.865Z"
     }
   ]
 }
