@@ -107,6 +107,15 @@
       "studentName": "Hans Georg",
       "studentClass": "",
       "createdAt": "2026-07-19T15:35:59.201Z"
+    },
+    {
+      "id": "732b37e0-932d-44c9-9655-4542945dbe05",
+      "eventId": "4",
+      "slotId": "sl_1_1784414588953",
+      "mode": "slot",
+      "studentName": "Mama Mia",
+      "studentClass": "",
+      "createdAt": "2026-07-27T19:37:36.190Z"
     }
   ]
 }
