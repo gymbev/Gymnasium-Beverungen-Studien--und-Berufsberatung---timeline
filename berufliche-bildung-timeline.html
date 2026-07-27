@@ -1612,7 +1612,8 @@ async function openDetail(id){
       if(isAdmin && sl.registrants.length>0){
         body+=`<div class="registrant-list">`;
         sl.registrants.forEach((r,i)=>{
-          body+=`<div class="registrant-item">${r.name}${r.klasse?' ('+r.klasse+')':''}<button class="btn-sm btn-danger" onclick="(${id},'slot','${sl.id}',${i});event.stopPropagation()">×</button></div>`;
+          const clsLabel = r.className ? ' (' + r.className + ')' : '';
+          body+=`<div class="registrant-item"><span>${r.name}${clsLabel}</span><button class="btn-sm btn-danger" onclick="removeRegistrant(${id},'slot','${sl.id}','${r.id}');event.stopPropagation()">×</button></div>`;
         });
         body+=`</div>`;
       }
@@ -1642,7 +1643,8 @@ async function openDetail(id){
     if(isAdmin && regs.length>0){
       body+=`<div class="registrant-list" style="margin-bottom:var(--space-3)">`;
       regs.forEach((r,i)=>{
-        body+=`<div class="registrant-item" style="padding:var(--space-2) 0">${r.name}${r.klasse?' ('+r.klasse+')':''}<button class="btn-sm btn-danger" onclick="(${id},'workshop',null,${i});event.stopPropagation()">×</button></div>`;
+        const clsLabelWs = r.className ? ' (' + r.className + ')' : '';
+        body+=`<div class="registrant-item" style="padding:var(--space-2) 0"><span>${r.name}${clsLabelWs}</span><button class="btn-sm btn-danger" onclick="removeRegistrant(${id},'workshop',null,'${r.id}');event.stopPropagation()">×</button></div>`;
       });
       body+=`</div>`;
     }
@@ -1686,9 +1688,35 @@ lucide.createIcons();
 
 
 
-async function removeRegistrant(evId,kind,slotId,idx){
-  alert('Das Entfernen von Anmeldungen ist in dieser Version noch nicht aktiv.');
-  return;
+async function removeRegistrant(evId,kind,slotId,bookingId){
+  if(!bookingId){
+    alert('Diese Anmeldung kann nicht gelöscht werden (keine Buchungs-ID gefunden).');
+    return;
+  }
+  if(!confirm('Diese Anmeldung wirklich löschen?')) return;
+
+  let key = adminApiKeyMemory || '';
+  if(!key) key = prompt('Admin-API-Key eingeben, um Anmeldungen zu löschen:','') || '';
+  key = String(key || '').trim();
+  if(!key){ alert('Admin-API-Key fehlt.'); return; }
+  adminApiKeyMemory = key;
+
+  try{
+    const res = await fetch(`${BOOKING_API_BASE}/api/remove-booking`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-admin-key':key,'Accept':'application/json'},
+      body: JSON.stringify({ bookingId, eventId: evId })
+    });
+    let data = {};
+    try { data = await res.json(); } catch(_) { throw new Error('Antwort war kein gültiges JSON.'); }
+    if(!res.ok){
+      if(res.status===403) adminApiKeyMemory = '';
+      throw new Error(data.error || 'Anmeldung konnte nicht gelöscht werden.');
+    }
+    await openDetail(evId);
+  }catch(err){
+    alert(err.message || 'Fehler beim Löschen der Anmeldung.');
+  }
 }
 
 // ===== ADD/EDIT MODAL =====
