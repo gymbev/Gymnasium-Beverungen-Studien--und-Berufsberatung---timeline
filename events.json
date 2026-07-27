@@ -34,8 +34,42 @@
     ],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 2
+    "seriesId": null
+  },
+  {
+    "id": 8,
+    "title": "Test 100005",
+    "date": "2026-07-21",
+    "dateEnd": null,
+    "dateISO": "2026-07-21",
+    "time": "14:00",
+    "location": null,
+    "category": "Workshop",
+    "type": "freiwillig",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "10",
+      "EF"
+    ],
+    "desc": null,
+    "link": null,
+    "duration": null,
+    "bookingCode": "gym26",
+    "timeslots": [],
+    "workshopSignup": true,
+    "workshopCapacity": 10,
+    "workshopRegistrants": [
+      {
+        "id": "6c342169-e770-45f2-a5de-14b9f76a1aee",
+        "name": "Hans Georg",
+        "className": ""
+      }
+    ],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
   },
   {
     "id": 6,
@@ -235,19 +269,19 @@
         "id": "sl_0_1784414588952",
         "name": "1",
         "capacity": 1,
-        "registrants": [
-          {
-            "id": "",
-            "name": "Peter Pan",
-            "className": ""
-          }
-        ]
+        "registrants": []
       },
       {
         "id": "sl_1_1784414588953",
         "name": "2",
         "capacity": 1,
-        "registrants": []
+        "registrants": [
+          {
+            "id": "",
+            "name": "belegt",
+            "className": ""
+          }
+        ]
       },
       {
         "id": "sl_2_1784414588953",
@@ -267,7 +301,8 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null
+    "seriesId": null,
+    "registrationCount": 1
   },
   {
     "id": 5,
@@ -321,39 +356,59 @@
     "seriesId": null
   },
   {
-    "id": 8,
-    "title": "Test 100005",
-    "date": "2026-07-21",
+    "id": 9,
+    "title": "Aktuelle Version Test",
+    "date": "2026-08-02",
     "dateEnd": null,
-    "dateISO": "2026-07-21",
-    "time": "14:00",
+    "dateISO": "2026-08-02",
+    "time": null,
     "location": null,
-    "category": "Workshop",
-    "type": "freiwillig",
+    "category": "Praktikum",
+    "type": "wahlpflicht",
     "audience": [
-      "schueler"
+      "schueler",
+      "lehrer"
     ],
     "classes": [
+      "9",
       "10",
-      "EF"
+      "Q2"
     ],
     "desc": null,
     "link": null,
-    "duration": null,
+    "duration": "2 Std. 15 Min.",
     "bookingCode": "gym26",
-    "timeslots": [],
-    "workshopSignup": true,
-    "workshopCapacity": 10,
-    "workshopRegistrants": [
+    "timeslots": [
       {
-        "id": "6c342169-e770-45f2-a5de-14b9f76a1aee",
-        "name": "Hans Georg",
-        "className": ""
+        "id": "sl_0_1785181188665",
+        "name": "1",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_1_1785181188665",
+        "name": "2",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_2_1785181188665",
+        "name": "3",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_3_1785181188665",
+        "name": "5",
+        "capacity": 1,
+        "registrants": []
       }
     ],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 1
+    "seriesId": null
   }
 ]
