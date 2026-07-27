@@ -247,6 +247,69 @@
     "seriesId": null
   },
   {
+    "id": 9,
+    "title": "Aktuelle Version Test",
+    "date": "2026-08-02",
+    "dateEnd": null,
+    "dateISO": "2026-08-02",
+    "time": null,
+    "location": null,
+    "category": "Praktikum",
+    "type": "wahlpflicht",
+    "audience": [
+      "schueler",
+      "lehrer"
+    ],
+    "classes": [
+      "9",
+      "10",
+      "Q2"
+    ],
+    "desc": null,
+    "link": null,
+    "duration": "2 Std. 15 Min.",
+    "bookingCode": "gym26",
+    "timeslots": [
+      {
+        "id": "sl_0_1785181188665",
+        "name": "1",
+        "capacity": 1,
+        "registrants": [
+          {
+            "id": "",
+            "name": "belegt",
+            "className": ""
+          }
+        ]
+      },
+      {
+        "id": "sl_1_1785181188665",
+        "name": "2",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_2_1785181188665",
+        "name": "3",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_3_1785181188665",
+        "name": "5",
+        "capacity": 1,
+        "registrants": []
+      }
+    ],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null,
+    "registrationCount": 1
+  },
+  {
     "id": 4,
     "title": "Test 2",
     "date": "2026-08-03",
@@ -301,8 +364,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 1
+    "seriesId": null
   },
   {
     "id": 5,
@@ -356,50 +418,46 @@
     "seriesId": null
   },
   {
-    "id": 9,
-    "title": "Aktuelle Version Test",
-    "date": "2026-08-02",
+    "id": 10,
+    "title": "Aktuelle Version testen 2",
+    "date": "2026-08-01",
     "dateEnd": null,
-    "dateISO": "2026-08-02",
+    "dateISO": "2026-08-01",
     "time": null,
     "location": null,
-    "category": "Praktikum",
-    "type": "wahlpflicht",
+    "category": "Sonstiges",
+    "type": "freiwillig",
     "audience": [
       "schueler",
       "lehrer"
     ],
-    "classes": [
-      "9",
-      "10",
-      "Q2"
-    ],
+    "classes": [],
     "desc": null,
     "link": null,
-    "duration": "2 Std. 15 Min.",
+    "duration": "3 Std. 15 Min.",
     "bookingCode": "gym26",
     "timeslots": [
       {
-        "id": "sl_0_1785181188665",
+        "id": "sl_0_1785182113591",
         "name": "1",
-        "capacity": 1,
+        "capacity": 2,
         "registrants": []
       },
       {
-        "id": "sl_1_1785181188665",
+        "id": "sl_1_1785182113591",
         "name": "2",
         "capacity": 1,
         "registrants": []
       },
       {
-        "id": "sl_2_1785181188665",
-        "name": "3",
+        "id": "sl_2_1785182113591",
+        "name": "5",
         "capacity": 1,
         "registrants": []
       },
       {
-        "id": "sl_3_1785181188665",
-        "name": "5",
+        "id": "sl_3_1785182113591",
+        "name": "6",
         "capacity": 1,
         "registrants": []
       }
