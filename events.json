@@ -234,8 +234,7 @@
     ],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 1
+    "seriesId": null
   },
   {
     "id": 9,
@@ -297,8 +296,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 1
+    "seriesId": null
   },
   {
     "id": 4,
@@ -407,70 +405,5 @@
     "approved": true,
     "recurring": false,
     "seriesId": null
-  },
-  {
-    "id": 10,
-    "title": "Aktuelle Version testen 2",
-    "date": "2026-08-01",
-    "dateEnd": null,
-    "dateISO": "2026-08-01",
-    "time": null,
-    "location": null,
-    "category": "Sonstiges",
-    "type": "freiwillig",
-    "audience": [
-      "schueler",
-      "lehrer"
-    ],
-    "classes": [],
-    "desc": null,
-    "link": null,
-    "duration": "3 Std. 15 Min.",
-    "bookingCode": "gym26",
-    "timeslots": [
-      {
-        "id": "sl_0_1785182113591",
-        "name": "1",
-        "capacity": 2,
-        "registrants": [
-          {
-            "id": "05bab673-8597-4049-8ec8-ee12e56dc148",
-            "name": "tester 1",
-            "className": ""
-          }
-        ]
-      },
-      {
-        "id": "sl_1_1785182113591",
-        "name": "2",
-        "capacity": 1,
-        "registrants": [
-          {
-            "id": "073eb227-d9f0-41e1-82cb-48d3e081ffa6",
-            "name": "Tester 2",
-            "className": ""
-          }
-        ]
-      },
-      {
-        "id": "sl_2_1785182113591",
-        "name": "5",
-        "capacity": 1,
-        "registrants": []
-      },
-      {
-        "id": "sl_3_1785182113591",
-        "name": "6",
-        "capacity": 1,
-        "registrants": []
-      }
-    ],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null,
-    "registrationCount": 2
   }
 ]
