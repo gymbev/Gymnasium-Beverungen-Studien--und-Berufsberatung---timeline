@@ -109,6 +109,15 @@
       "studentName": "Daniel Meppert",
       "studentClass": "",
       "createdAt": "2026-07-27T19:42:54.865Z"
+    },
+    {
+      "id": "05bab673-8597-4049-8ec8-ee12e56dc148",
+      "eventId": "10",
+      "slotId": "sl_0_1785182113591",
+      "mode": "slot",
+      "studentName": "tester 1",
+      "studentClass": "",
+      "createdAt": "2026-07-27T19:55:51.865Z"
     }
   ]
 }
