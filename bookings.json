@@ -119,15 +119,6 @@
       "studentName": "Tester 2",
       "studentClass": "",
       "createdAt": "2026-07-27T19:56:11.827Z"
-    },
-    {
-      "id": "039f6174-3f1d-4ae7-9ce4-69420b781b21",
-      "eventId": "10",
-      "slotId": "sl_0_1785182765814",
-      "mode": "slot",
-      "studentName": "Neuer Tester",
-      "studentClass": "10",
-      "createdAt": "2026-07-27T20:06:39.701Z"
     }
   ]
 }
