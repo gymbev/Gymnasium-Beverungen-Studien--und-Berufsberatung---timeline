@@ -119,6 +119,15 @@
       "studentName": "Tester 2",
       "studentClass": "",
       "createdAt": "2026-07-27T19:56:11.827Z"
+    },
+    {
+      "id": "a9950248-3c7f-4f06-9d62-14987f25f592",
+      "eventId": "10",
+      "slotId": "sl_0_1785182765814",
+      "mode": "slot",
+      "studentName": "Daniel Hans",
+      "studentClass": "9",
+      "createdAt": "2026-07-27T20:32:54.679Z"
     }
   ]
 }
