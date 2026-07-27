@@ -405,5 +405,53 @@
     "approved": true,
     "recurring": false,
     "seriesId": null
+  },
+  {
+    "id": 10,
+    "title": "Aktuellster Test version Neu",
+    "date": "2026-08-01",
+    "dateEnd": null,
+    "dateISO": "2026-08-01",
+    "time": null,
+    "location": null,
+    "category": "Sonstiges",
+    "type": "freiwillig",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "10",
+      "EF"
+    ],
+    "desc": null,
+    "link": null,
+    "duration": "2 Std. 10 Min.",
+    "bookingCode": "gym26",
+    "timeslots": [
+      {
+        "id": "sl_0_1785182765814",
+        "name": "3",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_1_1785182765814",
+        "name": "4",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_2_1785182765814",
+        "name": "5",
+        "capacity": 1,
+        "registrants": []
+      }
+    ],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
   }
 ]
