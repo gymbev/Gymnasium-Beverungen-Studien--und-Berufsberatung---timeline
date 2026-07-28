@@ -128,6 +128,15 @@
       "studentName": "Daniel Hans",
       "studentClass": "9",
       "createdAt": "2026-07-27T20:32:54.679Z"
+    },
+    {
+      "id": "778b0bd3-c2ee-4ba8-9387-72af5db234b9",
+      "eventId": "5",
+      "slotId": null,
+      "mode": "workshop",
+      "studentName": "Daniel Tester",
+      "studentClass": "10b",
+      "createdAt": "2026-07-28T12:25:23.520Z"
     }
   ]
 }
