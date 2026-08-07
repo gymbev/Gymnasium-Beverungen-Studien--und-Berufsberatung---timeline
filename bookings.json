@@ -155,6 +155,15 @@
       "studentName": "Daniel Nauendorf",
       "studentClass": "10",
       "createdAt": "2026-08-07T17:28:57.070Z"
+    },
+    {
+      "id": "9ca8bd41-b915-4c9e-a4cc-6cfd74459560",
+      "eventId": "11",
+      "slotId": "sl_1_1786123538755",
+      "mode": "slot",
+      "studentName": "Daniel Nauendor",
+      "studentClass": "EF",
+      "createdAt": "2026-08-07T17:29:27.476Z"
     }
   ]
 }
