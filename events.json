@@ -1575,7 +1575,8 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null
+    "seriesId": null,
+    "registrationCount": 0
   },
   {
     "id": 39,
@@ -1584,7 +1585,7 @@
     "dateEnd": "2026-10-10",
     "dateISO": "2026-10-08",
     "time": null,
-    "location": null,
+    "location": "Tegelweg 33, 33034 Brakel",
     "category": "Ausbildungsmesse",
     "type": "freiwillig",
     "audience": [
@@ -1593,7 +1594,7 @@
       "eltern"
     ],
     "classes": [],
-    "desc": "https://www.step1-hx.de/",
+    "desc": "08.10. - 10.10.2026\nÖffnungszeiten\nDo 08:30-15:00 Uhr\nFr 08:30-13:00 Uhr\nSa 10:00-14:00 Uhr",
     "link": "https://www.step1-hx.de/",
     "duration": null,
     "bookingCode": null,
@@ -1603,6 +1604,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null
+    "seriesId": null,
+    "registrationCount": 0
   }
 ]
