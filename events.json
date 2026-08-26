@@ -460,364 +460,13 @@
     "seriesId": null
   },
   {
-    "id": 12,
-    "title": "Zukunftstag für Mädchen und Jungen (Girls' und Boys' Day)",
-    "date": "2027-04-22",
-    "dateEnd": null,
-    "dateISO": "2027-04-22",
-    "time": null,
-    "location": null,
-    "category": "Boys & Girls Day",
-    "type": "freiwillig",
-    "audience": [
-      "schueler",
-      "lehrer",
-      "eltern"
-    ],
-    "classes": [
-      "9",
-      "10"
-    ],
-    "desc": null,
-    "link": null,
-    "duration": null,
-    "bookingCode": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
-    "id": 13,
-    "title": "Ausbildungsmesse Beverungen „Wir für unsere Region“",
-    "date": "2027-02-11",
-    "dateEnd": null,
-    "dateISO": "2027-02-11",
-    "time": null,
-    "location": "Stadthalle",
-    "category": "Ausbildungsmesse",
-    "type": "pflicht",
-    "audience": [
-      "schueler",
-      "lehrer",
-      "eltern"
-    ],
-    "classes": [
-      "9",
-      "10",
-      "EF",
-      "Q1",
-      "Q2"
-    ],
-    "desc": null,
-    "link": null,
-    "duration": null,
-    "bookingCode": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
-    "id": 14,
-    "title": "BiZ-BO",
-    "date": "2026-11-25",
-    "dateEnd": null,
-    "dateISO": "2026-11-25",
-    "time": null,
-    "location": null,
-    "category": "Sonstiges",
-    "type": "pflicht",
-    "audience": [
-      "schueler",
-      "lehrer",
-      "eltern"
-    ],
-    "classes": [
-      "9"
-    ],
-    "desc": null,
-    "link": null,
-    "duration": "1 Std. 30 Min.",
-    "bookingCode": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
-  },
-  {
-    "id": 15,
-    "title": "Digitaler Elternabend „Wie kann ich meinen Sohn/meine Tochter bei der Berufs- und Studienwahl begleiten?“",
-    "date": "2027-02-24",
-    "dateEnd": null,
-    "dateISO": "2027-02-24",
-    "time": "18:30",
-    "location": null,
-    "category": "Elternabend",
-    "type": "freiwillig",
-    "audience": [
-      "eltern"
-    ],
-    "classes": [],
-    "desc": null,
-    "link": null,
-    "duration": "1 Std. 30 Min.",
-    "bookingCode": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
-    "id": 16,
-    "title": "Workshop: Was kostet das Leben?",
-    "date": "2027-02-03",
-    "dateEnd": null,
-    "dateISO": "2027-02-03",
-    "time": null,
-    "location": null,
-    "category": "Workshop",
-    "type": "wahlpflicht",
-    "audience": [
-      "schueler"
-    ],
-    "classes": [
-      "EF",
-      "Q1"
-    ],
-    "desc": null,
-    "link": null,
-    "duration": "1 Std. 30 Min.",
-    "bookingCode": "gym26",
-    "timeslots": [],
-    "workshopSignup": true,
-    "workshopCapacity": 30,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
-    "id": 17,
-    "title": "BO-Einheit KARL „Unterstützung bei der Berufswahl und Recherchemöglichkeiten“",
-    "date": "2026-10-14",
-    "dateEnd": null,
-    "dateISO": "2026-10-14",
-    "time": null,
-    "location": null,
-    "category": "Workshop",
-    "type": "freiwillig",
-    "audience": [
-      "schueler"
-    ],
-    "classes": [
-      "EF"
-    ],
-    "desc": null,
-    "link": null,
-    "duration": "45 Min.",
-    "bookingCode": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
-    "id": 18,
-    "title": "Workshop zur Reflexion (I) (SBO 9.3): „Wege nach dem Abitur“",
-    "date": "2027-01-27",
-    "dateEnd": null,
-    "dateISO": "2027-01-27",
-    "time": "14:00",
-    "location": null,
-    "category": "Workshop",
-    "type": "freiwillig",
-    "audience": [
-      "schueler"
-    ],
-    "classes": [
-      "Q1"
-    ],
-    "desc": null,
-    "link": null,
-    "duration": "1 Std. 30 Min.",
-    "bookingCode": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
-    "id": 19,
-    "title": "Digitale Elternveranstaltung „Wege nach dem Abitur“,",
-    "date": "2027-01-27",
-    "dateEnd": null,
-    "dateISO": "2027-01-27",
-    "time": null,
-    "location": null,
-    "category": "Elternabend",
-    "type": "pflicht",
-    "audience": [
-      "eltern"
-    ],
-    "classes": [],
-    "desc": null,
-    "link": null,
-    "duration": "1 Std. 30 Min.",
-    "bookingCode": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
-    "id": 20,
-    "title": "Informationstagen für Studieninteressierte der Georg-August-Universität Göttingen",
-    "date": "2027-03-09",
-    "dateEnd": null,
-    "dateISO": "2027-03-09",
-    "time": "09:00",
-    "location": "Göttingen",
-    "category": "Universität",
-    "type": "pflicht",
-    "audience": [
-      "schueler"
-    ],
-    "classes": [
-      "Q2"
-    ],
-    "desc": null,
-    "link": null,
-    "duration": "7 Std.",
-    "bookingCode": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
-    "id": 21,
-    "title": "Workshop - Gap Year",
-    "date": "2027-03-10",
-    "dateEnd": null,
-    "dateISO": "2027-03-10",
-    "time": "13:15",
-    "location": null,
-    "category": "Workshop",
-    "type": "wahlpflicht",
-    "audience": [
-      "schueler"
-    ],
-    "classes": [
-      "EF",
-      "Q1",
-      "Q2"
-    ],
-    "desc": "mindestens 2 von 4 Veranstaltungen bzw. die 2-Stündige Veranstaltung aus dem Wahlpflichtprogramm",
-    "link": null,
-    "duration": "45 Min.",
-    "bookingCode": "gym26",
-    "timeslots": [],
-    "workshopSignup": true,
-    "workshopCapacity": 30,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
-    "id": 22,
-    "title": "Workshop - Duales Studium",
-    "date": "2027-03-17",
-    "dateEnd": null,
-    "dateISO": "2027-03-17",
-    "time": null,
-    "location": null,
-    "category": "Workshop",
-    "type": "wahlpflicht",
-    "audience": [
-      "schueler"
-    ],
-    "classes": [
-      "EF",
-      "Q1",
-      "Q2"
-    ],
-    "desc": "mindestens 2 von 4 Veranstaltungen bzw. die 2-Stündige Veranstaltung aus dem Wahlpflichtprogramm",
-    "link": null,
-    "duration": "45 Min.",
-    "bookingCode": "gym26",
-    "timeslots": [],
-    "workshopSignup": true,
-    "workshopCapacity": 30,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
-    "id": 23,
-    "title": "Bewerbung um einen Studienplatz",
-    "date": "2027-01-20",
-    "dateEnd": null,
-    "dateISO": "2027-01-20",
-    "time": "13:15",
-    "location": null,
-    "category": "Workshop",
-    "type": "wahlpflicht",
-    "audience": [
-      "schueler"
-    ],
-    "classes": [
-      "EF",
-      "Q1",
-      "Q2"
-    ],
-    "desc": "mindestens 2 von 4 Veranstaltungen bzw. die 2-Stündige Veranstaltung aus dem Wahlpflichtprogramm",
-    "link": null,
-    "duration": "45 Min.",
-    "bookingCode": "gym26",
-    "timeslots": [],
-    "workshopSignup": true,
-    "workshopCapacity": 30,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
     "id": 24,
     "title": "Berufsberatung",
     "date": "2026-09-09",
     "dateEnd": null,
     "dateISO": "2026-09-09",
     "time": null,
-    "location": "Gegenüber R201 - Stubo-Raum",
+    "location": "GegenÃ¼ber R201 - Stubo-Raum",
     "category": "Berufsberatung",
     "type": "freiwillig",
     "audience": [
@@ -867,7 +516,37 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": true,
-    "seriesId": "series_1787687533039"
+    "seriesId": "series_1787687533039",
+    "registrationCount": 0
+  },
+  {
+    "id": 17,
+    "title": "BO-Einheit KARL âUnterstÃ¼tzung bei der Berufswahl und RecherchemÃ¶glichkeitenâ",
+    "date": "2026-10-14",
+    "dateEnd": null,
+    "dateISO": "2026-10-14",
+    "time": null,
+    "location": null,
+    "category": "Workshop",
+    "type": "pflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "EF"
+    ],
+    "desc": null,
+    "link": null,
+    "duration": "45 Min.",
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null,
+    "registrationCount": 0
   },
   {
     "id": 25,
@@ -988,6 +667,35 @@
     "seriesId": "series_1787687533039"
   },
   {
+    "id": 14,
+    "title": "BiZ-BO",
+    "date": "2026-11-25",
+    "dateEnd": null,
+    "dateISO": "2026-11-25",
+    "time": null,
+    "location": null,
+    "category": "Sonstiges",
+    "type": "pflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "9"
+    ],
+    "desc": null,
+    "link": null,
+    "duration": "1 Std. 30 Min.",
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null,
+    "registrationCount": 0
+  },
+  {
     "id": 27,
     "title": "Berufsberatung",
     "date": "2026-12-09",
@@ -1106,6 +814,125 @@
     "seriesId": "series_1787687533039"
   },
   {
+    "id": 23,
+    "title": "Workshop: Bewerbung um einen Studienplatz",
+    "date": "2027-01-20",
+    "dateEnd": null,
+    "dateISO": "2027-01-20",
+    "time": "13:15",
+    "location": null,
+    "category": "Workshop",
+    "type": "wahlpflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "EF",
+      "Q1",
+      "Q2"
+    ],
+    "desc": "mindestens 2 von 4 Veranstaltungen bzw. die 2-StÃ¼ndige Veranstaltung aus dem Wahlpflichtprogramm",
+    "link": null,
+    "duration": "45 Min.",
+    "bookingCode": "gym26",
+    "timeslots": [],
+    "workshopSignup": true,
+    "workshopCapacity": 30,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null,
+    "registrationCount": 0
+  },
+  {
+    "id": 18,
+    "title": "Workshop: Wege nach dem Abitur",
+    "date": "2027-01-27",
+    "dateEnd": null,
+    "dateISO": "2027-01-27",
+    "time": "14:00",
+    "location": null,
+    "category": "Workshop",
+    "type": "wahlpflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "EF",
+      "Q1",
+      "Q2"
+    ],
+    "desc": null,
+    "link": null,
+    "duration": "1 Std. 30 Min.",
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null,
+    "registrationCount": 0
+  },
+  {
+    "id": 19,
+    "title": "Digitale Elternveranstaltung „Wege nach dem Abitur“,",
+    "date": "2027-01-27",
+    "dateEnd": null,
+    "dateISO": "2027-01-27",
+    "time": null,
+    "location": null,
+    "category": "Elternabend",
+    "type": "pflicht",
+    "audience": [
+      "eltern"
+    ],
+    "classes": [],
+    "desc": null,
+    "link": null,
+    "duration": "1 Std. 30 Min.",
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
+  },
+  {
+    "id": 16,
+    "title": "Workshop: Was kostet das Leben?",
+    "date": "2027-02-03",
+    "dateEnd": null,
+    "dateISO": "2027-02-03",
+    "time": null,
+    "location": null,
+    "category": "Workshop",
+    "type": "wahlpflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "EF",
+      "Q1",
+      "Q2"
+    ],
+    "desc": null,
+    "link": null,
+    "duration": "1 Std. 30 Min.",
+    "bookingCode": "gym26",
+    "timeslots": [],
+    "workshopSignup": true,
+    "workshopCapacity": 30,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null,
+    "registrationCount": 0
+  },
+  {
     "id": 29,
     "title": "Berufsberatung",
     "date": "2027-02-10",
@@ -1163,6 +990,125 @@
     "approved": true,
     "recurring": true,
     "seriesId": "series_1787687533039"
+  },
+  {
+    "id": 13,
+    "title": "Ausbildungsmesse Beverungen „Wir für unsere Region“",
+    "date": "2027-02-11",
+    "dateEnd": null,
+    "dateISO": "2027-02-11",
+    "time": null,
+    "location": "Stadthalle",
+    "category": "Ausbildungsmesse",
+    "type": "pflicht",
+    "audience": [
+      "schueler",
+      "lehrer",
+      "eltern"
+    ],
+    "classes": [
+      "9",
+      "10",
+      "EF",
+      "Q1",
+      "Q2"
+    ],
+    "desc": null,
+    "link": null,
+    "duration": null,
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
+  },
+  {
+    "id": 15,
+    "title": "Digitaler Elternabend „Wie kann ich meinen Sohn/meine Tochter bei der Berufs- und Studienwahl begleiten?“",
+    "date": "2027-02-24",
+    "dateEnd": null,
+    "dateISO": "2027-02-24",
+    "time": "18:30",
+    "location": null,
+    "category": "Elternabend",
+    "type": "freiwillig",
+    "audience": [
+      "eltern"
+    ],
+    "classes": [],
+    "desc": null,
+    "link": null,
+    "duration": "1 Std. 30 Min.",
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
+  },
+  {
+    "id": 20,
+    "title": "Informationstagen für Studieninteressierte der Georg-August-Universität Göttingen",
+    "date": "2027-03-09",
+    "dateEnd": null,
+    "dateISO": "2027-03-09",
+    "time": "09:00",
+    "location": "Göttingen",
+    "category": "Universität",
+    "type": "pflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "Q2"
+    ],
+    "desc": null,
+    "link": null,
+    "duration": "7 Std.",
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
+  },
+  {
+    "id": 21,
+    "title": "Workshop: Gap Year",
+    "date": "2027-03-10",
+    "dateEnd": null,
+    "dateISO": "2027-03-10",
+    "time": "13:15",
+    "location": null,
+    "category": "Workshop",
+    "type": "wahlpflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "EF",
+      "Q1",
+      "Q2"
+    ],
+    "desc": "mindestens 2 von 4 Veranstaltungen bzw. die 2-StÃ¼ndige Veranstaltung aus dem Wahlpflichtprogramm",
+    "link": null,
+    "duration": "45 Min.",
+    "bookingCode": "gym26",
+    "timeslots": [],
+    "workshopSignup": true,
+    "workshopCapacity": 30,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null,
+    "registrationCount": 0
   },
   {
     "id": 30,
@@ -1224,6 +1170,36 @@
     "seriesId": "series_1787687533039"
   },
   {
+    "id": 22,
+    "title": "Workshop - Duales Studium",
+    "date": "2027-03-17",
+    "dateEnd": null,
+    "dateISO": "2027-03-17",
+    "time": null,
+    "location": null,
+    "category": "Workshop",
+    "type": "wahlpflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "EF",
+      "Q1",
+      "Q2"
+    ],
+    "desc": "mindestens 2 von 4 Veranstaltungen bzw. die 2-Stündige Veranstaltung aus dem Wahlpflichtprogramm",
+    "link": null,
+    "duration": "45 Min.",
+    "bookingCode": "gym26",
+    "timeslots": [],
+    "workshopSignup": true,
+    "workshopCapacity": 30,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
+  },
+  {
     "id": 31,
     "title": "Berufsberatung",
     "date": "2027-04-14",
@@ -1281,6 +1257,36 @@
     "approved": true,
     "recurring": true,
     "seriesId": "series_1787687533039"
+  },
+  {
+    "id": 12,
+    "title": "Zukunftstag fÃ¼r MÃ¤dchen und Jungen (Girls' und Boys' Day)",
+    "date": "2027-04-22",
+    "dateEnd": null,
+    "dateISO": "2027-04-22",
+    "time": null,
+    "location": null,
+    "category": "Boys & Girls Day",
+    "type": "freiwillig",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "9",
+      "10"
+    ],
+    "desc": null,
+    "link": null,
+    "duration": null,
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null,
+    "registrationCount": 0
   },
   {
     "id": 32,
@@ -1458,5 +1464,61 @@
     "approved": true,
     "recurring": true,
     "seriesId": "series_1787687533039"
+  },
+  {
+    "id": 35,
+    "title": "EF Schülerbetriebspraktikum",
+    "date": "2027-01-14",
+    "dateEnd": "2027-02-01",
+    "dateISO": "2027-01-14",
+    "time": "08:00",
+    "location": null,
+    "category": "Praktikum",
+    "type": "pflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "EF"
+    ],
+    "desc": "14./15.1: Vorbereitung \nzwei Wochen im Betrieb\nNachbereitung am 01.02.",
+    "link": null,
+    "duration": null,
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
+  },
+  {
+    "id": 36,
+    "title": "10 Schülerbetriebspraktikum",
+    "date": "2027-06-25",
+    "dateEnd": "2027-07-05",
+    "dateISO": "2027-06-25",
+    "time": "08:00",
+    "location": null,
+    "category": "Praktikum",
+    "type": "pflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "10"
+    ],
+    "desc": "25.6. Vorbereitung\neine Woche im Betrieb\n05.07. Nachbereitung",
+    "link": null,
+    "duration": null,
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
   }
 ]
