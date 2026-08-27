@@ -516,8 +516,35 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": true,
-    "seriesId": "series_1787687533039",
-    "registrationCount": 0
+    "seriesId": "series_1787687533039"
+  },
+  {
+    "id": 39,
+    "title": "STEP1-Berufseinstiegsmesse",
+    "date": "2026-10-08",
+    "dateEnd": "2026-10-10",
+    "dateISO": "2026-10-08",
+    "time": null,
+    "location": "Tegelweg 33, 33034 Brakel",
+    "category": "Ausbildungsmesse",
+    "type": "freiwillig",
+    "audience": [
+      "schueler",
+      "lehrer",
+      "eltern"
+    ],
+    "classes": [],
+    "desc": "08.10. - 10.10.2026\nÖffnungszeiten\nDo 08:30-15:00 Uhr\nFr 08:30-13:00 Uhr\nSa 10:00-14:00 Uhr",
+    "link": "https://www.step1-hx.de/",
+    "duration": null,
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
   },
   {
     "id": 17,
@@ -545,8 +572,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
+    "seriesId": null
   },
   {
     "id": 25,
@@ -692,8 +718,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
+    "seriesId": null
   },
   {
     "id": 27,
@@ -814,6 +839,34 @@
     "seriesId": "series_1787687533039"
   },
   {
+    "id": 35,
+    "title": "EF Schülerbetriebspraktikum",
+    "date": "2027-01-14",
+    "dateEnd": "2027-02-01",
+    "dateISO": "2027-01-14",
+    "time": "08:00",
+    "location": null,
+    "category": "Praktikum",
+    "type": "pflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "EF"
+    ],
+    "desc": "14./15.1: Vorbereitung \nzwei Wochen im Betrieb\nNachbereitung am 01.02.",
+    "link": null,
+    "duration": null,
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
+  },
+  {
     "id": 23,
     "title": "Workshop: Bewerbung um einen Studienplatz",
     "date": "2027-01-20",
@@ -841,8 +894,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
+    "seriesId": null
   },
   {
     "id": 18,
@@ -872,19 +924,18 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
+    "seriesId": null
   },
   {
     "id": 19,
-    "title": "Digitale Elternveranstaltung „Wege nach dem Abitur“,",
+    "title": "Digitale Elternveranstaltung âWege nach dem Abiturâ,",
     "date": "2027-01-27",
     "dateEnd": null,
     "dateISO": "2027-01-27",
     "time": null,
     "location": null,
     "category": "Elternabend",
-    "type": "pflicht",
+    "type": "freiwillig",
     "audience": [
       "eltern"
     ],
@@ -899,7 +950,8 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null
+    "seriesId": null,
+    "registrationCount": 0
   },
   {
     "id": 16,
@@ -929,8 +981,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
+    "seriesId": null
   },
   {
     "id": 29,
@@ -1107,8 +1158,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
+    "seriesId": null
   },
   {
     "id": 30,
@@ -1285,8 +1335,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
+    "seriesId": null
   },
   {
     "id": 32,
@@ -1407,6 +1456,34 @@
     "seriesId": "series_1787687533039"
   },
   {
+    "id": 36,
+    "title": "10 Schülerbetriebspraktikum",
+    "date": "2027-06-25",
+    "dateEnd": "2027-07-05",
+    "dateISO": "2027-06-25",
+    "time": "08:00",
+    "location": null,
+    "category": "Praktikum",
+    "type": "pflicht",
+    "audience": [
+      "schueler"
+    ],
+    "classes": [
+      "10"
+    ],
+    "desc": "25.6. Vorbereitung\neine Woche im Betrieb\n05.07. Nachbereitung",
+    "link": null,
+    "duration": null,
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
+  },
+  {
     "id": 34,
     "title": "Berufsberatung",
     "date": "2027-07-14",
@@ -1466,62 +1543,6 @@
     "seriesId": "series_1787687533039"
   },
   {
-    "id": 35,
-    "title": "EF Schülerbetriebspraktikum",
-    "date": "2027-01-14",
-    "dateEnd": "2027-02-01",
-    "dateISO": "2027-01-14",
-    "time": "08:00",
-    "location": null,
-    "category": "Praktikum",
-    "type": "pflicht",
-    "audience": [
-      "schueler"
-    ],
-    "classes": [
-      "EF"
-    ],
-    "desc": "14./15.1: Vorbereitung \nzwei Wochen im Betrieb\nNachbereitung am 01.02.",
-    "link": null,
-    "duration": null,
-    "bookingCode": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
-    "id": 36,
-    "title": "10 Schülerbetriebspraktikum",
-    "date": "2027-06-25",
-    "dateEnd": "2027-07-05",
-    "dateISO": "2027-06-25",
-    "time": "08:00",
-    "location": null,
-    "category": "Praktikum",
-    "type": "pflicht",
-    "audience": [
-      "schueler"
-    ],
-    "classes": [
-      "10"
-    ],
-    "desc": "25.6. Vorbereitung\neine Woche im Betrieb\n05.07. Nachbereitung",
-    "link": null,
-    "duration": null,
-    "bookingCode": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
     "id": 37,
     "title": "STEP1-Berufseinstiegsmesse",
     "date": "2027-10-14",
@@ -1575,36 +1596,6 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
-  },
-  {
-    "id": 39,
-    "title": "STEP1-Berufseinstiegsmesse",
-    "date": "2026-10-08",
-    "dateEnd": "2026-10-10",
-    "dateISO": "2026-10-08",
-    "time": null,
-    "location": "Tegelweg 33, 33034 Brakel",
-    "category": "Ausbildungsmesse",
-    "type": "freiwillig",
-    "audience": [
-      "schueler",
-      "lehrer",
-      "eltern"
-    ],
-    "classes": [],
-    "desc": "08.10. - 10.10.2026\nÖffnungszeiten\nDo 08:30-15:00 Uhr\nFr 08:30-13:00 Uhr\nSa 10:00-14:00 Uhr",
-    "link": "https://www.step1-hx.de/",
-    "duration": null,
-    "bookingCode": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
+    "seriesId": null
   }
 ]
