@@ -1597,5 +1597,37 @@
     "approved": true,
     "recurring": false,
     "seriesId": null
+  },
+  {
+    "id": 40,
+    "title": "X-Mas Réunion",
+    "date": "2026-12-22",
+    "dateEnd": null,
+    "dateISO": "2026-12-22",
+    "time": "10:00",
+    "location": null,
+    "category": "Sonstiges",
+    "type": "pflicht",
+    "audience": [
+      "schueler",
+      "lehrer",
+      "eltern"
+    ],
+    "classes": [
+      "EF",
+      "Q1",
+      "Q2"
+    ],
+    "desc": "Ehemaligentreffen und Vorstellung der Lebenswege",
+    "link": null,
+    "duration": "3 Std.",
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
   }
 ]
