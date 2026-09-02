@@ -466,7 +466,7 @@
     "dateEnd": null,
     "dateISO": "2026-09-09",
     "time": null,
-    "location": "GegenÃ¼ber R201 - Stubo-Raum",
+    "location": "Gegenueber R201 im Stubo-Raum",
     "category": "Berufsberatung",
     "type": "freiwillig",
     "audience": [
@@ -475,37 +475,37 @@
       "eltern"
     ],
     "classes": [],
-    "desc": null,
+    "desc": "Aus datenschutzrechtlichen Gründen bitte keine Namen angeben, sondern einfach einen Termin buchen und als Name eine Zahl (zum Beispiel \"1\") eingeben. \nZusätzlich dann bitte eine E-Mail an Frau Reckert-Paixao mit dem gewählten Termin und Name.\nVielen Dank",
     "link": null,
     "duration": "45 Min.",
-    "bookingCode": "gym26",
+    "bookingCode": "gymb1",
     "timeslots": [
       {
-        "id": "sl_0_1787687533039_b0",
+        "id": "sl_0_1788375106434",
         "name": "2. Stunde",
         "capacity": 1,
         "registrants": []
       },
       {
-        "id": "sl_1_1787687533039_b1",
+        "id": "sl_1_1788375106434",
         "name": "3. Stunde",
         "capacity": 1,
         "registrants": []
       },
       {
-        "id": "sl_2_1787687533039_b2",
+        "id": "sl_2_1788375106434",
         "name": "4. Stunde",
         "capacity": 1,
         "registrants": []
       },
       {
-        "id": "sl_3_1787687533039_b3",
+        "id": "sl_3_1788375106434",
         "name": "5. Stunde",
         "capacity": 1,
         "registrants": []
       },
       {
-        "id": "sl_4_1787687533039_b4",
+        "id": "sl_4_1788375106434",
         "name": "6. Stunde",
         "capacity": 1,
         "registrants": []
@@ -515,8 +515,9 @@
     "workshopCapacity": 0,
     "workshopRegistrants": [],
     "approved": true,
-    "recurring": true,
-    "seriesId": "series_1787687533039"
+    "recurring": false,
+    "seriesId": null,
+    "registrationCount": 0
   },
   {
     "id": 39,
@@ -950,8 +951,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
+    "seriesId": null
   },
   {
     "id": 16,
