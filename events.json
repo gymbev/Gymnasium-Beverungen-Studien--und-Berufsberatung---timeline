@@ -496,7 +496,13 @@
         "id": "sl_2_1788472361664",
         "name": "4. Stunde",
         "capacity": 1,
-        "registrants": []
+        "registrants": [
+          {
+            "id": "",
+            "name": "belegt",
+            "className": ""
+          }
+        ]
       },
       {
         "id": "sl_3_1788472361664",
@@ -927,7 +933,8 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null
+    "seriesId": null,
+    "registrationCount": 0
   },
   {
     "id": 18,
@@ -950,14 +957,15 @@
     "desc": null,
     "link": null,
     "duration": "1 Std. 30 Min.",
-    "bookingCode": null,
+    "bookingCode": "gym26",
     "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
+    "workshopSignup": true,
+    "workshopCapacity": 30,
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null
+    "seriesId": null,
+    "registrationCount": 0
   },
   {
     "id": 19,
