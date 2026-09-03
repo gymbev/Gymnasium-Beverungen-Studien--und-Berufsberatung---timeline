@@ -2235,49 +2235,124 @@ async function bookWorkshopViaApi(eventId, studentName, bookingCode, studentClas
   if(!res.ok || data.ok === false) throw new Error(data.error || data.message || 'Workshop-Anmeldung fehlgeschlagen.');
   return data;
 }
+let pendingBooking = null;
 
+function showBookingPrivacy(data){
+  pendingBooking = data;
+  showModal('bookingPrivacyModal');
+  lucide.createIcons();
+}
+
+function cancelBookingPrivacy(){
+  pendingBooking = null;
+  closeModal('bookingPrivacyModal');
+}
+
+async function confirmBookingPrivacy(){
+  if(!pendingBooking) return;
+
+  const booking = pendingBooking;
+
+  closeModal('bookingPrivacyModal');
+
+  try{
+    if(booking.mode === 'slot'){
+      await bookSlotViaApi(
+        booking.eventId,
+        booking.slotId,
+        booking.studentName,
+        booking.bookingCode,
+        booking.studentClass
+      );
+
+      alert('Buchung gespeichert.');
+    } else {
+      await bookWorkshopViaApi(
+        booking.eventId,
+        booking.studentName,
+        booking.bookingCode,
+        booking.studentClass
+      );
+
+      alert('Anmeldung gespeichert.');
+    }
+
+    pendingBooking = null;
+    await openDetail(booking.eventId);
+
+  }catch(err){
+    console.error(err);
+
+    alert(
+      err.message ||
+      'Die Anmeldung konnte nicht gespeichert werden. Bitte prüfe den Buchungscode.'
+    );
+  }
+}
 window.bookEventSlot = async function(eventId, slotId){
   const nameInput = $('slotName_'+slotId);
   const klasseInput = $('slotKlasse_'+slotId);
   const codeInput = $('slotCode_'+slotId);
+
   const studentName = nameInput ? nameInput.value.trim() : '';
   const studentClass = klasseInput ? klasseInput.value.trim() : '';
   const bookingCode = codeInput ? normalizeBookingCode(codeInput.value) : '';
+
   if(codeInput) codeInput.value = bookingCode;
 
-  if(!studentName){ alert('Bitte deinen Namen eingeben.'); nameInput?.focus(); return; }
-  if(!bookingCode){ alert('Bitte den Buchungscode eingeben.'); codeInput?.focus(); return; }
-
-  try{
-    await bookSlotViaApi(eventId, slotId, studentName, bookingCode, studentClass);
-    alert('Buchung gespeichert.');
-    await openDetail(eventId);
-  }catch(err){
-    console.error(err);
-    alert(err.message || 'Buchung fehlgeschlagen. Bitte prüfe den Buchungscode.');
+  if(!studentName){
+    alert('Bitte deinen Namen oder einen Platzhalter eingeben.');
+    nameInput?.focus();
+    return;
   }
+
+  if(!bookingCode){
+    alert('Bitte den Buchungscode eingeben.');
+    codeInput?.focus();
+    return;
+  }
+
+  showBookingPrivacy({
+    mode: 'slot',
+    eventId,
+    slotId,
+    studentName,
+    studentClass,
+    bookingCode
+  });
 };
 
 window.bookWorkshop = async function(eventId){
   const nameInput = $('wsName_'+eventId);
   const klasseInput = $('wsKlasse_'+eventId);
   const codeInput = $('wsCode_'+eventId);
+
   const studentName = nameInput ? nameInput.value.trim() : '';
   const studentClass = klasseInput ? klasseInput.value.trim() : '';
   const bookingCode = codeInput ? normalizeBookingCode(codeInput.value) : '';
+
   if(codeInput) codeInput.value = bookingCode;
 
-  if(!studentName){ alert('Bitte Vor- und Nachnamen eingeben.'); nameInput?.focus(); return; }
-  if(!bookingCode){ alert('Bitte den Buchungscode eingeben.'); codeInput?.focus(); return; }
-
-  try{
-    await bookWorkshopViaApi(eventId, studentName, bookingCode, studentClass);
-    alert('Anmeldung gespeichert.');
-    await openDetail(eventId);
-  }catch(err){
-    console.error(err);
-    alert(err.message || 'Anmeldung fehlgeschlagen. Bitte prüfe den Buchungscode.');
+  if(!studentName){
+    alert('Bitte deinen Namen oder einen Platzhalter eingeben.');
+    nameInput?.focus();
+    return;
   }
+
+  if(!bookingCode){
+    alert('Bitte den Buchungscode eingeben.');
+    codeInput?.focus();
+    return;
+  }
+
+  showBookingPrivacy({
+    mode: 'workshop',
+    eventId,
+    slotId: null,
+    studentName,
+    studentClass,
+    bookingCode
+  });
 };
 
 // ===== EXPORT / IMPORT / GITHUB =====
@@ -2577,5 +2652,41 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 </script>
 
+<!-- DATENSCHUTZ-BESTÄTIGUNG VOR EINER BUCHUNG -->
+<div class="modal-backdrop hidden" id="bookingPrivacyModal" role="dialog" aria-modal="true" aria-labelledby="bookingPrivacyTitle">
+  <div class="modal" style="max-width:560px">
+    <div class="modal-header">
+      <i data-lucide="shield-check" style="width:20px;height:20px;color:var(--color-primary)"></i>
+      <h2 id="bookingPrivacyTitle">Datenschutzhinweis zur Anmeldung</h2>
+      <button class="icon-btn" type="button" onclick="cancelBookingPrivacy()" aria-label="Hinweis schließen">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
 
+    <div class="modal-body">
+      <p style="margin-bottom:var(--space-3);font-size:var(--text-sm)">
+        Mit dem Abschicken der Anmeldung werden dein eingegebener Name und deine Klasse zur Organisation dieses Termins gespeichert.
+      </p>
+
+      <p style="margin-bottom:var(--space-3);font-size:var(--text-sm);color:var(--color-text-muted)">
+        Die Angaben werden auf geschützten Servern von Cloudflare gespeichert und sind nicht öffentlich einsehbar. Sie können nur von berechtigten Administrator:innen für die Organisation des Termins eingesehen werden.
+      </p>
+
+      <p style="padding:var(--space-3);border-radius:var(--radius-md);background:var(--color-surface-offset);font-size:var(--text-sm);color:var(--color-text-muted)">
+        <strong style="color:var(--color-text)">Alternative über IServ:</strong><br>
+        Wenn du nicht möchtest, dass dein Name auf den Cloudflare-Servern gespeichert wird, kannst du als Name einen Platzhalter eingeben, zum Beispiel eine Zahl. Schreibe anschließend zusätzlich über IServ an Herrn Nauendorf und nenne den gebuchten Termin bzw. Slot sowie deinen Vor- und Nachnamen.
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-sm btn-secondary" onclick="cancelBookingPrivacy()">
+        Abbrechen
+      </button>
+      <button type="button" class="btn-sm btn-primary" onclick="confirmBookingPrivacy()">
+        <i data-lucide="send" style="width:12px;height:12px"></i>
+        Abschicken
+      </button>
+    </div>
+  </div>
+</div>
 </body></html>
