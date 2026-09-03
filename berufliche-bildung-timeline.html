@@ -2236,19 +2236,49 @@ async function bookWorkshopViaApi(eventId, studentName, bookingCode, studentClas
   return data;
 }
 let pendingBooking = null;
+function updateBookingPrivacyButton(){
+  const checkbox = document.getElementById('bookingPrivacyConsent');
+  const submitButton = document.getElementById('bookingPrivacySubmitButton');
 
+  if(!checkbox || !submitButton) return;
+
+  submitButton.disabled = !checkbox.checked;
+  submitButton.style.opacity = checkbox.checked ? '1' : '.55';
+  submitButton.style.cursor = checkbox.checked ? 'pointer' : 'not-allowed';
+}
 function showBookingPrivacy(data){
   pendingBooking = data;
+
+  const checkbox = document.getElementById('bookingPrivacyConsent');
+  const submitButton = document.getElementById('bookingPrivacySubmitButton');
+
+  if(checkbox) checkbox.checked = false;
+
+  if(submitButton){
+    submitButton.disabled = true;
+    submitButton.style.opacity = '.55';
+    submitButton.style.cursor = 'not-allowed';
+  }
+
   showModal('bookingPrivacyModal');
-  lucide.createIcons();
+
+  if(window.lucide){
+    lucide.createIcons();
+  }
 }
 
 function cancelBookingPrivacy(){
   pendingBooking = null;
   closeModal('bookingPrivacyModal');
 }
-
 async function confirmBookingPrivacy(){
+  const checkbox = document.getElementById('bookingPrivacyConsent');
+
+  if(!checkbox || !checkbox.checked){
+    alert('Bitte bestätige zuerst den Datenschutzhinweis.');
+    return;
+  }
+
   if(!pendingBooking) return;
 
   const booking = pendingBooking;
@@ -2266,7 +2296,7 @@ async function confirmBookingPrivacy(){
       );
 
       alert('Buchung gespeichert.');
-    } else {
+    }else{
       await bookWorkshopViaApi(
         booking.eventId,
         booking.studentName,
@@ -2289,6 +2319,7 @@ async function confirmBookingPrivacy(){
     );
   }
 }
+
 window.bookEventSlot = async function(eventId, slotId){
   const nameInput = $('slotName_'+slotId);
   const klasseInput = $('slotKlasse_'+slotId);
@@ -2683,6 +2714,127 @@ document.addEventListener('DOMContentLoaded', async () => {
         Abbrechen
       </button>
       <button type="button" class="btn-sm btn-primary" onclick="confirmBookingPrivacy()">
+        <i data-lucide="send" style="width:12px;height:12px"></i>
+        Abschicken
+      </button>
+    </div>
+  </div>
+</div>
+  <!-- Datenschutzhinweis vor Termin- oder Workshop-Buchung -->
+<div
+  class="modal-backdrop hidden"
+  id="bookingPrivacyModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="bookingPrivacyTitle"
+>
+  <div class="modal" style="max-width:580px">
+    <div class="modal-header">
+      <i
+        data-lucide="shield-check"
+        style="width:20px;height:20px;color:var(--color-primary)"
+      ></i>
+
+      <h2 id="bookingPrivacyTitle">Datenschutzhinweis zur Anmeldung</h2>
+
+      <button
+        class="icon-btn"
+        type="button"
+        onclick="cancelBookingPrivacy()"
+        aria-label="Datenschutzhinweis schließen"
+      >
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <p style="font-size:var(--text-sm); line-height:1.5; margin:0 0 12px;">
+        <strong>Datenschutzhinweis zur Terminbuchung:</strong><br>
+        Für die Organisation von Angeboten der beruflichen Orientierung speichern wir
+        deinen Namen, deine Klasse, den gebuchten Termin beziehungsweise Zeitslot
+        sowie den Zeitpunkt der Buchung. Die Daten sind nicht öffentlich sichtbar
+        und werden nur von berechtigten schulischen Organisator:innen eingesehen.
+      </p>
+
+      <p style="font-size:var(--text-sm); line-height:1.5; margin:0 0 12px;">
+        Die technische Speicherung erfolgt in einer nicht öffentlich erreichbaren
+        Cloudflare-D1-Datenbank. Die Buchungsdaten werden spätestens einen Tag nach
+        dem jeweiligen Termin gelöscht.
+      </p>
+
+      <p style="
+        font-size:var(--text-sm);
+        line-height:1.5;
+        margin:0 0 14px;
+        padding:12px;
+        border-radius:var(--radius-md);
+        background:var(--color-surface-offset);
+      ">
+        <strong>Alternative über IServ:</strong><br>
+        Wenn du nicht möchtest, dass dein Name und deine Klasse über Cloudflare
+        gespeichert werden, gib bei der Buchung bitte einen Platzhalter ein,
+        zum Beispiel eine Zahl. Schreibe anschließend zusätzlich über IServ an
+        Herrn Nauendorf und nenne den gebuchten Termin beziehungsweise Zeitslot,
+        deinen Vor- und Nachnamen sowie deine Klasse. Die Anmeldung ist dann erst
+        verbindlich, wenn die IServ-Nachricht eingegangen ist.
+      </p>
+
+      <label style="
+        display:flex;
+        align-items:flex-start;
+        gap:10px;
+        padding:12px;
+        border:1px solid var(--color-border);
+        border-radius:var(--radius-md);
+        cursor:pointer;
+        font-size:var(--text-sm);
+        line-height:1.45;
+      ">
+        <input
+          id="bookingPrivacyConsent"
+          type="checkbox"
+          onchange="updateBookingPrivacyButton()"
+          style="
+            width:18px;
+            height:18px;
+            margin-top:2px;
+            flex:0 0 auto;
+            accent-color:var(--color-primary);
+          "
+        >
+
+        <span>
+          Ich habe den Datenschutzhinweis zur Terminbuchung und die
+          <a
+            href="https://gymbev.de/datenschutzerklaerung"
+            target="_blank"
+            rel="noopener"
+            onclick="event.stopPropagation()"
+          >
+            Datenschutzerklärung der Schule
+          </a>
+          gelesen und zur Kenntnis genommen.
+        </span>
+      </label>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn-sm btn-secondary"
+        onclick="cancelBookingPrivacy()"
+      >
+        Abbrechen
+      </button>
+
+      <button
+        id="bookingPrivacySubmitButton"
+        type="button"
+        class="btn-sm btn-primary"
+        onclick="confirmBookingPrivacy()"
+        disabled
+        style="opacity:.55;cursor:not-allowed"
+      >
         <i data-lucide="send" style="width:12px;height:12px"></i>
         Abschicken
       </button>
