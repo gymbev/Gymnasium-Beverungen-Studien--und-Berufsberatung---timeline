@@ -475,37 +475,37 @@
       "eltern"
     ],
     "classes": [],
-    "desc": "Aus datenschutzrechtlichen Gründen bitte keine Namen angeben, sondern einfach einen Termin buchen und als Name eine Zahl (zum Beispiel \"1\") eingeben. \nZusätzlich dann bitte eine E-Mail an Frau Reckert-Paixao mit dem gewählten Termin und Name.\nVielen Dank",
+    "desc": null,
     "link": null,
     "duration": "45 Min.",
     "bookingCode": "gymb1",
     "timeslots": [
       {
-        "id": "sl_0_1788375106434",
+        "id": "sl_0_1788472361664",
         "name": "2. Stunde",
         "capacity": 1,
         "registrants": []
       },
       {
-        "id": "sl_1_1788375106434",
+        "id": "sl_1_1788472361664",
         "name": "3. Stunde",
         "capacity": 1,
         "registrants": []
       },
       {
-        "id": "sl_2_1788375106434",
+        "id": "sl_2_1788472361664",
         "name": "4. Stunde",
         "capacity": 1,
         "registrants": []
       },
       {
-        "id": "sl_3_1788375106434",
+        "id": "sl_3_1788472361664",
         "name": "5. Stunde",
         "capacity": 1,
         "registrants": []
       },
       {
-        "id": "sl_4_1788375106434",
+        "id": "sl_4_1788472361664",
         "name": "6. Stunde",
         "capacity": 1,
         "registrants": []
@@ -517,7 +517,7 @@
     "approved": true,
     "recurring": false,
     "seriesId": null,
-    "registrationCount": 0
+    "registrationCount": 1
   },
   {
     "id": 39,
@@ -779,6 +779,38 @@
     "approved": true,
     "recurring": true,
     "seriesId": "series_1787687533039"
+  },
+  {
+    "id": 40,
+    "title": "X-Mas Réunion",
+    "date": "2026-12-22",
+    "dateEnd": null,
+    "dateISO": "2026-12-22",
+    "time": "10:00",
+    "location": null,
+    "category": "Sonstiges",
+    "type": "pflicht",
+    "audience": [
+      "schueler",
+      "lehrer",
+      "eltern"
+    ],
+    "classes": [
+      "EF",
+      "Q1",
+      "Q2"
+    ],
+    "desc": "Ehemaligentreffen und Vorstellung der Lebenswege",
+    "link": null,
+    "duration": "3 Std.",
+    "bookingCode": null,
+    "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
   },
   {
     "id": 28,
@@ -1589,38 +1621,6 @@
     "desc": "https://www.step1-hx.de/",
     "link": "https://www.step1-hx.de/",
     "duration": null,
-    "bookingCode": null,
-    "timeslots": [],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
-    "id": 40,
-    "title": "X-Mas Réunion",
-    "date": "2026-12-22",
-    "dateEnd": null,
-    "dateISO": "2026-12-22",
-    "time": "10:00",
-    "location": null,
-    "category": "Sonstiges",
-    "type": "pflicht",
-    "audience": [
-      "schueler",
-      "lehrer",
-      "eltern"
-    ],
-    "classes": [
-      "EF",
-      "Q1",
-      "Q2"
-    ],
-    "desc": "Ehemaligentreffen und Vorstellung der Lebenswege",
-    "link": null,
-    "duration": "3 Std.",
     "bookingCode": null,
     "timeslots": [],
     "workshopSignup": false,
