@@ -691,12 +691,13 @@
     "duration": "45 Min.",
     "bookingCode": "gym26",
     "timeslots": [],
-    "workshopSignup": true,
-    "workshopCapacity": 30,
+    "workshopSignup": false,
+    "workshopCapacity": 0,
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null
+    "seriesId": null,
+    "registrationCount": 0
   },
   {
     "id": 18,
@@ -989,7 +990,6 @@
     "recurring": false,
     "seriesId": null
   },
-
   {
     "id": 38,
     "title": "STEP1-Berufseinstiegsmesse",
