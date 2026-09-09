@@ -522,8 +522,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 1
+    "seriesId": null
   },
   {
     "id": 39,
@@ -551,8 +550,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
+    "seriesId": null
   },
   {
     "id": 17,
@@ -639,8 +637,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": true,
-    "seriesId": "series_1787687533039",
-    "registrationCount": 0
+    "seriesId": "series_1787687533039"
   },
   {
     "id": 14,
@@ -727,8 +724,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
+    "seriesId": null
   },
   {
     "id": 40,
