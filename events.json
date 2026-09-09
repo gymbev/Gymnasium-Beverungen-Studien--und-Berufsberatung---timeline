@@ -581,65 +581,6 @@
     "seriesId": null
   },
   {
-    "id": 26,
-    "title": "Berufsberatung",
-    "date": "2026-11-04",
-    "dateEnd": null,
-    "dateISO": "2026-11-04",
-    "time": null,
-    "location": "Gegenüber R201 - Stubo-Raum",
-    "category": "Berufsberatung",
-    "type": "freiwillig",
-    "audience": [
-      "schueler",
-      "lehrer",
-      "eltern"
-    ],
-    "classes": [],
-    "desc": null,
-    "link": null,
-    "duration": "45 Min.",
-    "bookingCode": "gym26",
-    "timeslots": [
-      {
-        "id": "sl_0_1787687533039_c1",
-        "name": "2. Stunde",
-        "capacity": 1,
-        "registrants": []
-      },
-      {
-        "id": "sl_1_1787687533039_c1",
-        "name": "3. Stunde",
-        "capacity": 1,
-        "registrants": []
-      },
-      {
-        "id": "sl_2_1787687533039_c1",
-        "name": "4. Stunde",
-        "capacity": 1,
-        "registrants": []
-      },
-      {
-        "id": "sl_3_1787687533039_c1",
-        "name": "5. Stunde",
-        "capacity": 1,
-        "registrants": []
-      },
-      {
-        "id": "sl_4_1787687533039_c1",
-        "name": "6. Stunde",
-        "capacity": 1,
-        "registrants": []
-      }
-    ],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": true,
-    "seriesId": "series_1787687533039"
-  },
-  {
     "id": 14,
     "title": "BiZ-BO",
     "date": "2026-11-25",
