@@ -581,6 +581,65 @@
     "seriesId": null
   },
   {
+    "id": 26,
+    "title": "Berufsberatung",
+    "date": "2026-11-04",
+    "dateEnd": null,
+    "dateISO": "2026-11-04",
+    "time": null,
+    "location": "Gegenüber R201 - Stubo-Raum",
+    "category": "Berufsberatung",
+    "type": "freiwillig",
+    "audience": [
+      "schueler",
+      "lehrer",
+      "eltern"
+    ],
+    "classes": [],
+    "desc": null,
+    "link": null,
+    "duration": "45 Min.",
+    "bookingCode": "gym26",
+    "timeslots": [
+      {
+        "id": "sl_0_1787687533039_c1",
+        "name": "2. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_1_1787687533039_c1",
+        "name": "3. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_2_1787687533039_c1",
+        "name": "4. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_3_1787687533039_c1",
+        "name": "5. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_4_1787687533039_c1",
+        "name": "6. Stunde",
+        "capacity": 1,
+        "registrants": []
+      }
+    ],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": true,
+    "seriesId": "series_1787687533039"
+  },
+  {
     "id": 14,
     "title": "BiZ-BO",
     "date": "2026-11-25",
@@ -601,6 +660,65 @@
     "duration": "1 Std. 30 Min.",
     "bookingCode": null,
     "timeslots": [],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": false,
+    "seriesId": null
+  },
+  {
+    "id": 27,
+    "title": "Berufsberatung",
+    "date": "2026-12-09",
+    "dateEnd": null,
+    "dateISO": "2026-12-09",
+    "time": "08:50",
+    "location": "Stubo-Raum",
+    "category": "Berufsberatung",
+    "type": "freiwillig",
+    "audience": [
+      "schueler",
+      "lehrer",
+      "eltern"
+    ],
+    "classes": [],
+    "desc": "Anmeldung über den Link unten!",
+    "link": "https://gymbev.schulserver.de/iserv/courseselection/621",
+    "duration": "4 Std. 25 Min.",
+    "bookingCode": "gym26",
+    "timeslots": [
+      {
+        "id": "sl_0_1787687533039_c2",
+        "name": "2. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_1_1787687533039_c2",
+        "name": "3. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_2_1787687533039_c2",
+        "name": "4. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_3_1787687533039_c2",
+        "name": "5. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_4_1787687533039_c2",
+        "name": "6. Stunde",
+        "capacity": 1,
+        "registrants": []
+      }
+    ],
     "workshopSignup": false,
     "workshopCapacity": 0,
     "workshopRegistrants": [],
@@ -639,6 +757,65 @@
     "approved": true,
     "recurring": false,
     "seriesId": null
+  },
+  {
+    "id": 28,
+    "title": "Berufsberatung",
+    "date": "2027-01-13",
+    "dateEnd": null,
+    "dateISO": "2027-01-13",
+    "time": null,
+    "location": "Gegenüber R201 - Stubo-Raum",
+    "category": "Berufsberatung",
+    "type": "freiwillig",
+    "audience": [
+      "schueler",
+      "lehrer",
+      "eltern"
+    ],
+    "classes": [],
+    "desc": null,
+    "link": null,
+    "duration": "45 Min.",
+    "bookingCode": "gym26",
+    "timeslots": [
+      {
+        "id": "sl_0_1787687533039_c3",
+        "name": "2. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_1_1787687533039_c3",
+        "name": "3. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_2_1787687533039_c3",
+        "name": "4. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_3_1787687533039_c3",
+        "name": "5. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_4_1787687533039_c3",
+        "name": "6. Stunde",
+        "capacity": 1,
+        "registrants": []
+      }
+    ],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": true,
+    "seriesId": "series_1787687533039"
   },
   {
     "id": 35,
@@ -785,6 +962,65 @@
     "seriesId": null
   },
   {
+    "id": 29,
+    "title": "Berufsberatung",
+    "date": "2027-02-10",
+    "dateEnd": null,
+    "dateISO": "2027-02-10",
+    "time": null,
+    "location": "Gegenüber R201 - Stubo-Raum",
+    "category": "Berufsberatung",
+    "type": "freiwillig",
+    "audience": [
+      "schueler",
+      "lehrer",
+      "eltern"
+    ],
+    "classes": [],
+    "desc": null,
+    "link": null,
+    "duration": "45 Min.",
+    "bookingCode": "gym26",
+    "timeslots": [
+      {
+        "id": "sl_0_1787687533039_c4",
+        "name": "2. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_1_1787687533039_c4",
+        "name": "3. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_2_1787687533039_c4",
+        "name": "4. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_3_1787687533039_c4",
+        "name": "5. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_4_1787687533039_c4",
+        "name": "6. Stunde",
+        "capacity": 1,
+        "registrants": []
+      }
+    ],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": true,
+    "seriesId": "series_1787687533039"
+  },
+  {
     "id": 13,
     "title": "Ausbildungsmesse Beverungen „Wir für unsere Region“",
     "date": "2027-02-11",
@@ -903,6 +1139,65 @@
     "seriesId": null
   },
   {
+    "id": 30,
+    "title": "Berufsberatung",
+    "date": "2027-03-10",
+    "dateEnd": null,
+    "dateISO": "2027-03-10",
+    "time": null,
+    "location": "Gegenüber R201 - Stubo-Raum",
+    "category": "Berufsberatung",
+    "type": "freiwillig",
+    "audience": [
+      "schueler",
+      "lehrer",
+      "eltern"
+    ],
+    "classes": [],
+    "desc": null,
+    "link": null,
+    "duration": "45 Min.",
+    "bookingCode": "gym26",
+    "timeslots": [
+      {
+        "id": "sl_0_1787687533039_c5",
+        "name": "2. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_1_1787687533039_c5",
+        "name": "3. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_2_1787687533039_c5",
+        "name": "4. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_3_1787687533039_c5",
+        "name": "5. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_4_1787687533039_c5",
+        "name": "6. Stunde",
+        "capacity": 1,
+        "registrants": []
+      }
+    ],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": true,
+    "seriesId": "series_1787687533039"
+  },
+  {
     "id": 22,
     "title": "Workshop - Duales Studium",
     "date": "2027-03-17",
@@ -931,6 +1226,65 @@
     "approved": true,
     "recurring": false,
     "seriesId": null
+  },
+  {
+    "id": 31,
+    "title": "Berufsberatung",
+    "date": "2027-04-14",
+    "dateEnd": null,
+    "dateISO": "2027-04-14",
+    "time": null,
+    "location": "Gegenüber R201 - Stubo-Raum",
+    "category": "Berufsberatung",
+    "type": "freiwillig",
+    "audience": [
+      "schueler",
+      "lehrer",
+      "eltern"
+    ],
+    "classes": [],
+    "desc": null,
+    "link": null,
+    "duration": "45 Min.",
+    "bookingCode": "gym26",
+    "timeslots": [
+      {
+        "id": "sl_0_1787687533039_c6",
+        "name": "2. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_1_1787687533039_c6",
+        "name": "3. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_2_1787687533039_c6",
+        "name": "4. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_3_1787687533039_c6",
+        "name": "5. Stunde",
+        "capacity": 1,
+        "registrants": []
+      },
+      {
+        "id": "sl_4_1787687533039_c6",
+        "name": "6. Stunde",
+        "capacity": 1,
+        "registrants": []
+      }
+    ],
+    "workshopSignup": false,
+    "workshopCapacity": 0,
+    "workshopRegistrants": [],
+    "approved": true,
+    "recurring": true,
+    "seriesId": "series_1787687533039"
   },
   {
     "id": 12,
