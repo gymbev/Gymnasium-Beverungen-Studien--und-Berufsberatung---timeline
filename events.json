@@ -522,8 +522,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 1
+    "seriesId": null
   },
   {
     "id": 39,
@@ -638,7 +637,8 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": true,
-    "seriesId": "series_1787687533039"
+    "seriesId": "series_1787687533039",
+    "registrationCount": 0
   },
   {
     "id": 26,
@@ -697,7 +697,8 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": true,
-    "seriesId": "series_1787687533039"
+    "seriesId": "series_1787687533039",
+    "registrationCount": 0
   },
   {
     "id": 14,
@@ -733,8 +734,8 @@
     "date": "2026-12-09",
     "dateEnd": null,
     "dateISO": "2026-12-09",
-    "time": null,
-    "location": "Gegenüber R201 - Stubo-Raum",
+    "time": "08:50",
+    "location": "Stubo-Raum",
     "category": "Berufsberatung",
     "type": "freiwillig",
     "audience": [
@@ -743,9 +744,9 @@
       "eltern"
     ],
     "classes": [],
-    "desc": null,
-    "link": null,
-    "duration": "45 Min.",
+    "desc": "Anmeldung über den Link unten!",
+    "link": "https://gymbev.schulserver.de/iserv/courseselection/621",
+    "duration": "4 Std. 25 Min.",
     "bookingCode": "gym26",
     "timeslots": [
       {
@@ -783,8 +784,9 @@
     "workshopCapacity": 0,
     "workshopRegistrants": [],
     "approved": true,
-    "recurring": true,
-    "seriesId": "series_1787687533039"
+    "recurring": false,
+    "seriesId": null,
+    "registrationCount": 0
   },
   {
     "id": 40,
@@ -933,8 +935,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
+    "seriesId": null
   },
   {
     "id": 18,
@@ -964,8 +965,7 @@
     "workshopRegistrants": [],
     "approved": true,
     "recurring": false,
-    "seriesId": null,
-    "registrationCount": 0
+    "seriesId": null
   },
   {
     "id": 19,
