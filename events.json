@@ -609,65 +609,6 @@
     "seriesId": null
   },
   {
-    "id": 27,
-    "title": "Berufsberatung",
-    "date": "2026-12-09",
-    "dateEnd": null,
-    "dateISO": "2026-12-09",
-    "time": "08:50",
-    "location": "Stubo-Raum",
-    "category": "Berufsberatung",
-    "type": "freiwillig",
-    "audience": [
-      "schueler",
-      "lehrer",
-      "eltern"
-    ],
-    "classes": [],
-    "desc": "Anmeldung über den Link unten!",
-    "link": "https://gymbev.schulserver.de/iserv/courseselection/621",
-    "duration": "4 Std. 25 Min.",
-    "bookingCode": "gym26",
-    "timeslots": [
-      {
-        "id": "sl_0_1787687533039_c2",
-        "name": "2. Stunde",
-        "capacity": 1,
-        "registrants": []
-      },
-      {
-        "id": "sl_1_1787687533039_c2",
-        "name": "3. Stunde",
-        "capacity": 1,
-        "registrants": []
-      },
-      {
-        "id": "sl_2_1787687533039_c2",
-        "name": "4. Stunde",
-        "capacity": 1,
-        "registrants": []
-      },
-      {
-        "id": "sl_3_1787687533039_c2",
-        "name": "5. Stunde",
-        "capacity": 1,
-        "registrants": []
-      },
-      {
-        "id": "sl_4_1787687533039_c2",
-        "name": "6. Stunde",
-        "capacity": 1,
-        "registrants": []
-      }
-    ],
-    "workshopSignup": false,
-    "workshopCapacity": 0,
-    "workshopRegistrants": [],
-    "approved": true,
-    "recurring": false,
-    "seriesId": null
-  },
-  {
     "id": 40,
     "title": "X-Mas Réunion",
     "date": "2026-12-22",
